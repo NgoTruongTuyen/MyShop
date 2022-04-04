@@ -58,3 +58,9 @@ D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.genruntimeconfig.c
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\ref\MyShop.dll
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\DashboardView.g.cs
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\DashboardView.baml
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\LoginWindow.g.cs
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\LoginWindow.baml
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\SettingViewModel.g.cs
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\SettingViewModel.baml
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.g.cs
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.baml

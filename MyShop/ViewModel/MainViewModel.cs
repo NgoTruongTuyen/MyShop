@@ -12,7 +12,7 @@ namespace MyShop.ViewModel
 
         public MainViewModel()
         {
-            CurrentViewModel = new DashboardViewModel();
+            CurrentViewModel = new ImportViewModel();
         }
     }
 }

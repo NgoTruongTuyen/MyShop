@@ -1,6 +1,9 @@
 ﻿
 FD:\.NET\Project\MyShop\MyShop\App.xaml;;
+FD:\.NET\Project\MyShop\MyShop\LoginWindow.xaml;;
 FD:\.NET\Project\MyShop\MyShop\MainWindow.xaml;;
 FD:\.NET\Project\MyShop\MyShop\ResourceXAML\MainResource.xaml;;
 FD:\.NET\Project\MyShop\MyShop\View\DashboardView.xaml;;
+FD:\.NET\Project\MyShop\MyShop\View\ImportView.xaml;;
+FD:\.NET\Project\MyShop\MyShop\View\SettingViewModel.xaml;;
 

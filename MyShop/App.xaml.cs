@@ -20,7 +20,6 @@ namespace MyShop
             MainWindow = new MainWindow() {
                 DataContext = new MainViewModel()
             };
-
             MainWindow.Show();
             base.OnStartup(e);
         }
