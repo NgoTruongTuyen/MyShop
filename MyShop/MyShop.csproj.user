@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\AddNewProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\DashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\OrderManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,7 +24,16 @@
     <Page Update="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\ProductDetailView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AddNewProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\DashboardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\OrderManagementView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

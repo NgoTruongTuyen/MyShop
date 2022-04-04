@@ -24,6 +24,10 @@
         <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
             <views:DashboardView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
+            <views:OrderManagementView/>
+        </DataTemplate>
     </Window.Resources>
     
     
@@ -63,7 +67,7 @@
                             <TextBlock HorizontalAlignment="Center" Text="Order" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBlock></TextBlock>
+                    <ContentControl Content="{Binding OrderManagementViewModel}"/>
                 </TabItem>
 
                 <TabItem>
