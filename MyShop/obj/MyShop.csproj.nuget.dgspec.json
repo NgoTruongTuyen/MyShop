@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Windows Programming\\Project\\MyShop\\MyShop\\MyShop.csproj": {}
+    "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj": {}
   },
   "projects": {
-    "D:\\Windows Programming\\Project\\MyShop\\MyShop\\MyShop.csproj": {
+    "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Windows Programming\\Project\\MyShop\\MyShop\\MyShop.csproj",
+        "projectUniqueName": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
         "projectName": "MyShop",
-        "projectPath": "D:\\Windows Programming\\Project\\MyShop\\MyShop\\MyShop.csproj",
-        "packagesPath": "C:\\Users\\zerotus\\.nuget\\packages\\",
-        "outputPath": "D:\\Windows Programming\\Project\\MyShop\\MyShop\\obj\\",
+        "projectPath": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
+        "packagesPath": "C:\\Users\\KHACH\\.nuget\\packages\\",
+        "outputPath": "D:\\.NET\\Project\\MyShop\\MyShop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\zerotus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KHACH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

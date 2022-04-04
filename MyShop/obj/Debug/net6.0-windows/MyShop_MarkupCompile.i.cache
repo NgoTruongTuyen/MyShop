@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Windows Programming\Project\MyShop\MyShop\obj\Debug\net6.0-windows\
+D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\
 MyShop
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\Windows Programming\Project\MyShop\MyShop\App.xaml
-3-995864927
+D:\.NET\Project\MyShop\MyShop\App.xaml
+31005257697
 
-9114551004
-197-1358487406
-MainWindow.xaml;ResourceXAML\MainResource.xaml;View\DashboardWindow.xaml;
+10-1362802980
+197642397539
+MainWindow.xaml;ResourceXAML\MainResource.xaml;View\DashboardView.xaml;
 
-False
+True
 
