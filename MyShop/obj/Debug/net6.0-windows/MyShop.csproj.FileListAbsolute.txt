@@ -64,3 +64,4 @@ D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\SettingViewModel.g.c
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\SettingViewModel.baml
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.g.cs
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.baml
+D:\.NET\Project\MyShop\MyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll
