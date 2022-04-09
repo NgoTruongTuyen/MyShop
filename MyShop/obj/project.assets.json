@@ -407,19 +407,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KHACH\\.nuget\\packages\\": {}
+    "C:\\Users\\ACER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
+      "projectUniqueName": "D:\\HCMUS\\3rd year\\semester 2 - 3rd year\\Windows_Programing\\Project1\\MyShop\\MyShop\\MyShop\\MyShop.csproj",
       "projectName": "MyShop",
-      "projectPath": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
-      "packagesPath": "C:\\Users\\KHACH\\.nuget\\packages\\",
-      "outputPath": "D:\\.NET\\Project\\MyShop\\MyShop\\obj\\",
+      "projectPath": "D:\\HCMUS\\3rd year\\semester 2 - 3rd year\\Windows_Programing\\Project1\\MyShop\\MyShop\\MyShop\\MyShop.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "D:\\HCMUS\\3rd year\\semester 2 - 3rd year\\Windows_Programing\\Project1\\MyShop\\MyShop\\MyShop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\KHACH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

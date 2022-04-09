@@ -22,6 +22,9 @@ namespace MyShop.Model
         public int Memory { get; set; }
         public int Storage { get; set; }
         public int Battery { get; set; }
+
+        public List<Order_Product> OrderProducts { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;

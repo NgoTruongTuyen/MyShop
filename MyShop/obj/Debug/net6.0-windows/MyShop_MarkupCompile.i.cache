@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\
 MyShop
 none
 false
@@ -15,6 +15,12 @@ D:\.NET\Project\MyShop\MyShop\App.xaml
 18-1521018982
 199-1963753211
 LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\AddProductView.xaml;View\DashboardView.xaml;View\ImportView.xaml;View\ProductView.xaml;View\SettingViewModel.xaml;
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\App.xaml
+6-626100091
 
-True
+20-496395653
+197314806365
+MainWindow.xaml;ResourceXAML\MainResource.xaml;View\AddNewProductView.xaml;View\DashboardView.xaml;View\OrderManagementView.xaml;View\ProductDetailView.xaml;
+
+False
 
