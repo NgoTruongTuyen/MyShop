@@ -56,7 +56,7 @@ namespace MyShop.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MyShop;V1.0.0.0;component/view/dashboardview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MyShop;component/view/dashboardview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\DashboardView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

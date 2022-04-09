@@ -10,8 +10,9 @@
     <Compile Update="View\AddProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\DashboardWindow.xaml.cs">
     <Compile Update="LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\AddNewProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +26,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\OrderManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,7 +36,6 @@
     <Page Update="View\AddProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\DashboardWindow.xaml">
     <Page Update="LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -44,6 +46,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\DashboardView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -51,6 +55,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SettingViewModel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\ProductDetailView.xaml">
       <SubType>Designer</SubType>
     </Page>
