@@ -28,6 +28,10 @@
         <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
             <views:OrderManagementView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:AddNewOrderViewModel}">
+            <views:AddNewProductView/>
+        </DataTemplate>
     </Window.Resources>
     
     
@@ -61,13 +65,18 @@
 
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24"
+                        <Button Command="{Binding NavigateOrderManagementCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="auto" Height="auto"
                             HorizontalAlignment="Center" Kind="ReceiptOutline" />
-                            <TextBlock HorizontalAlignment="Center" Text="Order" />
-                        </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Text="Order" Foreground="Black" />
+                            </StackPanel>
+                        </Button>
+                        
                     </TabItem.Header>
-                    <ContentControl Content="{Binding OrderManagementViewModel}"/>
+                   
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
 
                 <TabItem>

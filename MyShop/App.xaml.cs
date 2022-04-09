@@ -1,4 +1,5 @@
-﻿using MyShop.ViewModel;
+﻿using MyShop.Stores;
+using MyShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,8 +18,11 @@ namespace MyShop
 
         protected override void OnStartup(StartupEventArgs e)
         {
+
+            NavigationStore navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new DashboardViewModel();
             MainWindow = new MainWindow() {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(navigationStore)
             };
 
             MainWindow.Show();

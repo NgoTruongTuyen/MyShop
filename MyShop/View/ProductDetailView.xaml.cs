@@ -18,9 +18,9 @@ namespace MyShop.View
     /// <summary>
     /// Interaction logic for AddNewProductView.xaml
     /// </summary>
-    public partial class AddNewProductView : UserControl
+    public partial class ProductDetailView : UserControl
     {
-        public AddNewProductView()
+        public ProductDetailView()
         {
             InitializeComponent();
         }

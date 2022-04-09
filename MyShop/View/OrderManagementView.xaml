@@ -14,6 +14,8 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
+             
+             
              >
     <Grid Background="#FDEFF4">
         <Grid Margin="20" >
@@ -50,7 +52,9 @@
               VerticalAlignment="Top"/>
                 </StackPanel>
 
-                <Button Margin="10"
+                <Button 
+                    Command="{Binding NavigateAddNewOrderCommand}"
+                    Margin="10"
                 VerticalAlignment="Top" HorizontalAlignment="Right"
                 Grid.Column="2"
               Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}"

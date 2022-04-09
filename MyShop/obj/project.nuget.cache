@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Kc9cuYpxl0ZEpBYDM8kFNhUmKimoI5b9xS6x9N7SCg4cLUAmImsVorCxSHHVQTtqBf5w3ond+5RHUFC04dtBoA==",
+  "success": true,
+  "projectFilePath": "D:\\HCMUS\\3rd year\\semester 2 - 3rd year\\Windows_Programing\\Project1\\MyShop\\MyShop\\MyShop\\MyShop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\fody\\6.5.1\\fody.6.5.1.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\propertychanged.fody\\3.4.0\\propertychanged.fody.3.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

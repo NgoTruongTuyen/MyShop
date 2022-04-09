@@ -17,23 +17,24 @@
     <Grid Background="#FDEFF4">
         <Grid Margin="20" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="150"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             
             <TextBlock
+                Margin="0 0 0 20"
                 Width="auto"
                 FontSize="32"
                 Grid.Column="0">ADD NEW ORDER
             </TextBlock>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="0 0 0 20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions >
@@ -41,8 +42,8 @@
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock FontWeight="Bold" FontSize="14" Grid.Column="1" Margin="50 0 0 0">Order Summary</TextBlock>
-                <TextBlock FontWeight="Bold" FontSize="14">Customer information</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="14" Grid.Column="1" Margin="50 0 0 10">Order Summary</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="14" Margin="0 0 0 10">Customer information</TextBlock>
 
                 <Border BorderThickness="1.5" BorderBrush="DarkViolet" Grid.Row="1" CornerRadius="3">
                     <Grid>
@@ -117,10 +118,10 @@
 
             </Grid>
 
-            <TextBlock FontWeight="Bold" FontSize="14" Grid.Row="2" Padding="0 5 0 5 ">Product information</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="14" Grid.Row="2" Margin="0 0 0 10">Product information</TextBlock>
 
             
-            <DockPanel Grid.Row="3" Margin="0 5 3 5" LastChildFill="True">
+            <DockPanel Grid.Row="3" Margin="0 5 3 20" LastChildFill="True" >
                 
                 <Button Width="80" DockPanel.Dock="Right" HorizontalAlignment="Right">Searrch</Button>
                 <Border BorderThickness="1" BorderBrush="DarkViolet" Margin="0 0 5 0" CornerRadius="3">
@@ -130,39 +131,41 @@
 
 
             <Border BorderThickness="1" Grid.Row="4" Background="White" BorderBrush="DarkViolet" Margin="0 0 5 10" CornerRadius="3">
-                <StackPanel Margin="5 5 5 5">
-                    <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
-                        <Grid Margin="5 5 5 5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
+                <ScrollViewer>
+                    <StackPanel Margin="5 5 5 5">
+                        <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
+                            <Grid Margin="5 5 5 5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="6*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                            <Image Grid.RowSpan="2" Source="/Image/iphone.png" Height="60"></Image>
-                            <TextBlock FontWeight="Bold" Grid.Column="1">Iphone 11 pro max</TextBlock>
-                            <TextBlock Foreground="red" Grid.Column="1" Grid.Row="1">17.000.000 VNĐ</TextBlock>
+                                <Image Grid.RowSpan="2" Source="/Image/iphone.png" Height="60"></Image>
+                                <TextBlock FontWeight="Bold" Grid.Column="1">Iphone 11 pro max</TextBlock>
+                                <TextBlock Foreground="red" Grid.Column="1" Grid.Row="1">17.000.000 VNĐ</TextBlock>
 
-                            <TextBlock FontWeight="Bold" Grid.Column="2" >Amount:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Column="2" Grid.Row="1">Total price:</TextBlock>
+                                <TextBlock FontWeight="Bold" Grid.Column="2" >Amount:</TextBlock>
+                                <TextBlock FontWeight="Bold" Grid.Column="2" Grid.Row="1">Total price:</TextBlock>
 
 
-                            <TextBox  Grid.Column="3" ></TextBox>
-                            <TextBlock Grid.Column="3" Grid.Row="1">1.000.000 VNĐ</TextBlock>
-                        </Grid>
-                    </Border>
-                </StackPanel>
+                                <TextBox  Grid.Column="3" ></TextBox>
+                                <TextBlock Grid.Column="3" Grid.Row="1">1.000.000 VNĐ</TextBlock>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
             </Border>
 
-            <StackPanel Grid.Row="5" VerticalAlignment="center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="Submit" Margin="0 0 50 0"></Button>
-                <Button Background="Gray" Content="Cancel"></Button>
+            <StackPanel Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Command="{Binding NavigateSubmitCommand}"  Content="Submit" Margin="0 0 50 0"></Button>
+                <Button Command="{Binding NavigateCancelCommand}" Background="Gray" Content="Cancel"></Button>
             </StackPanel>
         </Grid>
     </Grid>
