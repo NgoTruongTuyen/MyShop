@@ -45,9 +45,13 @@
     <Page Update="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
     <Page Update="View\ProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
+=======
+    <Page Update="View\ProductView.xaml" />
+>>>>>>> NDKhoi
     <Page Update="View\DashboardView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -55,6 +59,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SettingViewModel.xaml">
+<<<<<<< HEAD
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ProductDetailView.xaml">
@@ -67,6 +72,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\OrderManagementView.xaml">
+=======
+>>>>>>> NDKhoi
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
