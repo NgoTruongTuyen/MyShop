@@ -65,3 +65,39 @@ D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\SettingViewModel.bam
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.g.cs
 D:\.NET\Project\MyShop\MyShop\obj\Debug\net6.0-windows\View\ImportView.baml
 D:\.NET\Project\MyShop\MyShop\bin\Debug\net6.0-windows\Aspose.Cells.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.csproj.AssemblyReference.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\AddNewProductView.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\DashboardView.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\OrderManagementView.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\ProductDetailView.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\App.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop_MarkupCompile.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop_MarkupCompile.lref
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\refint\MyShop.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.pdb
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MyShop.exe
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MyShop.deps.json
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MyShop.runtimeconfig.json
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MyShop.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MyShop.pdb
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MaterialDesignColors.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\bin\Debug\net6.0-windows\MaterialDesignThemes.Wpf.dll
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\App.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MainWindow.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\ResourceXAML\MainResource.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\AddNewProductView.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\DashboardView.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\OrderManagementView.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\View\ProductDetailView.baml
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.g.resources
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.GeneratedMSBuildEditorConfig.editorconfig
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.AssemblyInfoInputs.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.AssemblyInfo.cs
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.csproj.CoreCompileInputs.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.csproj.Fody.CopyLocal.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.csproj.CopyComplete
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\MyShop.genruntimeconfig.cache
+D:\HCMUS\3rd year\semester 2 - 3rd year\Windows_Programing\Project1\MyShop\MyShop\MyShop\obj\Debug\net6.0-windows\ref\MyShop.dll

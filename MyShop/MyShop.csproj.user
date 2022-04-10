@@ -10,7 +10,9 @@
     <Compile Update="View\AddProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\DashboardWindow.xaml.cs">
     <Compile Update="LoginWindow.xaml.cs">
+    <Compile Update="View\AddNewProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\DashboardView.xaml.cs">
@@ -23,6 +25,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProductView.xaml.cs">
+    <Compile Update="View\OrderManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
