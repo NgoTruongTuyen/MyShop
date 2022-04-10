@@ -7,12 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Update="View\AddProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\DashboardWindow.xaml.cs">
-=======
     <Compile Update="LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,7 +20,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\SettingViewModel.xaml.cs">
->>>>>>> NDKhoi
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProductView.xaml.cs">
@@ -31,14 +27,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Page Update="View\AddProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\DashboardWindow.xaml">
-=======
     <Page Update="LoginWindow.xaml">
->>>>>>> NDKhoi
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
@@ -47,9 +39,7 @@
     <Page Update="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
-<<<<<<< HEAD
-    <Page Update="View\ProductView.xaml">
-=======
+    <Page Update="View\ProductView.xaml" />
     <Page Update="View\DashboardView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -57,7 +47,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SettingViewModel.xaml">
->>>>>>> NDKhoi
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
