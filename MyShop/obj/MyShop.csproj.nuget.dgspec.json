@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MTBH\\Desktop\\MyShop\\MyShop\\MyShop.csproj": {}
+    "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MTBH\\Desktop\\MyShop\\MyShop\\MyShop.csproj": {
+    "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MTBH\\Desktop\\MyShop\\MyShop\\MyShop.csproj",
+        "projectUniqueName": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
         "projectName": "MyShop",
-        "projectPath": "C:\\Users\\MTBH\\Desktop\\MyShop\\MyShop\\MyShop.csproj",
-        "packagesPath": "C:\\Users\\MTBH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MTBH\\Desktop\\MyShop\\MyShop\\obj\\",
+        "projectPath": "D:\\.NET\\Project\\MyShop\\MyShop\\MyShop.csproj",
+        "packagesPath": "C:\\Users\\KHACH\\.nuget\\packages\\",
+        "outputPath": "D:\\.NET\\Project\\MyShop\\MyShop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MTBH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KHACH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[22.3.0, )"
+            },
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[4.4.0, )"

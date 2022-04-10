@@ -8,8 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\img.png" />
+    <None Remove="Image\login\img.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="22.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\login\img.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Image\store\" />
   </ItemGroup>
 
 </Project>
