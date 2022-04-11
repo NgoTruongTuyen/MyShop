@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Image\iphone.png" />
+    <None Remove="Image\login\img.png" />
+    <None Remove="Image\product\Iphone11.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,12 @@
 
   <ItemGroup>
     <Resource Include="Image\iphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\login\img.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

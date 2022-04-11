@@ -350,6 +350,48 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <RadioButton
+                     IsEnabled="False"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignChoiceChipPrimaryOutlineRadioButton}"
+                    IsChecked="True"
+                    GroupName="GroupChoiceChipOutline"
+                    Content="1" />
+                    
+                <Image Grid.Column="1"
+                    Width="100"
+                    Height="100"
+                    Source="../Image/product/Iphone11.png"/>
+                    <StackPanel
+                        
+                            VerticalAlignment="Center"
+Grid.Column="2">
+                        <TextBlock 
+                            FontWeight="Bold"
+                            FontSize="20">IPHONE 11</TextBlock>
+                        <TextBlock 
+                            Foreground="#F24A72 "
+                            FontSize="20">17.000.000 VND</TextBlock>
+                        <StackPanel 
+                                                    Orientation="Horizontal"> 
+                            <materialDesign:PackIcon 
+                                FontSize="20"
+                                Width="20"
+                                Height="20"
+                                Kind="Basket" />
+                            <TextBlock
+                                Foreground="#bdbdbd"
+                                FontSize="20">300</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Grid>
 
