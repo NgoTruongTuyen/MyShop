@@ -25,12 +25,12 @@ create table Product(
 create table Discount(
 	discountID int identity(1,1) primary key,
 	productID int,
-	"percent" int,
+	percent int,
 	startDate datetime,
 	endDate datetime
 );
 
-create table "Order"(
+create table Order(
 	orderID int identity(1,1) primary key,
 	date datetime,
 	totalAmount int,
@@ -45,7 +45,7 @@ create table Order_Product(
 	CONSTRAINT PK_Order PRIMARY KEY (orderID,productID)
 );
 
-create table "User"(
+create table User(
 	username varchar(50) primary key,
 	password varchar(50),
 );
