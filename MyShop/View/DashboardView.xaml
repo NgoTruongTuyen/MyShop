@@ -157,5 +157,201 @@
 
         </StackPanel>
 
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    >
+            <Separator Opacity="0" Width="70"/>
+            <Border
+                
+                BorderThickness="1"
+                BorderBrush="red"
+                CornerRadius="5"
+                 Background="#B667F1"
+                     Width="350"
+                    Height="150"
+
+                 
+                >
+                <Grid 
+                                  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        >
+                        <TextBlock
+                            Margin="0 20 0 0"
+                            FontSize="34"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+
+                            >TOTAL PRODUCT</TextBlock>
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            FontSize="60"
+                            FontWeight="Light"
+                            Foreground="White"
+                            Text="1000"/>
+                    </StackPanel>
+                    <Grid
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="1"
+                        >
+                        
+                        
+                    <materialDesign:PackIcon Kind="Cellphone" 
+                                             FontSize="30"
+                                             Width="80"
+                                             Height="90"
+                                             Foreground="White"
+                                             />
+                    </Grid>
+                </Grid>
+                
+            </Border>
+
+            
+            <Separator Opacity="0" Width="40"/>
+
+            <Border
+                
+                BorderThickness="1"
+                BorderBrush="red"
+                CornerRadius="5"
+                 Background="#B667F1"
+                    Width="350"
+                    Height="150"
+
+                >
+                <Grid 
+                Width="350"
+                  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        >
+                        <TextBlock
+                            Margin="0 20 0 0"
+                            FontSize="34"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+
+                            >NEW ORDER</TextBlock>
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            FontWeight="Light"
+                            FontSize="60"
+                            Foreground="White"
+                            Text="1000"/>
+                    </StackPanel>
+                    <Grid
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="1"
+                        >
+
+
+                        <materialDesign:PackIcon Kind="Basket" 
+                                             FontSize="30"
+                                             Width="80"
+                                             Height="90"
+                                             Foreground="White"
+                                             />
+                    </Grid>
+                </Grid>
+
+            </Border>
+
+            <Separator Opacity="0" Width="40"/>
+            
+            <Border
+            
+            BorderThickness="1"
+            BorderBrush="red"
+            CornerRadius="5"
+            Background="#B667F1"
+               Width="350"
+                    Height="150"
+
+            
+            >
+            <Grid 
+            Width="350"
+            >
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+            HorizontalAlignment="Center"
+            >
+                        <TextBlock
+            Margin="0 20 0 0"
+            FontSize="34"
+            FontWeight="Bold"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            
+            >TOTAL INCOME</TextBlock>
+            <TextBlock 
+            HorizontalAlignment="Center"
+            FontWeight="Light"
+            FontSize="60"
+            Foreground="White"
+            Text="1000"/>
+            </StackPanel>
+            <Grid
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Grid.Column="1"
+            >
+
+
+                        <materialDesign:PackIcon Kind="CurrencyUsd" 
+            FontSize="30"
+            Width="80"
+            Height="90"
+            Foreground="White"
+            />
+            </Grid>
+            </Grid>
+            
+            </Border>
+            
+        </StackPanel>
+
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+
+                <TextBlock FontSize="40"
+                       Foreground="#B667F1"
+                       >TOP 5 PRODUCTS</TextBlock>
+                <ListView>
+                    <ListViewItem Content="hello"/>
+                    <ListViewItem Content="hello"/>
+                    <ListViewItem Content="hello"/>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </UserControl>

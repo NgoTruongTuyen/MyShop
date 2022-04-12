@@ -25,6 +25,10 @@
             <views:DashboardView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewmodels:ImportViewModel}">
+            <views:ImportView/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
             <views:OrderManagementView/>
         </DataTemplate>

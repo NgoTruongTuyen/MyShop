@@ -24,7 +24,6 @@ namespace MyShop
             MainWindow = new MainWindow() {
                 DataContext = new MainViewModel(navigationStore)
             };
-
             MainWindow.Show();
             base.OnStartup(e);
         }

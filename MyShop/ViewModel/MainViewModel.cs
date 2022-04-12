@@ -14,7 +14,6 @@ namespace MyShop.ViewModel
         public event Action CurrentViewModelChanged;
 
         private readonly NavigationStore _navigationStore;
-
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
         public ICommand NavigateOrderManagementCommand { get; }
@@ -26,6 +25,11 @@ namespace MyShop.ViewModel
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             NavigateOrderManagementCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
+        }
+
+        private BaseViewModel GetCurrentViewModel()
+        {
+            return CurrentViewModel;
         }
 
         private void OnCurrentViewModelChanged()
