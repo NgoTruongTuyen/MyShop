@@ -28,7 +28,11 @@
         <DataTemplate DataType="{x:Type viewmodels:ImportViewModel}">
             <views:ImportView/>
         </DataTemplate>
-
+        
+        <DataTemplate DataType="{x:Type viewmodels:ProductViewModel}">
+            <views:ProductView />
+        </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewmodels:OrderManagementViewModel}">
             <views:OrderManagementView/>
         </DataTemplate>
@@ -61,10 +65,10 @@
                         <StackPanel Width="auto" Height="auto">
                             <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="PackageVariantClosed" />
-                            <TextBlock HorizontalAlignment="Center" Text="Package" />
+                            <TextBlock HorizontalAlignment="Center" Text="Product" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBlock></TextBlock>
+                    <ContentControl Content="{Binding CurrentViewModel}" />
                 </TabItem>
 
                 <TabItem>

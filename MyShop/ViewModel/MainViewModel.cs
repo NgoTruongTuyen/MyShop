@@ -1,12 +1,12 @@
 ﻿using MyShop.Commands;
 using MyShop.Stores;
+using MyShop.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
 namespace MyShop.ViewModel
 {
     public class MainViewModel: BaseViewModel
@@ -20,11 +20,13 @@ namespace MyShop.ViewModel
 
         public MainViewModel(NavigationStore navigationStore)
         {
+            
             _navigationStore = navigationStore;
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
             NavigateOrderManagementCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
+        
+            
         }
 
         private BaseViewModel GetCurrentViewModel()

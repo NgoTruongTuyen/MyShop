@@ -2,6 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodel="clr-namespace:MyShop.ViewModel">
 
-    <viewmodel:DashboardViewModel x:Key="DashboardVM"></viewmodel:DashboardViewModel> 
-    
+    <viewmodel:DashboardViewModel x:Key="DashboardVM"></viewmodel:DashboardViewModel>
+    <viewmodel:ProductViewModel x:Key="ProductVM"></viewmodel:ProductViewModel>
 </ResourceDictionary>
