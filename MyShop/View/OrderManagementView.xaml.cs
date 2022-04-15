@@ -27,7 +27,7 @@ namespace MyShop.View
 
         private void OnContextMenuOpened(object sender, RoutedEventArgs e)
         {
-
+            ((ContextMenu)sender).DataContext = OrderManagementWindow.DataContext;
         }
     }
 }

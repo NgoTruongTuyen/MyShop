@@ -3,6 +3,7 @@ using MyShop.Commands;
 using MyShop.Model;
 using MyShop.Service;
 using MyShop.Stores;
+using MyShop.ViewModel.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,8 +20,15 @@ namespace MyShop.ViewModel
         public BindingList<Order> Orders { get; set; }
 
         public ICommand NavigateAddNewOrderCommand { get; set; }
-       public OrderManagementViewModel (NavigationStore navigationStore)
+
+        public RelayCommand EditCommand;
+        public RelayCommand DeleteCommand;
+
+        public OrderManagementViewModel (NavigationStore navigationStore)
         {
+            EditCommand = new RelayCommand(editCommand, null);
+            DeleteCommand = new RelayCommand(deleteCommand, null);
+
             OrderService orderService = new OrderService();
             Orders = new BindingList<Order> ();
 
@@ -33,5 +41,8 @@ namespace MyShop.ViewModel
 
             NavigateAddNewOrderCommand=new NavigateCommand<AddNewOrderViewModel>(navigationStore, () => new AddNewOrderViewModel(navigationStore));
         }
+
+        public void editCommand(object x) { }
+        public void deleteCommand(object x) { }
     }
 }

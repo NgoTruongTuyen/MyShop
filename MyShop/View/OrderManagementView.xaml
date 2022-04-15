@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="MyShop.View.OrderManagementView"
+             x:Name="OrderManagementWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -75,10 +76,11 @@
                     </ListView.ItemsPanel>
 
                     <ListView.Resources>
-                        <ContextMenu x:Key="phoneContextMenu" Background="LightGray">
-                            <MenuItem Header="Delete">
+                        <ContextMenu x:Key="phoneContextMenu" Background="LightGray"
+                                     Opened="OnContextMenuOpened">
+                            <MenuItem Header="Delete" Command="{Binding DeleteCommand}">
                             </MenuItem>
-                            <MenuItem Header="Edit">
+                            <MenuItem Header="Edit" Command="{Binding EditCommand}">
                             </MenuItem>
                         </ContextMenu>
                     </ListView.Resources>
