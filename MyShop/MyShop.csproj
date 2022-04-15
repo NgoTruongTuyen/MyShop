@@ -13,6 +13,8 @@
     <None Remove="Image\delete.png" />
     <None Remove="Image\edit.png" />
     <None Remove="Image\iphone.png" />
+    <None Remove="Image\login\img.png" />
+    <None Remove="Image\product\Iphone11.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +39,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\iphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\login\img.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

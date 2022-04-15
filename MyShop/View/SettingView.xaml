@@ -1,13 +1,11 @@
-﻿<UserControl x:Class="MyShop.View.SettingViewModel"
+﻿<UserControl x:Class="MyShop.View.SettingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyShop.View"
              mc:Ignorable="d" 
-
-             
-             
+              
                
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -42,11 +40,14 @@
                 FontSize="20"
     Text="Change quanlity of the products " />
             <Slider
+            Value="{Binding Quanlity, UpdateSourceTrigger=PropertyChanged}"
             Margin="100 0 0 0"
             Width="200"
-         Minimum="0"
-         Maximum="50"
-             Value="35" />
+               Minimum="0"
+  Maximum="{Binding DiscreteHorizontal.Maximum}"
+  Style="{StaticResource MaterialDesignDiscreteSlider}"
+  TickFrequency="{Binding DiscreteHorizontal.TickFrequency}"
+  TickPlacement="BottomRight"/>
 
             </StackPanel>
         </materialDesign:Card>
@@ -66,10 +67,11 @@
                 FontSize="20"
     Text="Reopen the last screen that was turned off last time" />
                 <ToggleButton
+                    IsChecked="{Binding Reopen}"
                     Margin="20 0 0 0"
   Style="{StaticResource MaterialDesignSwitchToggleButton}"
   ToolTip="MaterialDesignSwitchToggleButton"
-  IsChecked="True" />
+  />
             </StackPanel>
         </materialDesign:Card>
 
