@@ -77,14 +77,8 @@
                     <ListView.Resources>
                         <ContextMenu x:Key="phoneContextMenu" Background="LightGray">
                             <MenuItem Header="Delete">
-                                <MenuItem.Icon>
-                                    <Image Source="Image/delete.png"/>
-                                </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Edit">
-                                <MenuItem.Icon>
-                                    <Image Source="Image/edit.png"/>
-                                </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
                     </ListView.Resources>

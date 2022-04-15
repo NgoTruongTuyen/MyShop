@@ -24,5 +24,10 @@ namespace MyShop.View
         {
             InitializeComponent();
         }
+
+        private void OnContextMenuOpened(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
