@@ -8,16 +8,14 @@ namespace MyShop.Model
 {
     public class Order_Product
     {
-        public int OrderProductId { get; set; }
-        public string OrderId   { get; set; }
-        public string ProductId { get; set; }
+        public int OrderId   { get; set; }
+        public int ProductId { get; set; }
 
         public decimal Price { get; set; }
         public int Amount { get; set; }
 
-        public Order_Product(int orderProductId, string orderId, string productId, decimal price, int amount)
+        public Order_Product(int orderProductId, int orderId, int productId, decimal price, int amount)
         {
-            OrderProductId = orderProductId;
             OrderId = orderId;
             ProductId = productId;
             Price = price;

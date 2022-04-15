@@ -33,6 +33,7 @@ create table Discount(
 create table Order(
 	orderID int identity(1,1) primary key,
 	date datetime,
+	customer varchar(50);
 	totalAmount int,
 	totalPrice int,
 );

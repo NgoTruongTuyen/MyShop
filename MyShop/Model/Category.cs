@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MyShop.Model
 {
-    public class Category
+    public class Category: INotifyPropertyChanged
     {
         private string _brand;
         private ObservableCollection<Product> _products;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public string Brand
         {

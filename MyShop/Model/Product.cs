@@ -9,7 +9,7 @@ namespace MyShop.Model
 {
     public class Product : INotifyPropertyChanged
     {
-        public String ProductId { get; set; }
+        public int ProductId { get; set; }
         public String ProductName { get; set; }
         public String ImageURL { get; set; }
         public int Stock { get; set; }
@@ -34,7 +34,9 @@ namespace MyShop.Model
 
         }
 
-        public Product( string name, 
+        public Product(
+                        int productId,
+                        string name, 
                         string imgURL, 
                         int cost, 
                         float screenSize, 
@@ -46,7 +48,7 @@ namespace MyShop.Model
                         DateTime releaseDay, 
                         int number, string brand)
         {
-            ProductId = "";
+            ProductId = productId;
             ProductName = name;
             ImageURL = imgURL;
             CostPrice = cost;

@@ -65,107 +65,76 @@
                 />
 
             </Grid>
-            <Border CornerRadius="10" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Snow">
-                <WrapPanel Background="White">
-                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+            <Border CornerRadius="10" Grid.Row="1" Background="White" Margin="20" BorderThickness="2" BorderBrush="Snow">
+                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding Orders}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
 
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0">
-                            04/04/2022
-                            </TextBlock>
+                    <ListView.Resources>
+                        <ContextMenu x:Key="phoneContextMenu" Background="LightGray">
+                            <MenuItem Header="Delete">
+                                <MenuItem.Icon>
+                                    <Image Source="Image/delete.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Edit">
+                                <MenuItem.Icon>
+                                    <Image Source="Image/edit.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.Resources>
 
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" >
+                            <Setter Property="ContextMenu" Value="{StaticResource phoneContextMenu}" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8">DH001</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8">Nguyễn Đăng Khôi</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8">10.000.000 vnđ</TextBlock>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5" Width="350">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
-                           Đã thanh toán
-                            </TextBlock>
-                        </Grid>
-                    </Border>
-                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+                                    <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0" Text="{Binding Date}">
 
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0">
-                            04/04/2022
-                            </TextBlock>
+                                    </TextBlock>
 
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
 
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8">DH001</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8">Nguyễn Đăng Khôi</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8">10.000.000 vnđ</TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8" Text="{Binding OrderId}"></TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8" Text="{Binding Customer}"></TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8" Text="{Binding TotalPrice}"></TextBlock>
 
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
-                           Đã thanh toán
-                            </TextBlock>
-                        </Grid>
-                    </Border>
-                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
+                                    <TextBlock HorizontalAlignment="Right" FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
+                                    Đã thanh toán
+                                    </TextBlock>
+                                </Grid>
+                            </Border>
 
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0">
-                            04/04/2022
-                            </TextBlock>
-
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
-
-                            <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8">DH001</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8">Nguyễn Đăng Khôi</TextBlock>
-                            <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8">10.000.000 vnđ</TextBlock>
-
-                            <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
-                           Đã thanh toán
-                            </TextBlock>
-                        </Grid>
-                    </Border>
-                </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Border>
-
+          
             <StackPanel Grid.Row="2" VerticalAlignment="center" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Background="White" Content="First" Foreground="Black"></Button>
                 <Button Background="White" Content="Prev" Foreground="Black"></Button>
