@@ -68,7 +68,8 @@
             </Grid>
             <Border CornerRadius="10" Grid.Row="1" Background="White" Margin="20" BorderThickness="2" BorderBrush="Snow">
                 <ListView x:Name="orderView" Background="White" ItemsSource="{Binding Orders}" 
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                          SelectedItem="{Binding SelectedItem}">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
@@ -79,8 +80,9 @@
                         <ContextMenu x:Key="phoneContextMenu" Background="LightGray"
                                      Opened="OnContextMenuOpened">
                             <MenuItem Header="Delete" Command="{Binding DeleteCommand}">
+                             
                             </MenuItem>
-                            <MenuItem Header="Edit" Command="{Binding EditCommand}">
+                            <MenuItem Header="Edit" Command="{Binding NavigateEditNewOrderCommand}">
                             </MenuItem>
                         </ContextMenu>
                     </ListView.Resources>
@@ -117,7 +119,7 @@
                                     <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
 
                                     <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8" Text="{Binding OrderId}"></TextBlock>
-                                    <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8" Text="{Binding Customer}"></TextBlock>
+                                    <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8" Text="{Binding CustomerName}"></TextBlock>
                                     <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8" Text="{Binding TotalPrice}"></TextBlock>
 
                                     <TextBlock HorizontalAlignment="Right" FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">

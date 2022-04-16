@@ -1,5 +1,6 @@
 ﻿using Castle.Components.DictionaryAdapter;
 using MyShop.Commands;
+using MyShop.Messenger;
 using MyShop.Model;
 using MyShop.Service;
 using MyShop.Stores;
@@ -17,17 +18,54 @@ namespace MyShop.ViewModel
     
     public class OrderManagementViewModel : BaseViewModel
     {
+        public BaseMessenger<Order> UpdatingMessenger { get; set; }
+        public BaseMessenger<Order> AddingMessenger { get; set; }
+        public Order SelectedItem { get; set; }
         public BindingList<Order> Orders { get; set; }
-
         public ICommand NavigateAddNewOrderCommand { get; set; }
+        public ICommand NavigateEditNewOrderCommand { get; set; }
 
-        public RelayCommand EditCommand;
         public RelayCommand DeleteCommand;
+ 
+        public void deleteItem(object x)
+        {
+            int index = Orders.IndexOf(SelectedItem);
+            if (index == -1)
+            {
+                return;
+            }
+
+            Orders.Remove(SelectedItem);
+        }
+
+        public void updateItem(Order order)
+        {
+            int index = Orders.IndexOf(SelectedItem);
+            if (index == -1)
+            {
+                return;
+            }
+
+            Orders.RemoveAt(index);
+            Orders.Insert(index, order);
+
+        }
+
+        public void addItem(Order order)
+        {
+            Orders.Add(order);
+        }
 
         public OrderManagementViewModel (NavigationStore navigationStore)
         {
-            EditCommand = new RelayCommand(editCommand, null);
-            DeleteCommand = new RelayCommand(deleteCommand, null);
+            SelectedItem = new Order();
+            UpdatingMessenger = new BaseMessenger<Order>();
+            AddingMessenger = new BaseMessenger<Order>();
+
+            UpdatingMessenger.action += updateItem;
+            AddingMessenger.action += addItem;
+
+            DeleteCommand = new RelayCommand(deleteItem, null);
 
             OrderService orderService = new OrderService();
             Orders = new BindingList<Order> ();
@@ -40,9 +78,19 @@ namespace MyShop.ViewModel
             }
 
             NavigateAddNewOrderCommand=new NavigateCommand<AddNewOrderViewModel>(navigationStore, () => new AddNewOrderViewModel(navigationStore));
+            NavigateEditNewOrderCommand = new NavigateCommand<AddNewOrderViewModel>(navigationStore, () => new AddNewOrderViewModel(navigationStore, UpdatingMessenger, SelectedItem));
         }
 
-        public void editCommand(object x) { }
+   
+        public void editCommand(object x) {
+            int index = Orders.IndexOf (SelectedItem);
+            if (index == -1)
+                return;
+
+            Orders.RemoveAt (index);
+        }
         public void deleteCommand(object x) { }
+
+       
     }
 }

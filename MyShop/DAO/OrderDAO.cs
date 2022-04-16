@@ -21,14 +21,18 @@ namespace MyShop.DAO
             while (reader.Read())
             {
                 var orderID = (int) reader["orderID"];
-                var customer = (string)reader["customer"];
+                var customerName = (string)reader["customerName"];
+                var customerPhone = (string)reader["customerPhone"];
+                var customerAddress = (string)reader["customerAddress"];
                 var date = (DateTime)reader["createdDate"];
                 var totalAmount = (int)reader["totalAmount"];
                 var totalPrice = (int)reader["totalPrice"];
 
-                orders.Add(new Order() { OrderId=orderID, Customer=customer, Date=date, TotalPrice=totalPrice });
+                orders.Add(new Order() { OrderId=orderID, CustomerName=customerName, CustomerPhone = customerPhone, CustomerAddress = customerAddress, 
+                    Date =date, TotalPrice=totalPrice });
             }
 
+            reader.Close();
             return orders;
         }
 

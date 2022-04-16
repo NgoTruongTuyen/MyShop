@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyShop.Model
 {
-    public class Product : INotifyPropertyChanged
+    public class Product : BaseModel
     {
         public int ProductId { get; set; }
         public String ProductName { get; set; }
@@ -23,7 +23,22 @@ namespace MyShop.Model
         public int Storage { get; set; }
         public int Battery { get; set; }
 
-        public List<Order_Product> OrderProducts { get; set; }
+        public int ViewCounts { get; set; }
+        public int BuyCounts { get; set; }
+
+        public int TotalPrice { 
+            get
+            {
+                return CostPrice * OrderProducts[0].Amount;
+            }
+            set
+            {
+                TotalPrice = value;
+
+                OnPropertyChanged(nameof(TotalPrice));            }
+        }
+
+        public BindingList<Order_Product> OrderProducts { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 
@@ -34,34 +49,27 @@ namespace MyShop.Model
 
         }
 
-        public Product(
-                        int productId,
-                        string name, 
-                        string imgURL, 
-                        int cost, 
-                        float screenSize, 
-                        string os, 
-                        string color, 
-                        int memory, 
-                        int storage, 
-                        int battery, 
-                        DateTime releaseDay, 
-                        int number, string brand)
+        public Product(int productId, string productName, string imageURL, int stock, int costPrice, int sellingPrice, string brand, float screenSize, string oS, string color, int memory, int storage, int battery, int viewCount, int buyCount, BindingList<Order_Product> orderProducts, DateTime releaseDate)
         {
             ProductId = productId;
-            ProductName = name;
-            ImageURL = imgURL;
-            CostPrice = cost;
+            ProductName = productName;
+            ImageURL = imageURL;
+            Stock = stock;
+            CostPrice = costPrice;
+            SellingPrice = sellingPrice;
+            Brand = brand;
             ScreenSize = screenSize;
-            OS = os;
+            OS = oS;
             Color = color;
             Memory = memory;
             Storage = storage;
             Battery = battery;
-            ReleaseDate = releaseDay;
-            Stock = number;
-            Brand = brand;
-
+            ViewCounts = viewCount;
+            BuyCounts = buyCount;
+            OrderProducts = orderProducts;
+            ReleaseDate = releaseDate;
         }
+
+
     }
 }

@@ -13,16 +13,21 @@ namespace MyShop.Model
         public DateTime Date { get; set; }
         public int TotalPrice { get; set; }
 
-        public string Customer { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerPhone { get; set; }
+        public string CustomerAddress { get; set; }
 
-       public List<Order_Product> OrderProducts { get; set; }
+        public List<Order_Product> OrderProducts { get; set; }
 
-        public Order(int orderID, DateTime date, int totalPrice, string customer)
+        public Order(int orderId, DateTime date, int totalPrice, string customerName, string customerPhone, string customerAddress, List<Order_Product> orderProducts)
         {
-            Customer=customer;
-            OrderId = orderID;
+            OrderId = orderId;
             Date = date;
             TotalPrice = totalPrice;
+            CustomerName = customerName;
+            CustomerPhone = customerPhone;
+            CustomerAddress = customerAddress;
+            OrderProducts = orderProducts;
         }
 
         public Order()

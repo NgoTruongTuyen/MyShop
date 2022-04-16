@@ -14,6 +14,8 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
+    
+    
     <Grid Background="#FDEFF4">
         <Grid Margin="20" >
             <Grid.RowDefinitions>
@@ -62,6 +64,7 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="5"
+                            Text="{Binding CustomerName}"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             AcceptsReturn="True"
                             materialDesign:HintAssist.Hint="Name"/>
@@ -72,6 +75,7 @@
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="5"
+                            Text="{Binding CustomerAddress}"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             AcceptsReturn="True"
                             materialDesign:HintAssist.Hint="Address"/>
@@ -80,6 +84,7 @@
                             Height="50"
                             Grid.Row="0"
                             Grid.Column="1"
+                            Text="{Binding CustomerPhone}"
                             Margin="5"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             AcceptsReturn="True"
@@ -108,9 +113,9 @@
                         <TextBlock Grid.Row="2" Grid.ColumnSpan="2">_________________________________________________</TextBlock>
                         <TextBlock FontWeight="Bold" Grid.Row="3">Total:</TextBlock>
 
-                        <TextBlock Grid.Column="1">3.000.000 vnđ</TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="red">-100.000 vnđ</TextBlock>
-                        <TextBlock Grid.Row="3" Grid.Column="1">2.900.000 vnđ</TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding SubTotal}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="red" Text="{Binding Discount}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Total}"></TextBlock>
 
                     </Grid>
                     
@@ -121,46 +126,114 @@
             <TextBlock FontWeight="Bold" FontSize="14" Grid.Row="2" Margin="0 0 0 10">Product information</TextBlock>
 
             
-            <DockPanel Grid.Row="3" Margin="0 5 3 20" LastChildFill="True" >
-                
-                <Button Width="80" DockPanel.Dock="Right" HorizontalAlignment="Right">Searrch</Button>
-                <Border BorderThickness="1" BorderBrush="DarkViolet" Margin="0 0 5 0" CornerRadius="3">
-                    <TextBox VerticalAlignment="Center" Padding="10" materialDesign:HintAssist.Hint="Product"></TextBox>
+           
+            <DockPanel Grid.Row="3" Margin="0 5 3 20" LastChildFill="True" Height="100">
+              
+               
+                <Border BorderThickness="1" BorderBrush="DarkViolet" Margin="0 0 5 0" CornerRadius="3" DockPanel.Dock="Top">
+                    <TextBox VerticalAlignment="Center" Padding="10" materialDesign:HintAssist.Hint="Product" Text="{Binding SearchBox ,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </Border>
+
+                
+                <ListView DockPanel.Dock="Bottom"
+               
+                SelectedItem="{Binding SelectedSearchProduct,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                
+                ItemsSource="{Binding ProductSearchList}"
+                >
+
+   
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
+                                <Grid Margin="5 5 5 5" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="5*"></RowDefinition>
+                                        <RowDefinition Height="5*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="6*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="1" Grid.RowSpan="2" Source="{Binding ImageURL}" Height="60"></Image>
+                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
+                                    <TextBlock Foreground="red" Grid.Column="1" Grid.Row="2" Text="{Binding CostPrice}"></TextBlock>
+
+                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="2"  >Amount:</TextBlock>
+
+
+                                    <TextBox  Grid.Row="1" HorizontalAlignment="Center"  Grid.Column="3" Text="{Binding OrderProducts[0].Amount}"></TextBox>
+                                </Grid>
+                            </Border>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </DockPanel>
 
 
             <Border BorderThickness="1" Grid.Row="4" Background="White" BorderBrush="DarkViolet" Margin="0 0 5 10" CornerRadius="3">
-                <ScrollViewer>
-                    <StackPanel Margin="5 5 5 5">
-                        <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
-                            <Grid Margin="5 5 5 5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
+                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding ProductsInOrder}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                          SelectedItem="{Binding SelectedProduct}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                                    <ColumnDefinition Width="6*"></ColumnDefinition>
-                                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
+                                <Grid Margin="5 5 5 5" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="5*"></RowDefinition>
+                                        <RowDefinition Height="5*"></RowDefinition>
+                                    </Grid.RowDefinitions>
 
-                                <Image Grid.RowSpan="2" Source="/Image/iphone.png" Height="60"></Image>
-                                <TextBlock FontWeight="Bold" Grid.Column="1">Iphone 11 pro max</TextBlock>
-                                <TextBlock Foreground="red" Grid.Column="1" Grid.Row="1">17.000.000 VNĐ</TextBlock>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="6*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock FontWeight="Bold" Grid.Column="2" >Amount:</TextBlock>
-                                <TextBlock FontWeight="Bold" Grid.Column="2" Grid.Row="1">Total price:</TextBlock>
+                                    <Image Grid.Row="1" Grid.RowSpan="2" Source="{Binding ImageURL}" Height="60"></Image>
+                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
+                                    <TextBlock Foreground="red" Grid.Column="1" Grid.Row="2" Text="{Binding CostPrice}"></TextBlock>
+
+                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="2"  >Amount:</TextBlock>
 
 
-                                <TextBox  Grid.Column="3" ></TextBox>
-                                <TextBlock Grid.Column="3" Grid.Row="1">1.000.000 VNĐ</TextBlock>
-                            </Grid>
-                        </Border>
-                    </StackPanel>
-                </ScrollViewer>
+                                    <TextBox  Grid.Row="1" HorizontalAlignment="Center"  Grid.Column="3" Text="{Binding OrderProducts[0].Amount}"></TextBox>
+
+                                    <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}" HorizontalAlignment="Right" 
+                                            VerticalAlignment="Top" Background="Gray" Grid.Column="4">
+                                        X
+                                    </Button>
+                                   
+                                </Grid>
+                            </Border>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    </ListView>
+                  
             </Border>
 
             <StackPanel Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
