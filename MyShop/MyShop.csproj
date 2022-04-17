@@ -15,12 +15,40 @@
     <None Remove="Image\iphone.png" />
     <None Remove="Image\login\img.png" />
     <None Remove="Image\product\Iphone11.png" />
+    <None Remove="Icon\icon_add_white.ico" />
+    <None Remove="Icon\icon_buy.ico" />
+    <None Remove="Icon\icon_view.ico" />
+    <None Remove="Image\iphone.png" />
+    <None Remove="Image\product\Iphone11.png" />
+    <None Remove="Image\product\Iphone12Mini.jpg" />
+    <None Remove="Image\product\Iphone12Pro.jpg" />
+    <None Remove="Image\product\Iphone12ProMax.jpg" />
+    <None Remove="Image\product\Iphone13.jpg" />
+    <None Remove="Image\product\Iphone13Mini.jpg" />
+    <None Remove="Image\product\Iphone13Pro.png" />
+    <None Remove="Image\product\Iphone13ProMax.jpg" />
+    <None Remove="Image\product\Iphone6S.jpg" />
+    <None Remove="Image\product\Iphone6SPlus.jpg" />
+    <None Remove="Image\product\Iphone7.jpg" />
+    <None Remove="Image\product\Iphone7Plus.jpg" />
+    <None Remove="Image\product\IphoneSE.jpg" />
+    <None Remove="Image\product\IphoneXR.jpg" />
+    <None Remove="Image\product\OPPOReno6.jpg" />
+    <None Remove="Image\product\OPPOReno7Z.jpg" />
+    <None Remove="Image\product\RealmeC35.jpg" />
+    <None Remove="Image\product\SamsungGalaxyA03.jpg" />
+    <None Remove="Image\product\SamsungGalaxyA52s.jpg" />
+    <None Remove="Image\product\SamsungGalaxyS22Ultra.jpg" />
+    <None Remove="Image\product\SamsungGalaxyZFold3.jpg" />
+    <None Remove="Image\product\VivoY15s.jpg" />
+    <None Remove="Image\product\Xiaomi11T.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspose.Cells" Version="22.3.0" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
@@ -37,6 +65,18 @@
     </Resource>
     <Resource Include="Image\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icon\icon_add_white.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_buy.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_view.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\iphone.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -45,6 +85,73 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\product\Iphone11.png">
+    <Resource Include="Image\product\Iphone11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone12Mini.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone12Pro.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone12ProMax.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone13Mini.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone13Pro.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone13ProMax.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone6S.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone6SPlus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone7Plus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\IphoneSE.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\IphoneXR.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\OPPOReno6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\OPPOReno7Z.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\RealmeC35.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\SamsungGalaxyA03.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\SamsungGalaxyA52s.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\SamsungGalaxyS22Ultra.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\SamsungGalaxyZFold3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\VivoY15s.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Xiaomi11T.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

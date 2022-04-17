@@ -18,7 +18,12 @@ namespace MyShop.ViewModel.Command
             _execute = execute;
             _canExecute = canExecute;
         }
-
+         public RelayCommand(Action<object> execute)
+         : this(execute, null)
+      {
+         _execute = execute;
+      }
+ 
         public event EventHandler? CanExecuteChanged
         {
             add
