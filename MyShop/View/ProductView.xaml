@@ -41,7 +41,8 @@
                     BorderBrush="#B667F1"
                     CornerRadius="10"
                     Width="350"
-                    Height="35">
+                    Height="40
+">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -53,8 +54,7 @@
                              BorderThickness="0"
                              Text="{Binding SearchKey}"
                              Foreground="Black"
-                             materialDesign:HintAssist.Hint="Search"
-                            />
+                             materialDesign:HintAssist.Hint="Search" />
                     <Button  x:Name="btnMember"
                              Command="{Binding searchCommand}"
                              Background="{x:Null}"
