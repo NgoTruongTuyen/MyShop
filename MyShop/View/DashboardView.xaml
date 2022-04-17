@@ -194,7 +194,7 @@
                             FontSize="60"
                             FontWeight="Light"
                             Foreground="White"
-                            Text="1000"/>
+                            Text="{Binding NumberProduct, Mode=OneWay}"/>
                     </StackPanel>
                     <Grid
                         HorizontalAlignment="Center"
@@ -250,7 +250,7 @@
                             FontWeight="Light"
                             FontSize="60"
                             Foreground="White"
-                            Text="1000"/>
+                            Text="{Binding NumberOrder, Mode=OneWay}"/>
                     </StackPanel>
                     <Grid
                         HorizontalAlignment="Center"
@@ -306,7 +306,7 @@
             FontWeight="Light"
             FontSize="60"
             Foreground="White"
-            Text="1000"/>
+            Text="{Binding Income, Mode=OneWay}"/>
             </StackPanel>
             <Grid
             HorizontalAlignment="Center"
@@ -339,60 +339,65 @@
                 <TextBlock FontSize="40"
                        Foreground="#B667F1"
                        >TOP 5 PRODUCTS</TextBlock>
-                <ListView>
-                    <ListViewItem Content="hello"/>
-                    <ListViewItem Content="hello"/>
-                    <ListViewItem Content="hello"/>
+                <ListView 
+                     Height="400"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+          ScrollViewer.CanContentScroll="False"
+                    ItemsSource="{Binding Products}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock></TextBlock>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <RadioButton
+                                <RadioButton
                      IsEnabled="False"
                     Height="50"
                     Style="{StaticResource MaterialDesignChoiceChipPrimaryOutlineRadioButton}"
                     IsChecked="True"
                     GroupName="GroupChoiceChipOutline"
                     Content="1" />
-                    
-                <Image Grid.Column="1"
+
+                                <Image Grid.Column="1"
                     Width="100"
                     Height="100"
-                    Source="../Image/product/Iphone11.png"/>
-                    <StackPanel
+                    Source="{Binding ImageURL}"/>
+                                <StackPanel
                         
                             VerticalAlignment="Center"
 Grid.Column="2">
-                        <TextBlock 
+                                    <TextBlock 
                             FontWeight="Bold"
-                            FontSize="20">IPHONE 11</TextBlock>
-                        <TextBlock 
+                            FontSize="20"
+                                 Text="{Binding ProductName}"/>
+                                    <TextBlock 
                             Foreground="#F24A72 "
-                            FontSize="20">17.000.000 VND</TextBlock>
-                        <StackPanel 
-                                                    Orientation="Horizontal"> 
-                            <materialDesign:PackIcon 
+                            FontSize="20"
+                            Text="{Binding SellingPrice}"
+                                        />
+                                    <StackPanel 
+                                                    Orientation="Horizontal">
+                                        <materialDesign:PackIcon 
                                 FontSize="20"
                                 Width="20"
                                 Height="20"
                                 Kind="Basket" />
-                            <TextBlock
+                                        <TextBlock
                                 Foreground="#bdbdbd"
-                                FontSize="20">300</TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                                FontSize="20"
+                                Text="{Binding  Stock}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                           </StackPanel>
         </Grid>
 
     </Grid>
