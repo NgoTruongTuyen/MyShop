@@ -11,6 +11,7 @@ namespace MyShop.ViewModel
     {
         public DashboardViewModel()
         {
+
         }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MyShop
 {
     /// <summary>
-    /// Interaction logic for DashboardWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class DashboardWindow : Window
+    public partial class LoginWindow : Window
     {
-        public DashboardWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }

@@ -10,10 +10,25 @@
     <Compile Update="View\AddProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\DashboardWindow.xaml.cs">
+    <Compile Update="LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AddNewProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ImportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SettingViewModel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\OrderManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -21,7 +36,7 @@
     <Page Update="View\AddProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\DashboardWindow.xaml">
+    <Page Update="LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
@@ -30,7 +45,34 @@
     <Page Update="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
     </Page>
+
     <Page Update="View\ProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+
+    <Page Update="View\ProductView.xaml" />
+
+    <Page Update="View\DashboardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ImportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SettingViewModel.xaml">
+
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ProductDetailView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AddNewProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DashboardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\OrderManagementView.xaml">
+
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

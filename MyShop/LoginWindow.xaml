@@ -1,0 +1,120 @@
+﻿<Window x:Class="MyShop.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShop"
+        mc:Ignorable="d"
+        
+        
+
+        xmlns:views="clr-namespace:MyShop.View"
+        xmlns:viewmodels="clr-namespace:MyShop.ViewModel"
+        
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource DashboardVM}"
+
+        
+        
+        
+        
+        
+        
+        
+        Title="LoginWindow" Height="768" Width="1366">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+            
+        <Image
+            
+            Source="Image/login/img.png"/>
+
+        <Grid
+            Margin="100 0"
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                VerticalAlignment="Center"
+                >
+                <TextBlock
+                FontSize="30"
+                >Welcome back</TextBlock>
+                <TextBlock
+                    FontSize="48"
+                    >
+                    Login to your account
+                </TextBlock>
+                </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                    FontSize="30"
+                    >Username</TextBlock>
+                <TextBox
+                    Margin="0 10 "
+                    VerticalContentAlignment="Center"
+                    FontSize="30"
+                    Height="60"
+                    materialDesign:HintAssist.Hint="   Username"
+                    ></TextBox>
+                     <TextBlock
+                    FontSize="30"
+                    >Password</TextBlock>
+                <PasswordBox
+                    Margin="0 10 "
+                    VerticalContentAlignment="Center"
+                    FontSize="30"
+                    Height="60"
+                    materialDesign:HintAssist.Hint="   *******"
+                    ></PasswordBox>
+
+                <CheckBox
+                Content="Remember me"
+                Style="{StaticResource MaterialDesignCheckBox}" 
+                >
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2"
+                                        ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                    
+                    
+                </CheckBox>
+
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+
+                <Button 
+                    Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                    Margin="0 30 0 20"
+                    Height="60"
+                    FontSize="30"
+                    Content="Login now" 
+                        Background="#04C35C"/>
+
+                 <Button 
+                     Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                    Height="60"
+                    FontSize="30"
+                    Content="Try free for 15 days" 
+                        Background="#2d3748"/>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
