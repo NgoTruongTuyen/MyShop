@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:MyShop.View"
              mc:Ignorable="d"
              d:DesignHeight="768"
              d:DesignWidth="1292"
-             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local1="clr-namespace:MyShop.ViewModel"
-
+             xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
@@ -47,20 +47,30 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Margin="10 5 25 5"
+                    <TextBox Margin="10,5,60,5"
                              Width="auto"
                              FontSize="16"
                              BorderThickness="0"
+                             Text="{Binding SearchKey}"
+                             Foreground="Black"
                              materialDesign:HintAssist.Hint="Search"
-                             materialDesign:HintAssist.IsFloating="True" />
-                    <materialDesign:PackIcon Kind="Magnify"
-                                             FontSize="20"
-                                             Width="20"
-                                             Height="20"
-                                             Foreground="Black"
-                                             Margin="323,0,0,0"
-                                             RenderTransformOrigin="0.554,1.497"
-                                             VerticalAlignment="Center" />
+                            />
+                    <Button  x:Name="btnMember"
+                             Command="{Binding searchCommand}"
+                             Background="{x:Null}"
+                             BorderBrush="{x:Null}"
+                             FontSize="10"
+                             Margin="298,0,0,1">
+                        <materialDesign:PackIcon Kind="Magnify"
+                                                 FontSize="20"
+                                                 Width="20"
+                                                 Height="20"
+                                                 Foreground="Black"
+                                                 Background="Transparent"
+                                                 RenderTransformOrigin="0.554,1.497"
+                                                 VerticalAlignment="Center" />
+                    </Button>
+
                 </Grid>
             </Border>
 
@@ -238,8 +248,15 @@
                 <ListView ItemsSource="{Binding _selectedCategory}"
                           Width="1200"
                           Height="450"
+                          Name="ListView1"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <i1:Interaction.Triggers>
+                        <i1:EventTrigger EventName="MouseDoubleClick">
+                            <i1:InvokeCommandAction Command="{Binding DoubleClickProductCommand}"
+                                                    CommandParameter="{Binding ElementName=ListView1, Path=SelectedItem}" />
+                        </i1:EventTrigger>
+                    </i1:Interaction.Triggers>
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
@@ -306,7 +323,7 @@
                                                         <ColumnDefinition />
                                                         <ColumnDefinition />
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock FontSize="20" >
+                                                    <TextBlock FontSize="20">
                                                     <Image Stretch="Fill"
                                                            Source="/Icon/icon_view.ico"
                                                            Height="25"
@@ -317,7 +334,6 @@
                                                                FontSize="20">
                                                     <Image Stretch="Fill"
                                                            Source="/Icon/icon_buy.ico"
-                                                         
                                                            Height="30"
                                                            Width="30" />
                                                     <Run Text="{Binding BuyCount}"></Run>

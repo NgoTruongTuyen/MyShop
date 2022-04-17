@@ -1,4 +1,5 @@
 ﻿using MyShop.Model;
+using MyShop.View;
 using MyShop.ViewModel.Command;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,19 @@ namespace MyShop.ViewModel
         private int _totalItems { get; set; }
         private int _currentPage { get; set; }
         private int _totalPages { get; set; }
-
+        private string searchKey;
+        public string SearchKey
+        {
+            get { return searchKey; }
+            set
+            {
+                if (!string.Equals(searchKey, value))
+                {
+                    searchKey = value;
+                    //RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                }
+            }
+        }
         int _rowsPerPage = 10;
         public RelayCommand nextPageCommand { get; }
         public RelayCommand previousPageCommand { get; }
@@ -39,6 +52,9 @@ namespace MyShop.ViewModel
         public RelayCommand xiaomiTabCommand { get; }
         public RelayCommand realmeTabCommand { get; }
         public RelayCommand oppoTabCommand { get; }
+        public RelayCommand searchCommand { get; }
+
+        private ICommand doubleClickProductCommand;
         public ProductViewModel()
         {
             _categories = getDataFromDataBase(server);
@@ -55,7 +71,7 @@ namespace MyShop.ViewModel
             xiaomiTabCommand = new RelayCommand(clickXiaomiTab, null);
             realmeTabCommand = new RelayCommand(clickRealmeTab, null);
             oppoTabCommand = new RelayCommand(clickOppoTab, null);
-            
+            searchCommand = new RelayCommand(search, null);
         }
         public ObservableCollection<Category> Categories
         {
@@ -175,7 +191,55 @@ namespace MyShop.ViewModel
             return categories;
         }
 
+        public ObservableCollection<Product> findProductByName(String server, string productName)
+        {
+            
+            SqlConnection ConnectDatabase =
+                new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+            // Sau khi kết nối thành công
+            var sql = $"select * from Product where productName like '%{productName}%'";
+            var command = new SqlCommand(sql, ConnectDatabase);
+
+            var reader = command.ExecuteReader();
+
+            ObservableCollection<Product> result = new ObservableCollection<Product>();
+
+            while (reader.Read())
+            {
+                var id = (int)reader["productID"];
+                var name = (string)reader["productName"];
+                var brand = (string)reader["brand"];
+                var imageURL = (string)reader["imageURL"];
+                var sellingPrice = (int)reader["sellingPrice"];
+                var stock = (int)reader["stock"];
+                var costPrice = (int)reader["costPrice"];
+                var screenSize = (double)reader["screenSize"];
+                var os = (string)reader["os"];
+                var color = (string)reader["color"];
+                var memory = (int)reader["memory"];
+                var storage = (int)reader["storage"];
+                var battery = (int)reader["battery"];
+                var releaseDate = (DateTime)reader["releaseDate"];
+                var buyCounts = (int)reader["buyCounts"];
+                var viewCounts = (int)reader["viewCounts"];
+                Product tmp = new Product(id.ToString(), name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
+               
+                result.Add(tmp);
+            }
+            reader.Close();
+
+           
+            return result;
+        }
         public ObservableCollection<Product> getProductOfCategory(string name)
         {
             ObservableCollection<Product> category = null;
@@ -205,7 +269,7 @@ namespace MyShop.ViewModel
             _totalPages = _currentCategory.Count / _rowsPerPage +
                 (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
 
-            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";         
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
         }
 
         public void clickNextPage(object parameter)
@@ -230,18 +294,18 @@ namespace MyShop.ViewModel
                 _selectedCategory = _currentCategory
                 .Skip((_currentPage - 1) * _rowsPerPage)
                 .Take(_rowsPerPage)
-                .ToList();              
-                currentPagingTextBlock= $"{_currentPage}/{_totalPages}";
+                .ToList();
+                currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
             }
         }
         public void clickFirstPage(object parameter)
         {
-                _currentPage = 1;
-                _selectedCategory = _currentCategory
-                .Skip((_currentPage - 1) * _rowsPerPage)
-                .Take(_rowsPerPage)
-                .ToList();
-                currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+            _currentPage = 1;
+            _selectedCategory = _currentCategory
+            .Skip((_currentPage - 1) * _rowsPerPage)
+            .Take(_rowsPerPage)
+            .ToList();
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
         }
         public void clickLastPage(object parameter)
         {
@@ -280,5 +344,40 @@ namespace MyShop.ViewModel
         {
             paging("Realme");
         }
+        public void search(object parameter)
+        {
+            
+            _currentCategory = findProductByName(server, SearchKey);
+
+            _currentPage = 1;
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+        }
+        public ICommand DoubleClickProductCommand
+        {
+            get
+            {
+                return doubleClickProductCommand ?? (doubleClickProductCommand = new RelayCommand(x =>
+                {
+                    DoStuff(x as Product);
+                }));
+            }
+        }
+        private void DoStuff(Product item)
+        {
+            MessageBox.Show(item.ProductName + " element clicked");
+            //var screen = new AddProductView();
+
+            //screen.Show;
+        }
     }
+
 }
