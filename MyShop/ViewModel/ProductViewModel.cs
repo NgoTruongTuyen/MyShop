@@ -152,7 +152,7 @@ namespace MyShop.ViewModel
                 var releaseDate = (DateTime)reader["releaseDate"];
                 var buyCounts = (int)reader["buyCounts"];
                 var viewCounts = (int)reader["viewCounts"];
-                Product tmp = new Product(id.ToString(), name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
+                Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
                 if (brand == "Apple")
                 {
                     categoryApple.Products.Add(tmp);
@@ -231,7 +231,7 @@ namespace MyShop.ViewModel
                 var releaseDate = (DateTime)reader["releaseDate"];
                 var buyCounts = (int)reader["buyCounts"];
                 var viewCounts = (int)reader["viewCounts"];
-                Product tmp = new Product(id.ToString(), name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
+                Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
                
                 result.Add(tmp);
             }

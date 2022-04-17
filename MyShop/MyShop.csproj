@@ -51,6 +51,7 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,7 +66,8 @@
     </Resource>
     <Resource Include="Image\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -84,7 +86,6 @@
     <Resource Include="Image\login\img.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\product\Iphone11.png">
     <Resource Include="Image\product\Iphone11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

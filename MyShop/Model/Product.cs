@@ -52,17 +52,7 @@ namespace MyShop.Model
         }
 
         public Product(int productId, string productName, string imageURL, int stock, int costPrice, int sellingPrice, string brand, float screenSize, string oS, string color, int memory, int storage, int battery, int viewCount, int buyCount, BindingList<Order_Product> orderProducts, DateTime releaseDate)
-        public Product( string name, 
-                        string imgURL, 
-                        int cost, 
-                        double screenSize, 
-                        string os, 
-                        string color, 
-                        int memory, 
-                        int storage, 
-                        int battery, 
-                        DateTime releaseDay, 
-                        int number, string brand)
+       
         {
             ProductId = productId;
             ProductName = productName;
@@ -84,7 +74,7 @@ namespace MyShop.Model
         }
 
 
-        public Product(string id,
+        public Product(int id,
                        string name,
                        string imgURL,
                        int cost,
