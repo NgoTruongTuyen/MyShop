@@ -1,5 +1,6 @@
 ﻿using MyShop.Commands;
 using MyShop.DAO;
+using MyShop.DatabaseConnection;
 using MyShop.Messenger;
 using MyShop.Model;
 using MyShop.Stores;
@@ -8,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace MyShop.ViewModel
@@ -15,24 +18,40 @@ namespace MyShop.ViewModel
     public class AddNewOrderViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
+        OrderProductDAO orderProductDAO;
+
+        SqlTransaction sqlTransaction;
+
+        private RelayCommand _focusCommand;
+        public RelayCommand FocusCommand { get { return _focusCommand; }  set { _focusCommand = value; OnPropertyChanged(nameof(FocusCommand)); } }
+
+        private string _showSearchList;
+        public string ShowSearchList {
+            get 
+            { 
+                return _showSearchList; 
+            } 
+            set 
+            { 
+                _showSearchList = value; 
+                OnPropertyChanged(nameof(ShowSearchList)); 
+            } 
+        }
+
         private int _subTotal;
         public int SubTotal
         {
             get
             {
-                int subtotal = 0;
-                foreach (Product product in ProductsInOrder)
-                {
-                    subtotal += product.SellingPrice * product.OrderProducts[0].Amount;
-                }
-
-                return subtotal;
+                return _subTotal;
             }
             set
             {
                 _subTotal = value;
 
                 OnPropertyChanged(nameof(SubTotal));
+
+
             }
         }
         private int _total;
@@ -66,7 +85,7 @@ namespace MyShop.ViewModel
             set { 
                 _searchBox = value; 
                 OnPropertyChanged(nameof(SearchBox));
-
+                ShowSearchList = "Visible";
                 searchProduct();
             } 
         }
@@ -87,9 +106,16 @@ namespace MyShop.ViewModel
             get { return _selectSearchProduct; }
             set
             {
-                if (_selectSearchProduct != value)
+                if ((value as Product).OrderProducts != null)
                 {
-                    _selectSearchProduct = value; OnPropertyChanged();
+                    _selectSearchProduct = value; 
+                    OnPropertyChanged(nameof(SelectSearchProduct));
+               
+                    ProductsInOrder.Add(SelectSearchProduct);
+
+                    orderProductDAO.insertOne(SelectSearchProduct.OrderProducts[0]);
+
+                    SubTotal = calcSubTotal();
                 }
             }
         }
@@ -124,58 +150,25 @@ namespace MyShop.ViewModel
 
         public AddNewOrderViewModel(NavigationStore navigationStore)
         {
-            order=new Order();
-           NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
-           NavigateSubmitCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
-        }
-
-        public AddNewOrderViewModel(NavigationStore navigationStore, BaseMessenger<Order> baseMessenger)
-        {
-            ProductDAO productDAO = new ProductDAO();
-
-            ProductsInOrder = new ObservableCollection<Product>();
-
-            List<Product> _Products = productDAO.GetAll(OrderId);
-
-            foreach (Product product in _Products)
-            {
-                ProductsInOrder.Add(product);
-            }
-
-            Messenger = baseMessenger;
-            order = new Order();
-
-            NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
-            NavigateSubmitCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => {
-                Messenger.excute(order);
-                return new OrderManagementViewModel(navigationStore);
-                });
            
-        }
+            ProductDAO productDAO = new ProductDAO();
+            OrderDAO orderDAO = new OrderDAO();
 
-        public AddNewOrderViewModel(NavigationStore navigationStore, BaseMessenger<Order> baseMessenger, Order? sendedOrder)
-        {
-            Products = new ObservableCollection<Product>();
-            Discount = 300000;
+            order = new Order() { CustomerAddress = " ", CustomerName = " ", CustomerPhone = " ", TotalAmount = 0, TotalPrice = 0 };
+            order.OrderId= orderDAO.insertOne(order);
 
-            SelectedProduct = new Product();
+            DBConnection.GetInstance().beginTrans();
 
-            DeleteCommand = new RelayCommand(deleteProduct, null);
 
-            order = sendedOrder;
+            orderProductDAO = new OrderProductDAO();
+
+            ShowSearchList = "Hidden";
 
             ProductsInOrder = new ObservableCollection<Product>();
 
-            ProductDAO productDAO = new ProductDAO();
+            Products = new ObservableCollection<Product>();
 
-            List<Product> _Products = productDAO.GetAll(OrderId);
-
-            foreach (Product product in _Products)
-            {
-                ProductsInOrder.Add(product);
-            }
-
-            List<Product> _Product1=productDAO.GetAll();
+            List<Product> _Product1 = productDAO.GetAll();
             foreach (Product product in _Product1)
             {
                 Products.Add(product);
@@ -185,11 +178,111 @@ namespace MyShop.ViewModel
 
             SelectSearchProduct = new Product();
 
+            Discount = 300000;
+
+            SelectedProduct = new Product();
+
+            DeleteCommand = new RelayCommand(deleteProduct, null);
+
+            NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () =>
+            {
+                DBConnection.GetInstance().Transaction.Rollback();
+
+                orderDAO.deleteOne(OrderId);
+
+                orderProductDAO.deleteOrder(OrderId);
+
+                return new OrderManagementViewModel(navigationStore);
+            } 
+            );
+           NavigateSubmitCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => {
+               OrderDAO orderDAO = new OrderDAO();
+
+               int TotalAmount = 0;
+
+               foreach (Product product in ProductsInOrder)
+               {
+                   TotalAmount += product.OrderProducts[0].Amount;
+               }
+
+               orderDAO.setTotalPrice(OrderId, Total);
+               orderDAO.setTotalAmount(OrderId, TotalAmount);
+               orderDAO.setCustomer(OrderId, CustomerName, CustomerPhone, CustomerAddress);
+
+               DBConnection.GetInstance().Transaction.Commit();
+               return new OrderManagementViewModel(navigationStore);
+               });
+        }
+
+        public AddNewOrderViewModel(NavigationStore navigationStore, BaseMessenger<Order> baseMessenger, Order? sendedOrder)
+        {
+            DBConnection.GetInstance().beginTrans();
+
+            orderProductDAO=new OrderProductDAO();
+
+            ShowSearchList = "Hidden";
+
+            ProductsInOrder = new ObservableCollection<Product>();
+
+            Products = new ObservableCollection<Product>();
+
+            ProductSearchList = new ObservableCollection<Product>();
+
+            SelectSearchProduct = new Product();
+
+            Discount = 300000;
+
+            SelectedProduct = new Product();
+
+            DeleteCommand = new RelayCommand(deleteProduct, null);
+
+            order = sendedOrder;
+
+            FocusCommand = new RelayCommand(handleFocus, null);
+
+
+            ProductDAO productDAO = new ProductDAO();
+
+            List<Product> _Products = productDAO.GetAll(OrderId);
+
+            foreach (Product product in _Products)
+            {
+                ProductsInOrder.Add(product);
+            }
+
+            List<Product> _Product1 = productDAO.GetAll();
+            foreach (Product product in _Product1)
+            {
+                Products.Add(product);
+            }
+
+            SubTotal = calcSubTotal();
+
+
+
 
             Messenger = baseMessenger;
 
-            NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
+            NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () =>
+            {
+                DBConnection.GetInstance().Transaction.Rollback();
+                return new OrderManagementViewModel(navigationStore);
+            });
             NavigateSubmitCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => {
+                OrderDAO orderDAO = new OrderDAO();
+
+                int TotalAmount = 0;
+
+                foreach (Product product in ProductsInOrder)
+                {
+                    TotalAmount += product.OrderProducts[0].Amount;
+                }
+
+                orderDAO.setTotalPrice(OrderId, Total);
+                orderDAO.setTotalAmount(OrderId, TotalAmount);
+                orderDAO.setCustomer(OrderId, CustomerName, CustomerPhone, CustomerAddress);
+
+                DBConnection.GetInstance().Transaction.Commit();
                 Messenger.excute(order);
                 return new OrderManagementViewModel(navigationStore);
             });
@@ -198,7 +291,11 @@ namespace MyShop.ViewModel
 
         private void deleteProduct(object obj)
         {
+            orderProductDAO.deleteOne(SelectedProduct.OrderProducts[0]);
+
             ProductsInOrder.Remove(SelectedProduct);
+
+            SubTotal = calcSubTotal();
         }
 
         private void searchProduct()
@@ -208,13 +305,31 @@ namespace MyShop.ViewModel
             {
                 if (product.ProductName.ToLower().Contains(_searchBox.ToLower()))
                 {
-
+                    Product _product = product as Product;
+                    _product.OrderProducts = new BindingList<Order_Product>();
+                    _product.OrderProducts.Add(new Order_Product() { Amount = 0, ProductId = _product.ProductId, OrderId = OrderId, Price = _product.SellingPrice });
                     ProductSearchList.Add(product);
                 }
-
             }
-
-
         }
+
+        public void handleFocus(object x)
+        {
+            if (ShowSearchList == "visible")
+                ShowSearchList = "hidden";
+            else if (ShowSearchList == "visible")
+                ShowSearchList = "visible";
+        }
+
+        public int calcSubTotal()
+        {
+            int subtotal = 0;
+            foreach (Product product in ProductsInOrder)
+            {
+                subtotal += product.SellingPrice * product.OrderProducts[0].Amount;
+            }
+            return subtotal;
+        }
+
     }
 }

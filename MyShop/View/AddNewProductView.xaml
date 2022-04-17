@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyShop.View"
+             
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -14,16 +16,19 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    
-    
+
     <Grid Background="#FDEFF4">
+        
+
         <Grid Margin="20" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="0"></RowDefinition>
                 <RowDefinition Height="300"></RowDefinition>
+                
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             
@@ -125,62 +130,70 @@
 
             <TextBlock FontWeight="Bold" FontSize="14" Grid.Row="2" Margin="0 0 0 10">Product information</TextBlock>
 
-            
-           
-            <DockPanel Grid.Row="3" Margin="0 5 3 20" LastChildFill="True" Height="100">
-              
-               
-                <Border BorderThickness="1" BorderBrush="DarkViolet" Margin="0 0 5 0" CornerRadius="3" DockPanel.Dock="Top">
-                    <TextBox VerticalAlignment="Center" Padding="10" materialDesign:HintAssist.Hint="Product" Text="{Binding SearchBox ,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                </Border>
 
-                
-                <ListView DockPanel.Dock="Bottom"
-               
-                SelectedItem="{Binding SelectedSearchProduct,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+
+            <DockPanel Grid.Row="3" Margin="0 5 3 10" LastChildFill="True" >
+
+
+                <Border BorderThickness="1" BorderBrush="DarkViolet" Margin="0 0 5 0" CornerRadius="3" DockPanel.Dock="Top" >
+                    <TextBox VerticalAlignment="Center" Padding="10" 
+                             materialDesign:HintAssist.Hint="Product" 
+                             Text="{Binding SearchBox , UpdateSourceTrigger=PropertyChanged}"
+                            
+                             >
+                    </TextBox>
+                </Border>
+            </DockPanel>
+
+            <Canvas  Grid.Row="4"  Margin="2 2 2 2" Background="Black" Panel.ZIndex="1" Visibility="{Binding ShowSearchList, Mode=OneWay}">
+                    <ScrollViewer Background="LightGray">
+                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3">
+                        <ListView  Background="Black"
+                          Width="800"
+                          Height="200"
+      
+                SelectedItem="{Binding SelectSearchProduct,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 
                 ItemsSource="{Binding ProductSearchList}"
                 >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
+                                        <Grid Margin="5 5 5 5" Width="700">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"></RowDefinition>
+                                                <RowDefinition Height="5*"></RowDefinition>
+                                                <RowDefinition Height="5*"></RowDefinition>
+                                            </Grid.RowDefinitions>
 
-   
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="Violet" Margin="0 0 0 3" CornerRadius="3">
-                                <Grid Margin="5 5 5 5" >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"></RowDefinition>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                        <RowDefinition Height="5*"></RowDefinition>
-                                    </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                <ColumnDefinition Width="6*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="6*"></ColumnDefinition>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                            <Image Grid.Row="1" Grid.RowSpan="2" Source="{Binding ImageURL}" Height="60"></Image>
+                                            <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
+                                            <TextBlock Foreground="red" Grid.Column="1" Grid.Row="2" Text="{Binding CostPrice}"></TextBlock>
+                                        </Grid>
+                                    </Border>
 
-                                    <Image Grid.Row="1" Grid.RowSpan="2" Source="{Binding ImageURL}" Height="60"></Image>
-                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
-                                    <TextBlock Foreground="red" Grid.Column="1" Grid.Row="2" Text="{Binding CostPrice}"></TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                   
+                    </ScrollViewer>
+                </Canvas>
 
-                                    <TextBlock  Grid.Row="1" FontWeight="Bold" Grid.Column="2"  >Amount:</TextBlock>
+      
+           
 
-
-                                    <TextBox  Grid.Row="1" HorizontalAlignment="Center"  Grid.Column="3" Text="{Binding OrderProducts[0].Amount}"></TextBox>
-                                </Grid>
-                            </Border>
-
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </DockPanel>
-
-
-            <Border BorderThickness="1" Grid.Row="4" Background="White" BorderBrush="DarkViolet" Margin="0 0 5 10" CornerRadius="3">
-                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding ProductsInOrder}" 
+            <Border BorderThickness="1" Grid.Row="5" Background="White" BorderBrush="DarkViolet" Margin="0 0 5 10" CornerRadius="3" Panel.ZIndex="0">
+                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding ProductsInOrder}"
+                          
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                           SelectedItem="{Binding SelectedProduct}">
                     <ListView.ItemsPanel>
@@ -236,7 +249,7 @@
                   
             </Border>
 
-            <StackPanel Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Grid.Row="6" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Command="{Binding NavigateSubmitCommand}"  Content="Submit" Margin="0 0 50 0"></Button>
                 <Button Command="{Binding NavigateCancelCommand}" Background="Gray" Content="Cancel"></Button>
             </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using Castle.Components.DictionaryAdapter;
 using MyShop.Commands;
+using MyShop.DAO;
 using MyShop.Messenger;
 using MyShop.Model;
 using MyShop.Service;
@@ -25,8 +26,11 @@ namespace MyShop.ViewModel
         public ICommand NavigateAddNewOrderCommand { get; set; }
         public ICommand NavigateEditNewOrderCommand { get; set; }
 
-        public RelayCommand DeleteCommand;
- 
+        public RelayCommand DeleteCommand { get; set; }
+
+        public OrderDAO orderDAO { get; set; }
+        public OrderProductDAO orderProductDAO { get; set; }
+
         public void deleteItem(object x)
         {
             int index = Orders.IndexOf(SelectedItem);
@@ -35,7 +39,12 @@ namespace MyShop.ViewModel
                 return;
             }
 
+            orderDAO.deleteOne(SelectedItem.OrderId);
+            orderProductDAO.deleteOrder(SelectedItem.OrderId);
+
             Orders.Remove(SelectedItem);
+
+           
         }
 
         public void updateItem(Order order)
@@ -58,6 +67,9 @@ namespace MyShop.ViewModel
 
         public OrderManagementViewModel (NavigationStore navigationStore)
         {
+            orderDAO = new OrderDAO();
+            orderProductDAO = new OrderProductDAO();
+
             SelectedItem = new Order();
             UpdatingMessenger = new BaseMessenger<Order>();
             AddingMessenger = new BaseMessenger<Order>();
@@ -89,7 +101,10 @@ namespace MyShop.ViewModel
 
             Orders.RemoveAt (index);
         }
-        public void deleteCommand(object x) { }
+        public void deleteCommand(object x) {
+
+        
+        }
 
        
     }

@@ -81,7 +81,7 @@ namespace MyShop.DAO
             return products;
         }
 
-        internal List<Product> GetAll()
+        public List<Product> GetAll()
         {
             List<Product> products = new List<Product>();
             string sql = "select * from Products";

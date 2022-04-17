@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MyShop.DAO
 {
@@ -36,5 +37,64 @@ namespace MyShop.DAO
             return orders;
         }
 
+        public int insertOne(Order o)
+        {
+            string sql = "insert into Orders (createdDate, customerName, customerPhone, customerAddress, totalAmount, totalPrice) " +
+                "values(CURRENT_TIMESTAMP, @customerName, @customerPhone,  @customerAddress, @totalAmount, @totalPrice)";
+
+           DBConn.excute(sql, new SqlParameter("@customerName", o.CustomerName),
+               new SqlParameter("@customerPhone", o.CustomerPhone),
+               new SqlParameter("@customerAddress", o.CustomerAddress),
+               new SqlParameter("@totalAmount", o.TotalAmount),
+               new SqlParameter("@totalPrice", o.TotalPrice)
+               );
+
+
+
+            return getLatestID();
+
+        }
+
+        public void deleteOne(int id)
+        {
+            string sql = "delete from Orders where orderID = @id";
+
+            DBConn.excute(sql, new SqlParameter("@id", id));
+        }
+
+        public int getLatestID()
+        {
+           string sql = "SELECT MAX(orderID) AS LastID FROM Orders";
+
+            int id = DBConn.excuteScalar(sql);
+
+            Debug.WriteLine("--------------------------------"+id+"----------------------------------------");
+
+            return id;
+        }
+
+        internal void setTotalPrice(int orderId, int totalPrice)
+        {
+            string sql = "update Orders set totalPrice=@totalPrice where orderID=@orderID";
+
+            DBConn.excute(sql, new SqlParameter("@totalPrice", totalPrice), new SqlParameter("@orderID", orderId));
+        }
+
+        internal void setTotalAmount(int orderId, int totalAmount)
+        {
+            string sql = "update Orders set totalAmount=@totalAmount where orderID=@orderID";
+
+            DBConn.excute(sql, new SqlParameter("@totalAmount", totalAmount), new SqlParameter("@orderID", orderId));
+        }
+
+        internal void setCustomer(int orderId, string customerName, string customerPhone, string customerAddress)
+        {
+            string sql = "update Orders set customerName=@customerName, customerPhone=@customerPhone, customerAddress=@customerAddress where orderID=@orderID";
+
+            DBConn.excute(sql, new SqlParameter("@customerName", customerName), 
+                new SqlParameter("@customerPhone", customerPhone), 
+                new SqlParameter("@customerAddress", customerAddress), 
+                new SqlParameter("@orderID", orderId));
+        }
     }
 }
