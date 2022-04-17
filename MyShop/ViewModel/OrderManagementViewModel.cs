@@ -93,17 +93,14 @@ namespace MyShop.ViewModel
             NavigateEditNewOrderCommand = new NavigateCommand<AddNewOrderViewModel>(navigationStore, () => new AddNewOrderViewModel(navigationStore, UpdatingMessenger, SelectedItem));
         }
 
-   
-        public void editCommand(object x) {
-            int index = Orders.IndexOf (SelectedItem);
+
+        public void editCommand(object x)
+        {
+            int index = Orders.IndexOf(SelectedItem);
             if (index == -1)
                 return;
 
-            Orders.RemoveAt (index);
-        }
-        public void deleteCommand(object x) {
-
-        
+            Orders.RemoveAt(index);
         }
 
        
