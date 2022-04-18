@@ -87,24 +87,31 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-
-                    <materialDesign:PackIcon Kind="Filter"
-                                             FontSize="20"
-                                             Width="20"
-                                             Height="20"
-                                             Foreground="Black"
-                                             Margin="5,0,0,0"
-                                             RenderTransformOrigin="0.554,1.497"
-                                             VerticalAlignment="Center" />
+                    <Button  x:Name="btnFilter"
+                             Command="{Binding filterCommand}"
+                             Background="{x:Null}"
+                             BorderBrush="{x:Null}"
+                             FontSize="10"
+                             Margin="0,0,128,0">
+                        <materialDesign:PackIcon Kind="Filter"
+                                                 FontSize="20"
+                                                 Width="20"
+                                                 Height="20"
+                                                 Foreground="Black"
+                                                 Margin="-16,-5,0,0"
+                                                 RenderTransformOrigin="0.554,1.497"
+                                                 HorizontalAlignment="Left" />
+                    </Button>
                     <ComboBox x:Name="cbFilterProduct"
                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                               BorderThickness="0"
                               materialDesign:HintAssist.Hint="Filter"
-                              Margin="30,0,10,0"
+                              Margin="35,0,5,0"
+                              SelectedItem="{Binding FilterKey}"
                               Height="28">
-                        <ComboBoxItem Content="Android" />
-                        <ComboBoxItem Content="iOS" />
-                        <ComboBoxItem Content="Linux" />
+                        <ComboBoxItem Content="0 - 5,000,000" />
+                        <ComboBoxItem Content="5,000,000 - 10,000,000" />
+                        <ComboBoxItem Content="10,000,000+" />
                     </ComboBox>
                 </Grid>
             </Border>

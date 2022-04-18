@@ -28,6 +28,7 @@ namespace MyShop.ViewModel
         private int _currentPage { get; set; }
         private int _totalPages { get; set; }
         private string searchKey;
+        private string filterKey;
         public string SearchKey
         {
             get { return searchKey; }
@@ -36,7 +37,17 @@ namespace MyShop.ViewModel
                 if (!string.Equals(searchKey, value))
                 {
                     searchKey = value;
-                    //RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                }
+            }
+        }
+        public string FilterKey
+        {
+            get { return filterKey; }
+            set
+            {
+                if (!string.Equals(filterKey, value))
+                {
+                    filterKey = value;
                 }
             }
         }
@@ -53,6 +64,7 @@ namespace MyShop.ViewModel
         public RelayCommand realmeTabCommand { get; }
         public RelayCommand oppoTabCommand { get; }
         public RelayCommand searchCommand { get; }
+        public RelayCommand filterCommand { get; }
 
         private ICommand doubleClickProductCommand;
         public ProductViewModel()
@@ -72,6 +84,7 @@ namespace MyShop.ViewModel
             realmeTabCommand = new RelayCommand(clickRealmeTab, null);
             oppoTabCommand = new RelayCommand(clickOppoTab, null);
             searchCommand = new RelayCommand(search, null);
+            filterCommand = new RelayCommand(filter, null);
         }
         public ObservableCollection<Category> Categories
         {
@@ -193,7 +206,7 @@ namespace MyShop.ViewModel
 
         public ObservableCollection<Product> findProductByName(String server, string productName)
         {
-            
+
             SqlConnection ConnectDatabase =
                 new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
             try
@@ -232,12 +245,74 @@ namespace MyShop.ViewModel
                 var buyCounts = (int)reader["buyCounts"];
                 var viewCounts = (int)reader["viewCounts"];
                 Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
-               
+
                 result.Add(tmp);
             }
             reader.Close();
 
-           
+
+            return result;
+        }
+        public ObservableCollection<Product> filterProductByPrice(String server, String price)
+        {
+
+            SqlConnection ConnectDatabase =
+                new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            String content = "";
+            price = price.Split("System.Windows.Controls.ComboBoxItem: ")[1];
+            if (price.ToString() == "0 - 5,000,000")
+            {
+                content = "<= 5000000";
+            }
+            else if (price.ToString() == "5,000,000 - 10,000,000")
+            {
+                content = "> 5000000 and sellingPrice < 10000000";
+            }
+            else if (price.ToString() == "10,000,000+")
+            {
+                content = ">=10000000";
+            }
+            // Sau khi kết nối thành công
+            var sql = $"select * from Product where sellingPrice {content}";
+            var command = new SqlCommand(sql, ConnectDatabase);
+
+            var reader = command.ExecuteReader();
+
+            ObservableCollection<Product> result = new ObservableCollection<Product>();
+
+            while (reader.Read())
+            {
+                var id = (int)reader["productID"];
+                var name = (string)reader["productName"];
+                var brand = (string)reader["brand"];
+                var imageURL = (string)reader["imageURL"];
+                var sellingPrice = (int)reader["sellingPrice"];
+                var stock = (int)reader["stock"];
+                var costPrice = (int)reader["costPrice"];
+                var screenSize = (double)reader["screenSize"];
+                var os = (string)reader["os"];
+                var color = (string)reader["color"];
+                var memory = (int)reader["memory"];
+                var storage = (int)reader["storage"];
+                var battery = (int)reader["battery"];
+                var releaseDate = (DateTime)reader["releaseDate"];
+                var buyCounts = (int)reader["buyCounts"];
+                var viewCounts = (int)reader["viewCounts"];
+                Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
+
+                result.Add(tmp);
+            }
+            reader.Close();
+
+
             return result;
         }
         public ObservableCollection<Product> getProductOfCategory(string name)
@@ -346,8 +421,24 @@ namespace MyShop.ViewModel
         }
         public void search(object parameter)
         {
-            
+
             _currentCategory = findProductByName(server, SearchKey);
+
+            _currentPage = 1;
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+        }
+        public void filter(object parameter)
+        {
+            _currentCategory = filterProductByPrice(server, FilterKey);
 
             _currentPage = 1;
             _selectedCategory = _currentCategory
@@ -373,10 +464,11 @@ namespace MyShop.ViewModel
         }
         private void DoStuff(Product item)
         {
-            MessageBox.Show(item.ProductName + " element clicked");
-            //var screen = new AddProductView();
-
-            //screen.Show;
+            var screen = new DetailProductView();
+            var tmp = new DetailProductViewModel(item);
+            screen.DataContext = tmp;
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
         }
     }
 
