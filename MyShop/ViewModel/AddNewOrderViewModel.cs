@@ -59,7 +59,7 @@ namespace MyShop.ViewModel
         {
             get
             {
-                return SubTotal-Discount;
+                return (SubTotal-Discount>0) ? (SubTotal-Discount) : 0;
             }
             set
             {
@@ -106,16 +106,22 @@ namespace MyShop.ViewModel
             get { return _selectSearchProduct; }
             set
             {
-                if ((value as Product).OrderProducts != null)
+                if (value != null)
                 {
-                    _selectSearchProduct = value; 
-                    OnPropertyChanged(nameof(SelectSearchProduct));
-               
-                    ProductsInOrder.Add(SelectSearchProduct);
+                    if ((value as Product).OrderProducts != null)
+                    {
+                        if (!ProductsInOrder.Contains(value))
+                        {
+                            _selectSearchProduct = value;
+                            OnPropertyChanged(nameof(SelectSearchProduct));
 
-                    orderProductDAO.insertOne(SelectSearchProduct.OrderProducts[0]);
+                            ProductsInOrder.Add(SelectSearchProduct);
 
-                    SubTotal = calcSubTotal();
+                            orderProductDAO.insertOne(SelectSearchProduct.OrderProducts[0]);
+
+                            SubTotal = calcSubTotal();
+                        }
+                    }
                 }
             }
         }
@@ -127,8 +133,19 @@ namespace MyShop.ViewModel
             set { _productSearchList = value; OnPropertyChanged(nameof(ProductSearchList)); }
         }
 
+        public ObservableCollection<Product> _productsInOrder;
+        public ObservableCollection<Product> ProductsInOrder { 
+            get 
+            { 
+                return _productsInOrder; 
+            } set 
+            {
+                _productsInOrder = value;
+                OnPropertyChanged(nameof(ProductsInOrder));
 
-        public ObservableCollection<Product> ProductsInOrder { get; set; }
+                calcSubTotal();
+            } 
+        }
 
         public Product SelectedProduct { get; set; }
 
@@ -257,10 +274,7 @@ namespace MyShop.ViewModel
             }
 
             SubTotal = calcSubTotal();
-
-
-
-
+    
             Messenger = baseMessenger;
 
             NavigateCancelCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () =>

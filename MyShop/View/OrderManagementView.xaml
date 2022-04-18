@@ -27,9 +27,9 @@
             </Grid.RowDefinitions>
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock
                 Margin="20 0 0 0"
@@ -39,6 +39,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5 0 0 0">
                     <TextBlock Margin="5 15 10 0 " FontSize="16" FontWeight="Bold">Filter:</TextBlock>
                     <DatePicker
+                        SelectedDate="{Binding StartDate}"
               Width="100"
               materialDesign:HintAssist.Hint="Start Date"
               materialDesign:TextFieldAssist.HasClearButton="True"
@@ -46,16 +47,25 @@
               VerticalAlignment="Top"/>
                     <TextBlock Margin="5 18 5 0 " FontWeight="Bold">---</TextBlock>
                     <DatePicker
+                         SelectedDate="{Binding EndDate}"
               Width="100"
               materialDesign:HintAssist.Hint="End Date"
               materialDesign:TextFieldAssist.HasClearButton="True"
               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
               VerticalAlignment="Top"/>
+                    <Button Margin="15 5 5 13" Command="{Binding SearchRegardingDateCommand}">
+                        Search
+                    </Button>
+
+                    <Button Margin="30 5 5 13" Command="{Binding RefreshCommand}">
+                        Refresh
+                    </Button>
                 </StackPanel>
 
                 <Button 
+                    
                     Command="{Binding NavigateAddNewOrderCommand}"
-                    Margin="10"
+                    Margin="0 6 5 0 "
                 VerticalAlignment="Top" HorizontalAlignment="Right"
                 Grid.Column="2"
               Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}"
@@ -67,7 +77,7 @@
 
             </Grid>
             <Border CornerRadius="10" Grid.Row="1" Background="White" Margin="20" BorderThickness="2" BorderBrush="Snow">
-                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding Orders}" 
+                <ListView x:Name="orderView" Background="White" ItemsSource="{Binding CurrentOrders}" 
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                           SelectedItem="{Binding SelectedItem}">
                     <ListView.ItemsPanel>
@@ -134,11 +144,24 @@
             </Border>
           
             <StackPanel Grid.Row="2" VerticalAlignment="center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Background="White" Content="First" Foreground="Black"></Button>
-                <Button Background="White" Content="Prev" Foreground="Black"></Button>
-                <Button Background="White" Content="1/5" Foreground="Black"></Button>
-                <Button Background="White" Content="Next" Foreground="Black"></Button>
-                <Button Background="White" Content="Last" Foreground="Black"></Button>
+                <Button Background="White" Content="First" Foreground="Black" Command="{Binding FirstCommand}"></Button>
+                <Button Background="White" Content="Prev" Foreground="Black" Command="{Binding PreviousCommand}"></Button>
+                <Border Width="80" BorderThickness="2" BorderBrush="Violet" Background="LightGray">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Text="{Binding CurrentPage}">
+                        
+                    </TextBlock>
+                        <TextBlock FontSize="14" Margin="5 0 5 0" VerticalAlignment="Center"  FontWeight="Bold">
+                        of
+                        </TextBlock>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Text="{Binding totalPage}"  FontWeight="Bold">
+                        
+                        </TextBlock>
+                    </StackPanel>
+
+                </Border>
+                <Button Background="White" Content="Next" Foreground="Black" Command="{Binding NextCommand}"></Button>
+                <Button Background="White" Content="Last" Foreground="Black" Command="{Binding LastCommand}"></Button>
             </StackPanel>
         </Grid>
     </Grid>

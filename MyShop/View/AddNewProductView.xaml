@@ -15,7 +15,9 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}">
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             MouseDown="UserControl_MouseDown"
+             >
 
     <Grid Background="#FDEFF4">
         
@@ -139,13 +141,14 @@
                     <TextBox VerticalAlignment="Center" Padding="10" 
                              materialDesign:HintAssist.Hint="Product" 
                              Text="{Binding SearchBox , UpdateSourceTrigger=PropertyChanged}"
+                             TextChanged="TextBox_TextChanged"
                             
                              >
                     </TextBox>
                 </Border>
             </DockPanel>
 
-            <Canvas  Grid.Row="4"  Margin="2 2 2 2" Background="Black" Panel.ZIndex="1" Visibility="{Binding ShowSearchList, Mode=OneWay}">
+            <Canvas x:Name="SearchList"  Grid.Row="4"  Margin="2 2 2 2" Background="Black" Panel.ZIndex="1" Visibility="{Binding ShowSearchList, Mode=OneWay}">
                     <ScrollViewer Background="LightGray">
                     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3">
                         <ListView  Background="Black"

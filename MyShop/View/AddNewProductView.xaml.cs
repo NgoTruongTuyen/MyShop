@@ -24,5 +24,15 @@ namespace MyShop.View
         {
             InitializeComponent();
         }
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SearchList.Visibility=Visibility.Hidden;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchList.Visibility = Visibility.Visible;
+        }
     }
 }
