@@ -27,6 +27,7 @@
     <None Remove="Image\product\Iphone13Mini.jpg" />
     <None Remove="Image\product\Iphone13Pro.png" />
     <None Remove="Image\product\Iphone13ProMax.jpg" />
+    <None Remove="Image\product\Iphone6.jpg" />
     <None Remove="Image\product\Iphone6S.jpg" />
     <None Remove="Image\product\Iphone6SPlus.jpg" />
     <None Remove="Image\product\Iphone7.jpg" />
@@ -108,6 +109,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\product\Iphone13ProMax.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone6.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\product\Iphone6S.jpg">

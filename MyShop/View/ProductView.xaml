@@ -119,112 +119,36 @@
         <StackPanel  Grid.Row="1"
                      VerticalAlignment="Center"
                      Orientation="Horizontal">
-
+            <TextBlock Margin="20 0 0 0"
+                       Width="auto"
+                       VerticalAlignment="Center"
+                       FontSize="26">Category</TextBlock>
             <Border Margin="20 0 0 0"
                     HorizontalAlignment="Center"
                     Background="White"
                     BorderThickness="1"
                     BorderBrush="#B667F1"
                     CornerRadius="5"
-                    Width="1000"
+                    Width="400"
                     Height="50">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                <ComboBox x:Name="cbCategory"
+                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                          BorderThickness="0"
+                          materialDesign:HintAssist.Hint=""
+                          Margin="5,0,5,0"
+                          FontSize="16"
+                          
+                          SelectedItem="{Binding CategoryName}"
+                          ItemsSource="{Binding CategoryList}"
+                          Height="28">
+                </ComboBox>
 
-                    <Button Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding allTabCommand}"
-                            Content="All" />
-
-                    <Button Grid.Column="1"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding vivoTabCommand}"
-                            Content="Vivo" />
-
-                    <Button Grid.Column="2"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding appleTabCommand}"
-                            Content="Apple" />
-
-
-                    <Button Grid.Column="3"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding xiaomiTabCommand}"
-                            Content="Xiaomi" />
-                    <Button Grid.Column="4"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding samsungTabCommand}"
-                            Content="Samsung" />
-                    <Button Grid.Column="5"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding oppoTabCommand}"
-                            Content="OPPO" />
-                    <Button Grid.Column="7"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding realmeTabCommand}"
-                            Content="Realme" />
-                </Grid>
             </Border>
             <Button x:Name="btnAddProduct"
                     Margin="50 0 0 0"
                     Height="50"
                     Width="200"
+                    Command="{Binding addProductCommand}"
                     BorderBrush="#B667F1">
                 <StackPanel Orientation="Horizontal">
                     <Image Stretch="Fill"
@@ -302,7 +226,7 @@
                                            Margin="0, 0, 5, 0"
                                            Width="100"
                                            Height="100"
-                                           Source="{Binding ImageURL}" />
+                                           Source="{Binding ImageURL }" />
                                     <StackPanel Grid.Column="1">
                                         <Grid>
                                             <Grid.RowDefinitions>
