@@ -88,6 +88,8 @@ namespace MyShop.ViewModel
             ChartData= _productDAO.getDashboardChart();
             InitChart();
 
+            
+
         }
 
         

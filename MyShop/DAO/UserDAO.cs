@@ -25,12 +25,15 @@ namespace MyShop.DAO
                 var username = (string) reader["username"];
                 var password = (string)reader["password"];
                 var entropy = (string)reader["entropy"];
+                var remember = (Boolean)reader["remember"];
 
                 users.Add(new User()
                 {
                     UserName = username,
                     Password = password,
-                    Entropy = entropy
+                    Entropy = entropy,
+                    Remember = remember
+
 
                 }) ;
             }
@@ -43,16 +46,17 @@ namespace MyShop.DAO
         {
 
             string sql = "insert into Users (username, password, entropy) " +
-             "values(@username, @password, @entropy)";
+             "values(@username, @password, @entropy,@remember)";
 
             string data = encode("123456");
 
 
 
-            DBConn.excute(sql, new SqlParameter("@username", "ndkhoi"),
+            DBConn.excute(sql, new SqlParameter("@username", "vdphuc"),
                 new SqlParameter("@password", data.Split(' ')[0]),
-                new SqlParameter("@entropy", data.Split(' ')[1])
-                );
+                new SqlParameter("@entropy", data.Split(' ')[1]),
+                new SqlParameter("@remember", false)
+                ) ;
 
 
 
@@ -119,6 +123,28 @@ namespace MyShop.DAO
             return result;
 
         }
+
+         internal void setRemember(string username)
+        {
+            string sql = "update Users set remember =@remember where username=@username";
+
+            DBConn.excute(sql, new SqlParameter("@remember", true), new SqlParameter("@username", username));
+        }
+
+
+        public bool checkUsername(string username)
+        {
+            var data = GetAll();
+            return data.Where(x => x.UserName == username).Count() == 1;
+        }
+        public string  getPassword(string username)
+        {
+            var data = GetAll();
+            var pass = data.Where(x => x.UserName == username).Select(y => y.Password).ToList();
+            var entropy = data.Where(x => x.UserName == username).Select(y => y.Entropy).ToList();
+            return decode(pass[0], entropy[0]);
+        }
+
 
     }
 }
