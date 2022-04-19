@@ -2,8 +2,10 @@
 using MyShop.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -135,5 +137,28 @@ namespace MyShop.DAO
             reader.Close();
             return products;
         }
+
+
+
+        public ObservableCollection<Product> getTopFive()
+        {
+            var Products = GetAll();
+            var topProduct =  Products.OrderByDescending(x => x.BuyCounts).Take(5).ToList();
+            return new ObservableCollection<Product>(topProduct);
+
+        }
+
+        public ObservableCollection<Product> getDashboardChart()
+        {
+
+            var data = GetAll();
+          
+            var chart  = data.GroupBy(x => x.Brand)
+                        .Select(y => new Product { Brand = y.Key, BuyCounts = y.Count() }).ToList();
+            return new ObservableCollection<Product>(chart);
+
+
+        }
+
     }
 }

@@ -96,5 +96,50 @@ namespace MyShop.DAO
                 new SqlParameter("@customerAddress", customerAddress), 
                 new SqlParameter("@orderID", orderId));
         }
+
+        public decimal getAllPrice(int flag) // 0 day 1 month 2 year
+        {
+            string formatDate = "";
+            List<Order> orderCurrent;
+            if(flag == 0)
+            {
+                
+                orderCurrent = GetAll().Where(p => p.Date.ToString("dd/MM/yyyy") == DateTime.Now.ToString("yy/MM/yyyy")).ToList();
+            }
+            else if(flag == 1)
+            {
+                
+                orderCurrent = GetAll().Where(p => p.Date.ToString("MM/yyyy") == DateTime.Now.ToString("MM/yyyy")).ToList();
+            }
+            else
+            {
+               
+                orderCurrent = GetAll().Where(p => p.Date.ToString("yyyy") == DateTime.Now.ToString("yyyy")).ToList();
+            }
+            return orderCurrent.Sum(p => p.TotalPrice);
+        }
+
+          public int getCount(int flag) // 0 day 1 month 2 year
+        {
+            string formatDate = "";
+            List<Order> orderCurrent;
+            if(flag == 0)
+            {
+                
+                orderCurrent = GetAll().Where(p => p.Date.ToString("dd/MM/yyyy") == DateTime.Now.ToString("yy/MM/yyyy")).ToList();
+            }
+            else if(flag == 1)
+            {
+                
+                orderCurrent = GetAll().Where(p => p.Date.ToString("MM/yyyy") == DateTime.Now.ToString("MM/yyyy")).ToList();
+            }
+            else
+            {
+               
+                orderCurrent = GetAll().Where(p => p.Date.ToString("yyyy") == DateTime.Now.ToString("yyyy")).ToList();
+            }
+            return orderCurrent.Count();
+        }
+
     }
 }
