@@ -16,10 +16,11 @@
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
+             x:Name="ProductWindow"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
     <UserControl.DataContext>
-        <local1:ProductViewModel />
+        <local1:ProductViewModel x:Name ="ViewModel" />
     </UserControl.DataContext>
     <Grid Background="#FDEFF4">
         <Grid.RowDefinitions>
@@ -177,6 +178,7 @@
                     Width="1200"
                     Height="450">
                 <ListView ItemsSource="{Binding _selectedCategory}"
+                          SelectedItem="{Binding _selectedProduct}"
                           Width="1200"
                           Height="450"
                           Name="ListView1"
@@ -194,10 +196,14 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                     <ListView.Resources>
-                        <ContextMenu x:Key="productsContextMenu">
-                            <MenuItem Header="Delete">
+                        <ContextMenu x:Key="productsContextMenu" BorderThickness ="3" BorderBrush="Black" Opened="OnContextMenuOpen">
+                            <MenuItem Header="Delete"
+                                      Command="{Binding deleteProductCommand}"
+                                      >
                             </MenuItem>
-                            <MenuItem Header="Edit" />
+                            <MenuItem Header="Edit"
+                                      Command="{Binding editProductCommand}"
+                                      />
                         </ContextMenu>
                     </ListView.Resources>
                     <ListView.ItemContainerStyle>
@@ -226,7 +232,7 @@
                                            Margin="0, 0, 5, 0"
                                            Width="100"
                                            Height="100"
-                                           Source="{Binding ImageURL }" />
+                                           Source="{Binding Path =ImageURL }" />
                                     <StackPanel Grid.Column="1">
                                         <Grid>
                                             <Grid.RowDefinitions>

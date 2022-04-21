@@ -20,6 +20,7 @@ namespace MyShop.ViewModel
         private string server = @"LAPTOP-R4MFGNUI\SQL";
         private ObservableCollection<Product> _currentCategory { get; set; }
         public List<Product> _selectedCategory { get; set; }
+        public Product _selectedProduct { get; set; }
         public String currentPagingTextBlock { get; set; }
         private int _totalItems { get; set; }
         private int _currentPage { get; set; }
@@ -72,6 +73,8 @@ namespace MyShop.ViewModel
         public RelayCommand addProductCommand { get; }
 
         private ICommand doubleClickProductCommand;
+        public RelayCommand editProductCommand { get; }
+        public RelayCommand deleteProductCommand { get; }
         public ProductViewModel()
         {
 
@@ -85,6 +88,9 @@ namespace MyShop.ViewModel
 
             searchCommand = new RelayCommand(search, null);
             addProductCommand = new RelayCommand(addProduct, null);
+            editProductCommand = new RelayCommand(editProduct, null);
+            deleteProductCommand = new RelayCommand(deleteProduct, null);
+
         }
         public ObservableCollection<Category> Categories
         {
@@ -500,9 +506,71 @@ namespace MyShop.ViewModel
                 (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
 
             currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+        }
+        private void editProduct(object parameter)
+        {
+            var screen = new AddProductView();
+            screen.DataContext = new AddProductViewModel(_selectedProduct);
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
+            _currentCategory = getProductOfCategory(CategoryName);
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
 
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
 
         }
-    }
+        private void deleteProduct(object parameter)
+        {
+            if(MessageBox.Show("Are you sure to delete this Product?", "delete",
+                   MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes){
+                deleteProduct(server);
+                _currentCategory = getProductOfCategory(CategoryName);
+                _selectedCategory = _currentCategory
+                    .Skip((_currentPage - 1) * _rowsPerPage)
+                    .Take(_rowsPerPage)
+                    .ToList();
 
+                _totalItems = _currentCategory.Count;
+                _totalPages = _currentCategory.Count / _rowsPerPage +
+                    (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+                currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+            }
+
+           
+
+        }
+        private void deleteProduct(string server)
+        {
+            SqlConnection ConnectDatabase =
+                new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            String sql = $"delete from dbo.Products where productID = {_selectedProduct.ProductId}";
+            SqlCommand command = new SqlCommand(sql, ConnectDatabase);
+           
+            
+            int result = command.ExecuteNonQuery();
+
+            // Check Error
+            if (result < 0)
+                MessageBox.Show("Delete fail", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+                MessageBox.Show("Delete successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+   
 }

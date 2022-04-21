@@ -166,7 +166,7 @@
                                  BorderThickness="0"
                                  Padding="5 10 0 0"
                                  FontSize="16"
-                                 Text="{Binding Price}"
+                                 Text="{Binding SellingPrice}"
                                  Margin="5 5 5 5">
 
                         </TextBox>
@@ -183,7 +183,7 @@
                         BorderThickness="2"
                        
                         >
-                    <Image Source="{Binding Path = Image }"></Image>
+                    <Image Source="{Binding ImageUrl }"></Image>
                 </Border>
 
                 <Button Command="{Binding importCommand}"

@@ -14,7 +14,6 @@
     <None Remove="Image\edit.png" />
     <None Remove="Image\iphone.png" />
     <None Remove="Image\login\img.png" />
-    <None Remove="Image\product\Iphone11.png" />
     <None Remove="Icon\icon_add_white.ico" />
     <None Remove="Icon\icon_buy.ico" />
     <None Remove="Icon\icon_view.ico" />

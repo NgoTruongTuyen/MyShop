@@ -25,5 +25,10 @@ namespace MyShop.View
         {
             InitializeComponent();
         }
+
+        private void OnContextMenuOpen(object sender, RoutedEventArgs e)
+        {
+            ((ContextMenu)sender).DataContext = ProductWindow.DataContext;
+        }
     }
 }
