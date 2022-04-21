@@ -120,7 +120,7 @@
         <StackPanel  Grid.Row="1"
                      VerticalAlignment="Center"
                      Orientation="Horizontal">
-            <TextBlock Margin="20 0 0 0"
+            <TextBlock Margin="50 0 0 0"
                        Width="auto"
                        VerticalAlignment="Center"
                        FontSize="26">Category</TextBlock>
@@ -146,7 +146,7 @@
 
             </Border>
             <Button x:Name="btnAddProduct"
-                    Margin="50 0 0 0"
+                    Margin="250 0 0 0"
                     Height="50"
                     Width="200"
                     Command="{Binding addProductCommand}"
@@ -162,6 +162,26 @@
                            Margin="10,0,0,0"
                            Foreground="White" />
                 </StackPanel>
+            </Button>
+            <Button x:Name="btnManagerBrand"
+                    Margin="50 0 0 0"
+                    Height="50"
+                    Width="200"
+                    Command="{Binding manageCategoryCommand}"
+                    BorderBrush="#B667F1">
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Stretch="Fill"
+                           Source="/Icon/icon_category.ico"
+                           RenderTransformOrigin="0.027,0.538"
+                           Height="30"
+                           Width="30" />
+                    <Label Content="Manage Category"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           Foreground="White" />
+                </StackPanel>
+                
             </Button>
         </StackPanel>
 
@@ -198,10 +218,14 @@
                     <ListView.Resources>
                         <ContextMenu x:Key="productsContextMenu" BorderThickness ="3" BorderBrush="Black" Opened="OnContextMenuOpen">
                             <MenuItem Header="Delete"
+                                      BorderThickness="1"
+                                      BorderBrush="Black"
                                       Command="{Binding deleteProductCommand}"
                                       >
                             </MenuItem>
                             <MenuItem Header="Edit"
+                                      BorderThickness="1"
+                                      BorderBrush="Black"
                                       Command="{Binding editProductCommand}"
                                       />
                         </ContextMenu>

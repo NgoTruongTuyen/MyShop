@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Icon\delete.png" />
     <None Remove="Icon\edit.png" />
+    <None Remove="Icon\icon_category.ico" />
+    <None Remove="Icon\icon_edit.ico" />
     <None Remove="Image\delete.png" />
     <None Remove="Image\edit.png" />
     <None Remove="Image\iphone.png" />
@@ -60,6 +62,12 @@
     </Resource>
     <Resource Include="Icon\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_category.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_edit.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\delete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

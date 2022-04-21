@@ -31,7 +31,7 @@ namespace MyShop.ViewModel
         public String OS { get; set; }
         public String Color { get; set; }
         public int id { get; set; } 
-
+        public String content { get; set; }
         private DateTime _startDate = DateTime.Now;
         public DateTime DateRealease
         {
@@ -48,6 +48,7 @@ namespace MyShop.ViewModel
         {
             importCommand = new RelayCommand(importFile, null);
             submitCommand = new RelayCommand(movingImg, null);
+            content = "ADD NEW PRODUCT";
             getBrand(server);
         }
         public AddProductViewModel(Product item)
@@ -66,6 +67,7 @@ namespace MyShop.ViewModel
             Battery = item.Battery;
             Amount = item.Stock;
             id = item.ProductId;
+            content = "EDIT PRODUCT";
             importCommand = new RelayCommand(importFile, null);
             submitCommand = new RelayCommand(updateProduct, null);
             

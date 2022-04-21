@@ -75,6 +75,7 @@ namespace MyShop.ViewModel
         private ICommand doubleClickProductCommand;
         public RelayCommand editProductCommand { get; }
         public RelayCommand deleteProductCommand { get; }
+        public RelayCommand manageCategoryCommand { get; }
         public ProductViewModel()
         {
 
@@ -90,7 +91,7 @@ namespace MyShop.ViewModel
             addProductCommand = new RelayCommand(addProduct, null);
             editProductCommand = new RelayCommand(editProduct, null);
             deleteProductCommand = new RelayCommand(deleteProduct, null);
-
+            manageCategoryCommand = new RelayCommand(manageCategory, null);
         }
         public ObservableCollection<Category> Categories
         {
@@ -570,6 +571,25 @@ namespace MyShop.ViewModel
                 MessageBox.Show("Delete fail", "", MessageBoxButton.OK, MessageBoxImage.Error);
             else
                 MessageBox.Show("Delete successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void manageCategory(object parameter)
+        {
+            var screen = new CategoryView();
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
+
+            _currentCategory = getProductOfCategory("All");
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
         }
     }
    

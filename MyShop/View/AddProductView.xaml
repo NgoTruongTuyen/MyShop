@@ -30,7 +30,8 @@
         <StackPanel VerticalAlignment="Stretch">
             <TextBlock Margin="20 0 0 0"
                        Width="auto"
-                       FontSize="32">ADD NEW PRODUCT</TextBlock>
+                       FontSize="32"
+                       Text="{Binding content}"></TextBlock>
             <TextBlock Margin="20 5 0 0"
                        Width="auto"
                        FontSize="22"
@@ -180,9 +181,7 @@
                 <Border Background="White"
                         Width="300"
                         Height="150"
-                        BorderThickness="2"
-                       
-                        >
+                        BorderThickness="2">
                     <Image Source="{Binding ImageUrl }"></Image>
                 </Border>
 
@@ -191,14 +190,13 @@
                         Background="White"
                         Height="30"
                         Width="100"
-                        FontSize="14"
-                        >
+                        FontSize="14">
                     Browser
                 </Button>
 
             </StackPanel>
-           
-            
+
+
         </StackPanel>
         <TextBlock Grid.Row="2"
                    Margin="20 5 0 0"
@@ -314,7 +312,7 @@
                                   FontSize="16"
                                   ItemsSource="{Binding CategoryList}"
                                   SelectedItem="{Binding Brand}">
-                            
+
                         </ComboBox>
                     </Border>
                     <Border Grid.Row="1"
@@ -388,7 +386,7 @@
                                     DisplayDateStart="01/01/1500"
                                     SelectedDate="{Binding DateRealease}"
                                     BorderThickness="0">
-                            
+
                         </DatePicker>
                     </Border>
                     <Border Grid.Row="2"
@@ -470,7 +468,7 @@
                         SUBMIT
                     </Button>
                 </Border>
-                
+
             </StackPanel>
         </StackPanel>
     </Grid>

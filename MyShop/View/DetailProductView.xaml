@@ -407,29 +407,8 @@
                 </Grid>
             </Border>
 
-            <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                <Border Grid.Row="3"
-                        Grid.Column="3"
-                        Margin="0 20 0 0"
-                        HorizontalAlignment="Center"
-                        Background="#B667F1"
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        CornerRadius="5"
-                        Width="250"
-                        Height="50">
-                    <Button x:Name="btnSubmitAddProduct"
-                            Height="50"
-                            FontSize="22"
-                            Background="#B667F1"
-                            BorderBrush="#B667F1">
-                        EDIT PRODUCT
-                    </Button>
-                </Border>
+            
 
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
