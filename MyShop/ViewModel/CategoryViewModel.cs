@@ -163,11 +163,34 @@ namespace MyShop.ViewModel
             deleteBrand(server);
             CategoryList = getDataFromDatabase(server);
         }
+        private void deleteProductbyBrand(String server)
+        {
+
+            SqlConnection ConnectDatabase =
+            new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            String sql = "Delete from dbo.Products where brand = @id";
+            SqlCommand command = new SqlCommand(sql, ConnectDatabase);
+            command.Parameters.AddWithValue("@id", SelectedCategory.Id);
+
+            int result = command.ExecuteNonQuery();
+
+            // Check Error
+
+        }
         private void deleteBrand(String server)
         {
             
             if (MessageBox.Show("Are you sure to delete this Category?", "Delete Category", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
+                deleteProductbyBrand(server);
                 SqlConnection ConnectDatabase =
                 new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
                 try
@@ -192,4 +215,6 @@ namespace MyShop.ViewModel
             }
         }
     }
+    
+}
 }
