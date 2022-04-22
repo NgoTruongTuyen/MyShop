@@ -289,15 +289,19 @@ namespace MyShop.ViewModel
             price = price.Split("System.Windows.Controls.ComboBoxItem: ")[1];
             if (price.ToString() == "0 - 5,000,000")
             {
-                content = "<= 5000000";
+                content = "sellingPrice <= 5000000";
             }
             else if (price.ToString() == "5,000,000 - 10,000,000")
             {
-                content = "> 5000000 and sellingPrice < 10000000";
+                content = "sellingPrice > 5000000 and sellingPrice < 10000000";
             }
             else if (price.ToString() == "10,000,000+")
             {
-                content = ">=10000000";
+                content = "sellingPrice >=10000000";
+            }
+            else if (price.ToString() == "Amount <= 5")
+            {
+                content = "Stock <= 5";
             }
             var sql = "select * from Brands";
             var command = new SqlCommand(sql, ConnectDatabase);
@@ -316,7 +320,7 @@ namespace MyShop.ViewModel
             }
             reader.Close();
 
-            sql = $"select * from Products where sellingPrice {content}";
+            sql = $"select * from Products where {content}";
             command = new SqlCommand(sql, ConnectDatabase);
 
             reader = command.ExecuteReader();

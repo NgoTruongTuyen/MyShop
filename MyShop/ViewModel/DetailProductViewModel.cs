@@ -36,7 +36,7 @@ namespace MyShop.ViewModel
             Date = product.ReleaseDate;
             Storage = product.Storage;
             Battery = product.Battery;
-
+            Amount = product.Stock;
         }
 
 

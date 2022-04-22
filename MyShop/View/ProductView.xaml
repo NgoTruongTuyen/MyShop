@@ -113,6 +113,7 @@
                         <ComboBoxItem Content="0 - 5,000,000" />
                         <ComboBoxItem Content="5,000,000 - 10,000,000" />
                         <ComboBoxItem Content="10,000,000+" />
+                        <ComboBoxItem Content="Amount &lt;= 5" />
                     </ComboBox>
                 </Grid>
             </Border>
