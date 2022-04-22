@@ -40,6 +40,10 @@
         <DataTemplate DataType="{x:Type viewmodels:AddNewOrderViewModel}">
             <views:AddNewProductView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:DetailOrderViewModel}">
+            <views:DetailOrderView/>
+        </DataTemplate>
     </Window.Resources>
     
     

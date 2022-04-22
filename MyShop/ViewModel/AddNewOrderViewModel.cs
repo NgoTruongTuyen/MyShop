@@ -18,13 +18,16 @@ namespace MyShop.ViewModel
     public class AddNewOrderViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
+        // DAO
+
         OrderProductDAO orderProductDAO;
 
-        SqlTransaction sqlTransaction;
-
-        private RelayCommand _focusCommand;
-        public RelayCommand FocusCommand { get { return _focusCommand; }  set { _focusCommand = value; OnPropertyChanged(nameof(FocusCommand)); } }
-
+        //Command
+        public RelayCommand DeleteCommand { get; set; }
+        public ICommand NavigateCancelCommand { get; set; }
+        public ICommand NavigateSubmitCommand { get; set; }
+        public RelayCommand CalcSubTotalCommand { get; set; }
+        //Binding data
         private string _showSearchList;
         public string ShowSearchList {
             get 
@@ -50,8 +53,6 @@ namespace MyShop.ViewModel
                 _subTotal = value;
 
                 OnPropertyChanged(nameof(SubTotal));
-
-
             }
         }
         private int _total;
@@ -90,16 +91,6 @@ namespace MyShop.ViewModel
             } 
         }
 
-        private ObservableCollection<Product> _products;
-        public ObservableCollection<Product> Products
-        {
-            get
-            {
-                return _products;
-            }
-            set { _products = value; OnPropertyChanged(nameof(Products)); }
-        }
-
         private Product _selectSearchProduct;
         public Product SelectSearchProduct
         {
@@ -115,16 +106,30 @@ namespace MyShop.ViewModel
                             _selectSearchProduct = value;
                             OnPropertyChanged(nameof(SelectSearchProduct));
 
-                            ProductsInOrder.Add(SelectSearchProduct);
+                            ProductsInOrder.Add(new Product(SelectSearchProduct));
 
                             orderProductDAO.insertOne(SelectSearchProduct.OrderProducts[0]);
 
-                            SubTotal = calcSubTotal();
+                            SubTotal = calcSubTotal("sth");
+
                         }
                     }
                 }
             }
         }
+        //Binding List
+
+        private ObservableCollection<Product> _products;
+        public ObservableCollection<Product> Products
+        {
+            get
+            {
+                return _products;
+            }
+            set { _products = value; OnPropertyChanged(nameof(Products)); }
+        }
+
+      
 
         private ObservableCollection<Product> _productSearchList;
         public ObservableCollection<Product> ProductSearchList
@@ -143,16 +148,13 @@ namespace MyShop.ViewModel
                 _productsInOrder = value;
                 OnPropertyChanged(nameof(ProductsInOrder));
 
-                calcSubTotal();
+                SubTotal=calcSubTotal("Add product to oredr");
             } 
         }
 
         public Product SelectedProduct { get; set; }
 
-        public RelayCommand DeleteCommand { get; set; }
- 
-        public ICommand NavigateCancelCommand { get; set; }
-        public ICommand NavigateSubmitCommand { get; set; }
+       
         public Order? order { get; set; }
 
         public int OrderId { get { return order.OrderId; } set { order.OrderId = value; } }
@@ -167,7 +169,7 @@ namespace MyShop.ViewModel
 
         public AddNewOrderViewModel(NavigationStore navigationStore)
         {
-           
+            CalcSubTotalCommand = new RelayCommand(calcSubTotal, null);
             ProductDAO productDAO = new ProductDAO();
             OrderDAO orderDAO = new OrderDAO();
 
@@ -207,8 +209,6 @@ namespace MyShop.ViewModel
 
                 orderDAO.deleteOne(OrderId);
 
-                orderProductDAO.deleteOrder(OrderId);
-
                 return new OrderManagementViewModel(navigationStore);
             } 
             );
@@ -231,8 +231,18 @@ namespace MyShop.ViewModel
                });
         }
 
+        private void calcSubTotal(object obj)
+        {
+            Debug.WriteLine("Subtotalllllllllllllllllllllllll00");
+
+            SubTotal = calcSubTotal("Dang tinh toan doan tang so sp trong oder");
+
+            Debug.WriteLine(SubTotal);
+        }
+
         public AddNewOrderViewModel(NavigationStore navigationStore, BaseMessenger<Order> baseMessenger, Order? sendedOrder)
         {
+            CalcSubTotalCommand = new RelayCommand(calcSubTotal, null);
             DBConnection.GetInstance().beginTrans();
 
             orderProductDAO=new OrderProductDAO();
@@ -255,9 +265,6 @@ namespace MyShop.ViewModel
 
             order = sendedOrder;
 
-            FocusCommand = new RelayCommand(handleFocus, null);
-
-
             ProductDAO productDAO = new ProductDAO();
 
             List<Product> _Products = productDAO.GetAll(OrderId);
@@ -273,7 +280,7 @@ namespace MyShop.ViewModel
                 Products.Add(product);
             }
 
-            SubTotal = calcSubTotal();
+            SubTotal = calcSubTotal("This is init when init view model");
     
             Messenger = baseMessenger;
 
@@ -305,11 +312,17 @@ namespace MyShop.ViewModel
 
         private void deleteProduct(object obj)
         {
-            orderProductDAO.deleteOne(SelectedProduct.OrderProducts[0]);
+            ProductDAO productDAO = new ProductDAO();
+            Product product = obj as Product;
 
-            ProductsInOrder.Remove(SelectedProduct);
+            orderProductDAO.deleteOne(product.OrderProducts[0]);
 
-            SubTotal = calcSubTotal();
+            productDAO.increaseStock(product.ProductId, product.OrderProducts[0].Amount);
+
+            ProductsInOrder.Remove(product);
+
+            SubTotal = calcSubTotal("sth");
+
         }
 
         private void searchProduct()
@@ -327,15 +340,9 @@ namespace MyShop.ViewModel
             }
         }
 
-        public void handleFocus(object x)
-        {
-            if (ShowSearchList == "visible")
-                ShowSearchList = "hidden";
-            else if (ShowSearchList == "visible")
-                ShowSearchList = "visible";
-        }
+      
 
-        public int calcSubTotal()
+        public int calcSubTotal(String name)
         {
             int subtotal = 0;
             foreach (Product product in ProductsInOrder)

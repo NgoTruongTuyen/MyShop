@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyShop.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace MyShop.Model
         public int Stock { get; set; }
         public int CostPrice { get; set; }
         public int SellingPrice { get; set; }
-        public String Brand { get; set; }
+        public int Brand { get; set; }
         public float ScreenSize { get; set; }
         public String OS { get; set; }
         public String Color { get; set; }
@@ -49,7 +50,7 @@ namespace MyShop.Model
 
         }
 
-        public Product(int productId, string productName, string imageURL, int stock, int costPrice, int sellingPrice, string brand, float screenSize, string oS, string color, int memory, int storage, int battery, int viewCount, int buyCount, BindingList<Order_Product> orderProducts, DateTime releaseDate)
+        public Product(int productId, string productName, string imageURL, int stock, int costPrice, int sellingPrice, int brand, float screenSize, string oS, string color, int memory, int storage, int battery, int viewCount, int buyCount, BindingList<Order_Product> orderProducts, DateTime releaseDate)
         {
             ProductId = productId;
             ProductName = productName;
@@ -70,6 +71,27 @@ namespace MyShop.Model
             ReleaseDate = releaseDate;
         }
 
-
+        public Product(Product p)
+        {
+            ProductId = p.ProductId;
+            ProductName = p.ProductName;
+            ImageURL = p.ImageURL;
+            Stock = p.Stock;
+            CostPrice = p.CostPrice;
+            SellingPrice = p.CostPrice;
+            Brand = p.Brand;
+            ScreenSize = p.ScreenSize;
+            OS = p.OS;
+            Color = p.Color;
+            Memory = p.Memory;
+            Storage = p.Storage;
+            Battery = p.Battery;
+            ViewCounts = p.ViewCounts;
+            BuyCounts = p.BuyCounts;
+            OrderProducts = new BindingList<Order_Product>();
+            foreach (Order_Product op in p.OrderProducts)
+                OrderProducts.Add(op);
+            ReleaseDate = p.ReleaseDate;
+        }
     }
 }

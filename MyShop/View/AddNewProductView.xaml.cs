@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +35,14 @@ namespace MyShop.View
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchList.Visibility = Visibility.Visible;
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+            Debug.WriteLine("helloooooooooooooooooo");
+            if ( CalcSubTotalButton.Command.CanExecute(null))
+                CalcSubTotalButton.Command.Execute(null);
         }
     }
 }

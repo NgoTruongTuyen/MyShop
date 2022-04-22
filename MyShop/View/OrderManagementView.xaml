@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:MyShop.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
@@ -86,58 +86,67 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
 
+                   
+
                     <ListView.Resources>
                         <ContextMenu x:Key="phoneContextMenu" Background="LightGray"
                                      Opened="OnContextMenuOpened">
                             <MenuItem Header="Delete" Command="{Binding DeleteCommand}">
-                             
                             </MenuItem>
                             <MenuItem Header="Edit" Command="{Binding NavigateEditNewOrderCommand}">
+                            </MenuItem>
+                            <MenuItem Header="View" Command="{Binding NavigateDetailOrderCommand}">
                             </MenuItem>
                         </ContextMenu>
                     </ListView.Resources>
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}" >
-                            <Setter Property="ContextMenu" Value="{StaticResource phoneContextMenu}" />
+                            <Setter Property="ContextMenu" Value="{StaticResource phoneContextMenu}">
+                                
+                            </Setter>
                         </Style>
                     </ListView.ItemContainerStyle>
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5" Width="350">
-                                <Grid>
+                           
+                                <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Margin="5" Width="350">
+                                    <Grid>
+                                    <Grid.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick"  Command="{Binding NavigateEditNewOrderCommand}"/>
+                                    </Grid.InputBindings>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                                    <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0" Text="{Binding Date}">
+                                        <TextBlock FontStyle="Italic" FontSize="10" Grid.Row="0" Grid.Column="3" Padding="8 1 1 0" Text="{Binding Date}">
 
-                                    </TextBlock>
+                                        </TextBlock>
 
-                                    <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
-                                    <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
-                                    <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="1" Padding="8">Mã Đơn hàng:</TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="2" Padding="8">Khách hàng:</TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="3" Padding="8">Tổng tiền:</TextBlock>
 
-                                    <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8" Text="{Binding OrderId}"></TextBlock>
-                                    <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8" Text="{Binding CustomerName}"></TextBlock>
-                                    <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8" Text="{Binding TotalPrice}"></TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="1" Padding="8" Text="{Binding OrderId}"></TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="2" Grid.Column="1" Padding="8" Text="{Binding CustomerName}"></TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="3" Grid.Column="1" Padding="8" Text="{Binding TotalPrice}"></TextBlock>
 
-                                    <TextBlock HorizontalAlignment="Right" FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
-                                    Đã thanh toán
-                                    </TextBlock>
-                                </Grid>
-                            </Border>
-
+                                        <TextBlock HorizontalAlignment="Right" FontStyle="Italic" FontSize="10" Grid.Row="4" Grid.Column="3" Padding="8 2 2 2">
+                                        Đã thanh toán
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
+                          
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

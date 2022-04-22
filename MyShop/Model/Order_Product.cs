@@ -14,6 +14,9 @@ namespace MyShop.Model
         public int ProductId { get; set; }
 
         public int Price { get; set; }
+
+        bool init = false;
+
         private int _amount;
         public int Amount 
         { get
@@ -22,12 +25,24 @@ namespace MyShop.Model
             }
             set 
             {
-                _amount = value;
-                OnPropertyChanged(nameof(Amount));
+                ProductDAO productDAO = new ProductDAO();
+                if (!productDAO.checkStock(ProductId, value) && init)
+                {
+                    System.Windows.MessageBox.Show("The remain product is not enough");
+                }
+                else
+                {
+                    init = true;
+                    int temp = _amount;
+                    _amount = value;
+                    OnPropertyChanged(nameof(Amount));
 
-                OrderProductDAO orderProductDAO = new OrderProductDAO();
+                    OrderProductDAO orderProductDAO = new OrderProductDAO();
 
-                orderProductDAO.update(this);
+                    orderProductDAO.update(this);
+
+
+                }
             } 
         }
 

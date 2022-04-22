@@ -33,6 +33,7 @@ namespace MyShop.ViewModel
         public ICommand NavigateAddNewOrderCommand { get; set; }
         public ICommand NavigateEditNewOrderCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
+        public ICommand NavigateDetailOrderCommand { get; set; }
 
         //THuộc tính tìm theo ngày
         private DateTime _startDate;
@@ -45,7 +46,7 @@ namespace MyShop.ViewModel
 
         //Phân trang thông số
         public int totalItem { get; set; } = 0;
-        public int itemPerPage { get; set; } = 3;
+        public int itemPerPage { get; set; } = 9;
         public int totalPage { get; set; } = 0;
         public int CurrentPage { get; set; }
         public ObservableCollection<Order> CurrentOrders { get; set; }
@@ -64,6 +65,8 @@ namespace MyShop.ViewModel
 
         public void deleteItem(object x)
         {
+            ProductDAO productDAO = new ProductDAO();
+            OrderProductDAO orderProductDAO = new OrderProductDAO();
             int index = FiltedOrders.IndexOf(SelectedItem);
             if (index == -1)
             {
@@ -72,6 +75,9 @@ namespace MyShop.ViewModel
 
             orderDAO.deleteOne(SelectedItem.OrderId);
             orderProductDAO.deleteOrder(SelectedItem.OrderId);
+
+            foreach (Order_Product op in orderProductDAO.getAll(SelectedItem.OrderId))
+                productDAO.increaseStock(op.ProductId, op.Amount);
 
             FiltedOrders.Remove(SelectedItem);
             Orders.Remove(SelectedItem);
@@ -152,6 +158,8 @@ namespace MyShop.ViewModel
             NavigateAddNewOrderCommand =new NavigateCommand<AddNewOrderViewModel>(navigationStore, () => new AddNewOrderViewModel(navigationStore));
             NavigateEditNewOrderCommand = new NavigateCommand<AddNewOrderViewModel>(navigationStore, 
                 () => new AddNewOrderViewModel(navigationStore, UpdatingMessenger, SelectedItem));
+            NavigateDetailOrderCommand = new NavigateCommand<DetailOrderViewModel>(navigationStore, ()=> new DetailOrderViewModel(navigationStore, SelectedItem));
+
         }
 
         private void refresh(object obj)
