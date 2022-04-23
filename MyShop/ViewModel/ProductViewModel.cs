@@ -17,18 +17,31 @@ namespace MyShop.ViewModel
     {
         private ObservableCollection<Category> _categories;
 
-        public bool Isloaded = false;
-
         private string server = @"LAPTOP-R4MFGNUI\SQL";
         private ObservableCollection<Product> _currentCategory { get; set; }
         public List<Product> _selectedCategory { get; set; }
-
+        public Product _selectedProduct { get; set; }
         public String currentPagingTextBlock { get; set; }
         private int _totalItems { get; set; }
         private int _currentPage { get; set; }
         private int _totalPages { get; set; }
-        private string searchKey;
-        public string SearchKey
+        private String searchKey;
+        private String filterKey;
+        private String categoryName { get; set; }
+        public List<String> CategoryList { get; set; }
+        public String CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
+                if (!string.Equals(categoryName, value))
+                {
+                    categoryName = value;
+                    paging(value);
+                }
+            }
+        }
+        public String SearchKey
         {
             get { return searchKey; }
             set
@@ -36,42 +49,49 @@ namespace MyShop.ViewModel
                 if (!string.Equals(searchKey, value))
                 {
                     searchKey = value;
-                    //RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
                 }
             }
         }
-        int _rowsPerPage = 10;
+        public string FilterKey
+        {
+            get { return filterKey; }
+            set
+            {
+                if (!string.Equals(filterKey, value))
+                {
+                    filterKey = value;
+                    filter(value);
+                }
+            }
+        }
+        int _rowsPerPage = 9;
         public RelayCommand nextPageCommand { get; }
         public RelayCommand previousPageCommand { get; }
         public RelayCommand firstPageCommand { get; }
         public RelayCommand lastPageCommand { get; }
-        public RelayCommand allTabCommand { get; }
-        public RelayCommand vivoTabCommand { get; }
-        public RelayCommand appleTabCommand { get; }
-        public RelayCommand samsungTabCommand { get; }
-        public RelayCommand xiaomiTabCommand { get; }
-        public RelayCommand realmeTabCommand { get; }
-        public RelayCommand oppoTabCommand { get; }
         public RelayCommand searchCommand { get; }
+        public RelayCommand addProductCommand { get; }
 
         private ICommand doubleClickProductCommand;
+        public RelayCommand editProductCommand { get; }
+        public RelayCommand deleteProductCommand { get; }
+        public RelayCommand manageCategoryCommand { get; }
         public ProductViewModel()
         {
+
             _categories = getDataFromDataBase(server);
             paging("All");
+            categoryName = "All";
             nextPageCommand = new RelayCommand(clickNextPage, null);
             previousPageCommand = new RelayCommand(clickPreviousPage, null);
             firstPageCommand = new RelayCommand(clickFirstPage, null);
             lastPageCommand = new RelayCommand(clickLastPage, null);
 
-            allTabCommand = new RelayCommand(clickAllTab, null);
-            vivoTabCommand = new RelayCommand(clickVivoTab, null);
-            appleTabCommand = new RelayCommand(clickAppleTab, null);
-            samsungTabCommand = new RelayCommand(clickSamsungTab, null);
-            xiaomiTabCommand = new RelayCommand(clickXiaomiTab, null);
-            realmeTabCommand = new RelayCommand(clickRealmeTab, null);
-            oppoTabCommand = new RelayCommand(clickOppoTab, null);
             searchCommand = new RelayCommand(search, null);
+            addProductCommand = new RelayCommand(addProduct, null);
+            editProductCommand = new RelayCommand(editProduct, null);
+            deleteProductCommand = new RelayCommand(deleteProduct, null);
+            manageCategoryCommand = new RelayCommand(manageCategory, null);
         }
         public ObservableCollection<Category> Categories
         {
@@ -92,53 +112,59 @@ namespace MyShop.ViewModel
             }
 
             // Sau khi kết nối thành công
-            var sql = "select * from Product";
+            var sql = "select * from Brands";
             var command = new SqlCommand(sql, ConnectDatabase);
-
             var reader = command.ExecuteReader();
+            List<String> CategoryNameList = new List<String>();
+            List<List<String>> CategoryNameList2 = new List<List<String>>();
+            CategoryNameList.Add("All");
 
             ObservableCollection<Category> categories = new ObservableCollection<Category>();
+            while (reader.Read())
+            {
+                List<String> temp = new List<String>();
+                var id = (int)reader["brandId"];
+                var name = (string)reader["brandName"];
+                temp.Add(id.ToString());
+                temp.Add(name);
+                CategoryNameList2.Add(temp);
+                CategoryNameList.Add(name);
+                Category categoryTmp = new Category()
+                {
+                    Brand = name,
+                    Products = new ObservableCollection<Product>()
+                };
+                categories.Add(categoryTmp);
+            }
             Category categoryAll = new Category()
             {
                 Brand = "All",
                 Products = new ObservableCollection<Product>()
             };
+            reader.Close();
 
-            Category categoryApple = new Category()
-            {
-                Brand = "Apple",
-                Products = new ObservableCollection<Product>()
-            };
-            Category categoryVivo = new Category()
-            {
-                Brand = "Vivo",
-                Products = new ObservableCollection<Product>()
-            };
-            Category categorySamsung = new Category()
-            {
-                Brand = "Samsung",
-                Products = new ObservableCollection<Product>()
-            };
-            Category categoryLinovo = new Category()
-            {
-                Brand = "Xiaomi",
-                Products = new ObservableCollection<Product>()
-            };
-            Category categoryOPPO = new Category()
-            {
-                Brand = "OPPO",
-                Products = new ObservableCollection<Product>()
-            };
-            Category categoryRealme = new Category()
-            {
-                Brand = "Realme",
-                Products = new ObservableCollection<Product>()
-            };
+            sql = "select * from Products";
+            command = new SqlCommand(sql, ConnectDatabase);
+
+            reader = command.ExecuteReader();
+
             while (reader.Read())
             {
                 var id = (int)reader["productID"];
                 var name = (string)reader["productName"];
-                var brand = (string)reader["brand"];
+                var brandId = (int)reader["brand"];
+
+                String brand = "";
+
+                for (int i = 0; i < CategoryNameList2.Count; i++)
+                {
+                    if (brandId.ToString() == CategoryNameList2[i][0])
+                    {
+                        brand = CategoryNameList2[i][1];
+                        break;
+                    }
+                }
+
                 var imageURL = (string)reader["imageURL"];
                 var sellingPrice = (int)reader["sellingPrice"];
                 var stock = (int)reader["stock"];
@@ -153,47 +179,26 @@ namespace MyShop.ViewModel
                 var buyCounts = (int)reader["buyCounts"];
                 var viewCounts = (int)reader["viewCounts"];
                 Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
-                if (brand == "Apple")
+                for (int i = 0; i < categories.Count; i++)
                 {
-                    categoryApple.Products.Add(tmp);
-                }
-                else if (brand == "Vivo")
-                {
-                    categoryVivo.Products.Add(tmp);
-                }
-                else if (brand == "Samsung")
-                {
-                    categorySamsung.Products.Add(tmp);
-                }
-                else if (brand == "Realme")
-                {
-                    categoryRealme.Products.Add(tmp);
-                }
-                else if (brand == "OPPO")
-                {
-                    categoryOPPO.Products.Add(tmp);
-                }
-                else if (brand == "Xiaomi")
-                {
-                    categoryLinovo.Products.Add(tmp);
+                    if (categories[i].Brand == brand)
+                    {
+                        categories[i].Products.Add(tmp);
+                        break;
+                    }
                 }
                 categoryAll.Products.Add(tmp);
             }
             reader.Close();
 
             categories.Add(categoryAll);
-            categories.Add(categoryApple);
-            categories.Add(categoryVivo);
-            categories.Add(categorySamsung);
-            categories.Add(categoryRealme);
-            categories.Add(categoryOPPO);
-            categories.Add(categoryLinovo);
+            CategoryList = CategoryNameList;
             return categories;
         }
 
         public ObservableCollection<Product> findProductByName(String server, string productName)
         {
-            
+
             SqlConnection ConnectDatabase =
                 new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
             try
@@ -205,11 +210,27 @@ namespace MyShop.ViewModel
                 MessageBox.Show(ex.Message);
             }
 
-            // Sau khi kết nối thành công
-            var sql = $"select * from Product where productName like '%{productName}%'";
+            var sql = "select * from Brands";
             var command = new SqlCommand(sql, ConnectDatabase);
-
             var reader = command.ExecuteReader();
+            List<List<String>> CategoryNameList = new List<List<String>>();
+
+            while (reader.Read())
+            {
+                List<String> temp = new List<String>();
+                var id = (int)reader["brandId"];
+                var name = (string)reader["brandName"];
+                temp.Add(id.ToString());
+                temp.Add(name);
+                CategoryNameList.Add(temp);
+
+            }
+            reader.Close();
+
+
+            sql = $"select * from Products where productName like '%{productName}%'";
+            command = new SqlCommand(sql, ConnectDatabase);
+            reader = command.ExecuteReader();
 
             ObservableCollection<Product> result = new ObservableCollection<Product>();
 
@@ -217,7 +238,18 @@ namespace MyShop.ViewModel
             {
                 var id = (int)reader["productID"];
                 var name = (string)reader["productName"];
-                var brand = (string)reader["brand"];
+                var brandId = (int)reader["brand"];
+
+                String brand = "";
+
+                for (int i = 0; i < CategoryNameList.Count; i++)
+                {
+                    if (brandId.ToString() == CategoryNameList[i][0])
+                    {
+                        brand = CategoryNameList[i][1];
+                        break;
+                    }
+                }
                 var imageURL = (string)reader["imageURL"];
                 var sellingPrice = (int)reader["sellingPrice"];
                 var stock = (int)reader["stock"];
@@ -232,12 +264,106 @@ namespace MyShop.ViewModel
                 var buyCounts = (int)reader["buyCounts"];
                 var viewCounts = (int)reader["viewCounts"];
                 Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
-               
+
                 result.Add(tmp);
             }
             reader.Close();
 
-           
+
+            return result;
+        }
+        public ObservableCollection<Product> filterProductByPrice(String server, String price)
+        {
+
+            SqlConnection ConnectDatabase =
+                new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            String content = "";
+            price = price.Split("System.Windows.Controls.ComboBoxItem: ")[1];
+            if (price.ToString() == "0 - 5,000,000")
+            {
+                content = "sellingPrice <= 5000000";
+            }
+            else if (price.ToString() == "5,000,000 - 10,000,000")
+            {
+                content = "sellingPrice > 5000000 and sellingPrice < 10000000";
+            }
+            else if (price.ToString() == "10,000,000+")
+            {
+                content = "sellingPrice >=10000000";
+            }
+            else if (price.ToString() == "Amount <= 5")
+            {
+                content = "Stock <= 5";
+            }
+            var sql = "select * from Brands";
+            var command = new SqlCommand(sql, ConnectDatabase);
+            var reader = command.ExecuteReader();
+            List<List<String>> CategoryNameList = new List<List<String>>();
+
+            while (reader.Read())
+            {
+                List<String> temp = new List<String>();
+                var id = (int)reader["brandId"];
+                var name = (string)reader["brandName"];
+                temp.Add(id.ToString());
+                temp.Add(name);
+                CategoryNameList.Add(temp);
+
+            }
+            reader.Close();
+
+            sql = $"select * from Products where {content}";
+            command = new SqlCommand(sql, ConnectDatabase);
+
+            reader = command.ExecuteReader();
+
+            ObservableCollection<Product> result = new ObservableCollection<Product>();
+
+            while (reader.Read())
+            {
+                var id = (int)reader["productID"];
+                var name = (string)reader["productName"];
+                var brandId = (int)reader["brand"];
+
+                String brand = "";
+
+                for (int i = 0; i < CategoryNameList.Count; i++)
+                {
+                    if (brandId.ToString() == CategoryNameList[i][0])
+                    {
+                        brand = CategoryNameList[i][1];
+                        break;
+                    }
+                }
+
+                var imageURL = (string)reader["imageURL"];
+                var sellingPrice = (int)reader["sellingPrice"];
+                var stock = (int)reader["stock"];
+                var costPrice = (int)reader["costPrice"];
+                var screenSize = (double)reader["screenSize"];
+                var os = (string)reader["os"];
+                var color = (string)reader["color"];
+                var memory = (int)reader["memory"];
+                var storage = (int)reader["storage"];
+                var battery = (int)reader["battery"];
+                var releaseDate = (DateTime)reader["releaseDate"];
+                var buyCounts = (int)reader["buyCounts"];
+                var viewCounts = (int)reader["viewCounts"];
+                Product tmp = new Product(id, name, imageURL, costPrice, sellingPrice, screenSize, os, color, memory, storage, battery, releaseDate, stock, brand, viewCounts, buyCounts);
+
+                result.Add(tmp);
+            }
+            reader.Close();
+
+
             return result;
         }
         public ObservableCollection<Product> getProductOfCategory(string name)
@@ -316,38 +442,27 @@ namespace MyShop.ViewModel
             .ToList();
             currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
         }
-        public void clickAllTab(object parameter)
-        {
-            paging("All");
-        }
-        public void clickVivoTab(object parameter)
-        {
-            paging("Vivo");
-        }
-        public void clickAppleTab(object parameter)
-        {
-            paging("Apple");
-        }
-        public void clickSamsungTab(object parameter)
-        {
-            paging("Samsung");
-        }
-        public void clickOppoTab(object parameter)
-        {
-            paging("OPPO");
-        }
-        public void clickXiaomiTab(object parameter)
-        {
-            paging("Xiaomi");
-        }
-        public void clickRealmeTab(object parameter)
-        {
-            paging("Realme");
-        }
+
         public void search(object parameter)
         {
-            
+
             _currentCategory = findProductByName(server, SearchKey);
+
+            _currentPage = 1;
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+        }
+        public void filter(String Key)
+        {
+            _currentCategory = filterProductByPrice(server, Key);
 
             _currentPage = 1;
             _selectedCategory = _currentCategory
@@ -373,11 +488,113 @@ namespace MyShop.ViewModel
         }
         private void DoStuff(Product item)
         {
-            MessageBox.Show(item.ProductName + " element clicked");
-            //var screen = new AddProductView();
+            var screen = new DetailProductView();
+            var tmp = new DetailProductViewModel(item);
+            screen.DataContext = tmp;
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
+        }
+        private void addProduct(object parameter)
+        {
+            var screen = new AddProductView();
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
 
-            //screen.Show;
+            _currentCategory = getProductOfCategory(CategoryName);
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+        }
+        private void editProduct(object parameter)
+        {
+            var screen = new AddProductView();
+            screen.DataContext = new AddProductViewModel(_selectedProduct);
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
+            _currentCategory = getProductOfCategory(CategoryName);
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+
+        }
+        private void deleteProduct(object parameter)
+        {
+            if(MessageBox.Show("Are you sure to delete this Product?", "delete",
+                   MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes){
+                deleteProduct(server);
+                _currentCategory = getProductOfCategory(CategoryName);
+                _selectedCategory = _currentCategory
+                    .Skip((_currentPage - 1) * _rowsPerPage)
+                    .Take(_rowsPerPage)
+                    .ToList();
+
+                _totalItems = _currentCategory.Count;
+                _totalPages = _currentCategory.Count / _rowsPerPage +
+                    (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+                currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
+            }
+
+           
+
+        }
+        private void deleteProduct(string server)
+        {
+            SqlConnection ConnectDatabase =
+                new SqlConnection(string.Format($@"Server={server};Database=QLCH;Trusted_Connection=Yes;"));
+            try
+            {
+                ConnectDatabase.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            String sql = $"delete from dbo.Products where productID = {_selectedProduct.ProductId}";
+            SqlCommand command = new SqlCommand(sql, ConnectDatabase);
+           
+            
+            int result = command.ExecuteNonQuery();
+
+            // Check Error
+            if (result < 0)
+                MessageBox.Show("Delete fail", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+                MessageBox.Show("Delete successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void manageCategory(object parameter)
+        {
+            var screen = new CategoryView();
+            screen.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            screen.ShowDialog();
+
+            _currentCategory = getProductOfCategory("All");
+            _selectedCategory = _currentCategory
+                .Skip((_currentPage - 1) * _rowsPerPage)
+                .Take(_rowsPerPage)
+                .ToList();
+
+            _totalItems = _currentCategory.Count;
+            _totalPages = _currentCategory.Count / _rowsPerPage +
+                (_currentCategory.Count % _rowsPerPage == 0 ? 0 : 1);
+
+            currentPagingTextBlock = $"{_currentPage}/{_totalPages}";
         }
     }
-
+   
 }

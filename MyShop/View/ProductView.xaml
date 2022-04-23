@@ -16,10 +16,11 @@
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
+             x:Name="ProductWindow"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
     <UserControl.DataContext>
-        <local1:ProductViewModel />
+        <local1:ProductViewModel x:Name ="ViewModel" />
     </UserControl.DataContext>
     <Grid Background="#FDEFF4">
         <Grid.RowDefinitions>
@@ -87,24 +88,32 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-
-                    <materialDesign:PackIcon Kind="Filter"
-                                             FontSize="20"
-                                             Width="20"
-                                             Height="20"
-                                             Foreground="Black"
-                                             Margin="5,0,0,0"
-                                             RenderTransformOrigin="0.554,1.497"
-                                             VerticalAlignment="Center" />
+                    <Button  x:Name="btnFilter"
+                             Command="{Binding filterCommand}"
+                             Background="{x:Null}"
+                             BorderBrush="{x:Null}"
+                             FontSize="10"
+                             Margin="0,0,128,0">
+                        <materialDesign:PackIcon Kind="Filter"
+                                                 FontSize="20"
+                                                 Width="20"
+                                                 Height="20"
+                                                 Foreground="Black"
+                                                 Margin="-16,-5,0,0"
+                                                 RenderTransformOrigin="0.554,1.497"
+                                                 HorizontalAlignment="Left" />
+                    </Button>
                     <ComboBox x:Name="cbFilterProduct"
                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                               BorderThickness="0"
                               materialDesign:HintAssist.Hint="Filter"
-                              Margin="30,0,10,0"
+                              Margin="35,0,5,0"
+                              SelectedItem="{Binding FilterKey}"
                               Height="28">
-                        <ComboBoxItem Content="Android" />
-                        <ComboBoxItem Content="iOS" />
-                        <ComboBoxItem Content="Linux" />
+                        <ComboBoxItem Content="0 - 5,000,000" />
+                        <ComboBoxItem Content="5,000,000 - 10,000,000" />
+                        <ComboBoxItem Content="10,000,000+" />
+                        <ComboBoxItem Content="Amount &lt;= 5" />
                     </ComboBox>
                 </Grid>
             </Border>
@@ -112,112 +121,36 @@
         <StackPanel  Grid.Row="1"
                      VerticalAlignment="Center"
                      Orientation="Horizontal">
-
+            <TextBlock Margin="50 0 0 0"
+                       Width="auto"
+                       VerticalAlignment="Center"
+                       FontSize="26">Category</TextBlock>
             <Border Margin="20 0 0 0"
                     HorizontalAlignment="Center"
                     Background="White"
                     BorderThickness="1"
                     BorderBrush="#B667F1"
                     CornerRadius="5"
-                    Width="1000"
+                    Width="400"
                     Height="50">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                <ComboBox x:Name="cbCategory"
+                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                          BorderThickness="0"
+                          materialDesign:HintAssist.Hint=""
+                          Margin="5,0,5,0"
+                          FontSize="16"
+                          
+                          SelectedItem="{Binding CategoryName}"
+                          ItemsSource="{Binding CategoryList}"
+                          Height="28">
+                </ComboBox>
 
-                    <Button Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding allTabCommand}"
-                            Content="All" />
-
-                    <Button Grid.Column="1"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding vivoTabCommand}"
-                            Content="Vivo" />
-
-                    <Button Grid.Column="2"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding appleTabCommand}"
-                            Content="Apple" />
-
-
-                    <Button Grid.Column="3"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding xiaomiTabCommand}"
-                            Content="Xiaomi" />
-                    <Button Grid.Column="4"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding samsungTabCommand}"
-                            Content="Samsung" />
-                    <Button Grid.Column="5"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding oppoTabCommand}"
-                            Content="OPPO" />
-                    <Button Grid.Column="7"
-                            Style="{StaticResource MaterialDesignPaperLightButton}"
-                            ToolTip="Resource name: MaterialDesignPaperLightButton"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="#B667F1"
-                            FontSize="20"
-                            Command="{Binding realmeTabCommand}"
-                            Content="Realme" />
-                </Grid>
             </Border>
             <Button x:Name="btnAddProduct"
-                    Margin="50 0 0 0"
+                    Margin="250 0 0 0"
                     Height="50"
                     Width="200"
+                    Command="{Binding addProductCommand}"
                     BorderBrush="#B667F1">
                 <StackPanel Orientation="Horizontal">
                     <Image Stretch="Fill"
@@ -230,6 +163,26 @@
                            Margin="10,0,0,0"
                            Foreground="White" />
                 </StackPanel>
+            </Button>
+            <Button x:Name="btnManagerBrand"
+                    Margin="50 0 0 0"
+                    Height="50"
+                    Width="200"
+                    Command="{Binding manageCategoryCommand}"
+                    BorderBrush="#B667F1">
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Stretch="Fill"
+                           Source="/Icon/icon_category.ico"
+                           RenderTransformOrigin="0.027,0.538"
+                           Height="30"
+                           Width="30" />
+                    <Label Content="Manage Category"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           Foreground="White" />
+                </StackPanel>
+                
             </Button>
         </StackPanel>
 
@@ -246,6 +199,7 @@
                     Width="1200"
                     Height="450">
                 <ListView ItemsSource="{Binding _selectedCategory}"
+                          SelectedItem="{Binding _selectedProduct}"
                           Width="1200"
                           Height="450"
                           Name="ListView1"
@@ -263,10 +217,18 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                     <ListView.Resources>
-                        <ContextMenu x:Key="productsContextMenu">
-                            <MenuItem Header="Delete">
+                        <ContextMenu x:Key="productsContextMenu" BorderThickness ="3" BorderBrush="Black" Opened="OnContextMenuOpen">
+                            <MenuItem Header="Delete"
+                                      BorderThickness="1"
+                                      BorderBrush="Black"
+                                      Command="{Binding deleteProductCommand}"
+                                      >
                             </MenuItem>
-                            <MenuItem Header="Edit" />
+                            <MenuItem Header="Edit"
+                                      BorderThickness="1"
+                                      BorderBrush="Black"
+                                      Command="{Binding editProductCommand}"
+                                      />
                         </ContextMenu>
                     </ListView.Resources>
                     <ListView.ItemContainerStyle>
@@ -295,7 +257,7 @@
                                            Margin="0, 0, 5, 0"
                                            Width="100"
                                            Height="100"
-                                           Source="{Binding ImageURL}" />
+                                           Source="{Binding Path =ImageURL }" />
                                     <StackPanel Grid.Column="1">
                                         <Grid>
                                             <Grid.RowDefinitions>

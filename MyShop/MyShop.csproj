@@ -10,24 +10,25 @@
   <ItemGroup>
     <None Remove="Icon\delete.png" />
     <None Remove="Icon\edit.png" />
+    <None Remove="Icon\icon_category.ico" />
+    <None Remove="Icon\icon_edit.ico" />
     <None Remove="Image\delete.png" />
     <None Remove="Image\edit.png" />
     <None Remove="Image\iphone.png" />
     <None Remove="Image\login\img.png" />
-
     <None Remove="Icon\icon_add_white.ico" />
     <None Remove="Icon\icon_buy.ico" />
     <None Remove="Icon\icon_view.ico" />
     <None Remove="Image\iphone.png" />
     <None Remove="Image\product\Iphone11.png" />
     <None Remove="Image\product\Iphone12Mini.jpg" />
-
     <None Remove="Image\product\Iphone12Pro.jpg" />
     <None Remove="Image\product\Iphone12ProMax.jpg" />
     <None Remove="Image\product\Iphone13.jpg" />
     <None Remove="Image\product\Iphone13Mini.jpg" />
     <None Remove="Image\product\Iphone13Pro.png" />
     <None Remove="Image\product\Iphone13ProMax.jpg" />
+    <None Remove="Image\product\Iphone6.jpg" />
     <None Remove="Image\product\Iphone6S.jpg" />
     <None Remove="Image\product\Iphone6SPlus.jpg" />
     <None Remove="Image\product\Iphone7.jpg" />
@@ -64,6 +65,12 @@
     </Resource>
     <Resource Include="Icon\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_category.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icon\icon_edit.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\delete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -112,6 +119,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\product\Iphone13ProMax.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\product\Iphone6.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\product\Iphone6S.jpg">

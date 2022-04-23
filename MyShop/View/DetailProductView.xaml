@@ -1,4 +1,4 @@
-﻿<Window x:Class="MyShop.View.AddProductView"
+﻿<Window x:Class="MyShop.View.DetailProductView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,9 +16,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Window.DataContext>
-        <local1:AddProductViewModel />
-    </Window.DataContext>
+
+
     <Grid Background="#FDEFF4">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
@@ -30,8 +29,7 @@
         <StackPanel VerticalAlignment="Stretch">
             <TextBlock Margin="20 0 0 0"
                        Width="auto"
-                       FontSize="32"
-                       Text="{Binding content}"></TextBlock>
+                       FontSize="32">PRODUCT INFORMATION</TextBlock>
             <TextBlock Margin="20 5 0 0"
                        Width="auto"
                        FontSize="22"
@@ -102,15 +100,13 @@
                             CornerRadius="5"
                             Width="260"
                             Height="50">
-                        <TextBox Width="248"
-                                 Height="38"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Name}"
-                                 Margin="5 5 5 5">
-
-                        </TextBox>
+                        <TextBlock Width="248"
+                                   Height="38"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Text="{Binding Name}"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="1"
                             Grid.Column="1"
@@ -122,15 +118,13 @@
                             CornerRadius="5"
                             Width="260"
                             Height="50">
-                        <TextBox Width="248"
-                                 Height="38"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Amount}"
-                                 Margin="5 5 5 5">
-
-                        </TextBox>
+                        <TextBlock Width="248"
+                                   Height="38"
+                                   Text="{Binding Amount}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="0"
                             Grid.Column="3"
@@ -142,15 +136,13 @@
                             CornerRadius="5"
                             Width="260"
                             Height="50">
-                        <TextBox Width="248"
-                                 Height="38"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Margin="5 5 5 5"
-                                 Text="{Binding CostPrice}">
-
-                        </TextBox>
+                        <TextBlock Width="248"
+                                   Height="38"
+                                   Text="{Binding CostPrice}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="1"
                             Grid.Column="3"
@@ -162,41 +154,22 @@
                             CornerRadius="5"
                             Width="260"
                             Height="50">
-                        <TextBox Width="248"
-                                 Height="38"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding SellingPrice}"
-                                 Margin="5 5 5 5">
-
-                        </TextBox>
+                        <TextBlock Width="248"
+                                   Height="38"
+                                   Text="{Binding SellingPrice}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                 </Grid>
             </Border>
-            <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Margin="20 0 0 0">
-                <Border Background="White"
-                        Width="300"
-                        Height="150"
-                        BorderThickness="2">
-                    <Image Source="{Binding ImageUrl }"></Image>
-                </Border>
-
-                <Button Command="{Binding importCommand}"
-                        Foreground="#666666"
-                        Background="White"
-                        Height="30"
-                        Width="100"
-                        FontSize="14">
-                    Browser
-                </Button>
-
-            </StackPanel>
-
-
+            <Border Background="White"
+                    Width="300"
+                    BorderThickness="2"
+                    Margin="40 0 0 0">
+                <Image Source="{Binding ImageURL}"></Image>
+            </Border>
         </StackPanel>
         <TextBlock Grid.Row="2"
                    Margin="20 5 0 0"
@@ -205,9 +178,9 @@
                    FontWeight="Bold">Detail Information</TextBlock>
 
         <StackPanel  Grid.Row="3"
-                     VerticalAlignment="Top">
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Left">
             <Border Margin="20 0 0 0"
-                    HorizontalAlignment="Left"
                     Background="White"
                     BorderThickness="1"
                     BorderBrush="#B667F1"
@@ -303,17 +276,14 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <ComboBox x:Name="cbBrand"
-                                  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                  BorderThickness="0"
-                                  Margin="5 5 5 5"
-                                  Height="40"
-                                  Padding="5 10 0 0"
-                                  FontSize="16"
-                                  ItemsSource="{Binding CategoryList}"
-                                  SelectedItem="{Binding Brand}">
+                        <TextBlock x:Name="cbBrand"
+                                   Margin="5 5 5 5"
+                                   Text="{Binding Brand}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Height="40">
 
-                        </ComboBox>
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="1"
                             Grid.Column="1"
@@ -325,13 +295,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding ScreenSize}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding ScreenSize}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="0"
                             Grid.Column="3"
@@ -343,13 +312,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding OS}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding OS}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="1"
                             Grid.Column="3"
@@ -361,13 +329,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Memory}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding Memory}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="3"
                             Grid.Column="1"
@@ -379,15 +346,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <DatePicker Height="40"
-                                    Margin="5 5 5 5"
-                                    Padding="5 10 0 0"
-                                    FontSize="16"
-                                    DisplayDateStart="01/01/1500"
-                                    SelectedDate="{Binding DateRealease}"
-                                    BorderThickness="0">
-
-                        </DatePicker>
+                        <TextBlock Height="40"
+                                   Margin="5 5 5 5"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Text="{Binding Date}">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="2"
                             Grid.Column="1"
@@ -399,13 +363,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Color}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding Color}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="2"
                             Grid.Column="3"
@@ -417,13 +380,12 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Storage}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding Storage}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                     <Border Grid.Row="3"
                             Grid.Column="3"
@@ -435,41 +397,18 @@
                             CornerRadius="5"
                             Width="380"
                             Height="50">
-                        <TextBox Height="40"
-                                 BorderThickness="0"
-                                 Padding="5 10 0 0"
-                                 FontSize="16"
-                                 Text="{Binding Battery}"
-                                 Margin="5 5 5 5">
-                        </TextBox>
+                        <TextBlock Height="40"
+                                   Text="{Binding Battery}"
+                                   Padding="5 10 0 0"
+                                   FontSize="16"
+                                   Margin="5 5 5 5">
+                        </TextBlock>
                     </Border>
                 </Grid>
             </Border>
 
-            <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                <Border Grid.Row="3"
-                        Grid.Column="3"
-                        Margin="0 20 0 0"
-                        HorizontalAlignment="Center"
-                        Background="#B667F1"
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        CornerRadius="5"
-                        Width="150"
-                        Height="50">
-                    <Button x:Name="btnSubmitAddProduct"
-                            Height="50"
-                            Command="{Binding submitCommand}"
-                            FontSize="22"
-                            Background="#B667F1"
-                            BorderBrush="#B667F1">
-                        SUBMIT
-                    </Button>
-                </Border>
+            
 
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

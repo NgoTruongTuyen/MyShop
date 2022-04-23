@@ -1,5 +1,4 @@
-﻿using MyShop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MyShop.View
 {
     /// <summary>
-    /// Interaction logic for ProductView.xaml
+    /// Interaction logic for CategoryView.xaml
     /// </summary>
-    public partial class ProductView : UserControl
+    public partial class CategoryView : Window
     {
-        public ProductView()
+        public CategoryView()
         {
             InitializeComponent();
         }
 
         private void OnContextMenuOpen(object sender, RoutedEventArgs e)
         {
-            ((ContextMenu)sender).DataContext = ProductWindow.DataContext;
+            ((ContextMenu)sender).DataContext = CategoryWindow.DataContext;
         }
     }
 }
