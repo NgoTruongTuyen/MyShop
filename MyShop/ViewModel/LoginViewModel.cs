@@ -26,11 +26,14 @@ namespace MyShop.ViewModel
 
         public LoginViewModel(MessengerEvent messenger)
         {
+
+
             _messenger = messenger;
             LoginCommand = new RelayCommand(isValidUser, null);
             getSuggestion();
             MouseDownCommand = new RelayCommand(mouseDown, null);
             Visibility = "Hidden";
+               
 
         }
 
@@ -40,10 +43,7 @@ namespace MyShop.ViewModel
             var dataFilter = data.Where(x => x.Remember == true);
 
             Debug.WriteLine("+++++++++++++");
-            Debug.WriteLine(data[0].Remember);
-            Debug.WriteLine(data[0].Remember.GetType());
-                
-
+           
             Suggestion = new List<string>(dataFilter.Select(x => x.UserName)); 
 
         }
