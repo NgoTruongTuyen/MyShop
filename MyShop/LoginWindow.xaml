@@ -21,6 +21,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{StaticResource DashboardVM}"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 
         
         
@@ -30,6 +31,13 @@
         
         
         Title="LoginWindow" Height="768" Width="1366">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseDown">
+            <i:InvokeCommandAction Command="{Binding MouseDownCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -74,26 +82,52 @@
                     FontSize="30"
                     >Username</TextBlock>
                 <TextBox
-                    Text="{Binding Username}"
+                    Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 10 "
                     VerticalContentAlignment="Center"
                     FontSize="30"
                     Height="60"
                     materialDesign:HintAssist.Hint="   Username"
                     ></TextBox>
+
+                <Canvas
+                    Visibility="{Binding VisibilityList }"
+                        Panel.ZIndex="1000"
+                    >
+                    <ListView
+                        Panel.ZIndex="1000"
+                        SelectedItem="{Binding ItemSelected, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Suggestion}"
+                        >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Background="#bdbdbd"
+                                    FontSize="20"
+                                    Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Canvas>
+                
                      <TextBlock
                     FontSize="30"
                     >Password</TextBlock>
                 <PasswordBox
+                    
                     x:Name="Password"
+                    viewmodels:PasswordHelper.Attach="True"
+                    viewmodels:PasswordHelper.Password="{Binding Password}"
+                    
                     Margin="0 10 "
                     VerticalContentAlignment="Center"
                     FontSize="30"
                     Height="60"
                     materialDesign:HintAssist.Hint="   *******"
                     ></PasswordBox>
-
-                <CheckBox
+                
+                                <CheckBox
+                IsChecked="{Binding CheckBox}"
                 Content="Remember me"
                 Style="{StaticResource MaterialDesignCheckBox}" 
                 >

@@ -1,7 +1,8 @@
-﻿using MyShop.DatabaseConnection;
+using MyShop.DatabaseConnection;
 using MyShop.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -157,6 +158,7 @@ namespace MyShop.DAO
             return products;
         }
 
+
         public void increaseStock(int id, int diff)
         {
             String sql = "update Products set stock=stock+5 where productID=@id";
@@ -174,6 +176,30 @@ namespace MyShop.DAO
                new SqlParameter("@id", id)
               );
         }
+
+
+
+        public ObservableCollection<Product> getTopFive()
+        {
+            var Products = GetAll();
+            var topProduct =  Products.OrderByDescending(x => x.BuyCounts).Take(5).ToList();
+            return new ObservableCollection<Product>(topProduct);
+
+        }
+
+        public ObservableCollection<Product> getDashboardChart()
+        {
+
+            var data = GetAll();
+          
+            var chart  = data.GroupBy(x => x.Brand)
+                        .Select(y => new Product { Brand = y.Key, BuyCounts = y.Count() }).ToList();
+            return new ObservableCollection<Product>(chart);
+
+
+        }
+
+
     }
 
 }
