@@ -59,6 +59,10 @@
         <DataTemplate DataType="{x:Type viewmodels:DetailOrderViewModel}">
             <views:DetailOrderView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:StatisticViewModel}">
+            <views:StatisticView/>
+        </DataTemplate>
     </Window.Resources>
     
     

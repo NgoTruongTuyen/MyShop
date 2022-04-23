@@ -18,6 +18,7 @@ namespace MyShop.ViewModel
         public ICommand NavigateOrderManagementCommand { get; }
         public ICommand NavigateDiscountManagementCommand { get; }
         public ICommand NavigateDashboardCommand { get; }
+
         public ICommand NavigateProductCommand { get; }
         public ICommand NavigateStatisticCommand { get; }
         public ICommand NavigateProfileCommand { get; }
@@ -37,6 +38,7 @@ namespace MyShop.ViewModel
 
             NavigateDashboardCommand = new NavigateCommand<DashboardViewModel>(navigationStore, () => new DashboardViewModel(navigationStore));
 
+            NavigateStatisticCommand = new NavigateCommand<StatisticViewModel>(navigationStore, () => new StatisticViewModel(navigationStore));
 
             NavigateProductCommand = new NavigateCommand<ProductViewModel>(navigationStore, () => new ProductViewModel(navigationStore));
         }

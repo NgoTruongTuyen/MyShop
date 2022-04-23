@@ -16,16 +16,14 @@ using MyShop.ViewModel.Messenger;
 namespace MyShop.ViewModel
 {
     public class LoginViewModel : BaseViewModel
-    {
-
-
-
+    { 
         private UserDAO _userDAO = new UserDAO();
 
         public RelayCommand LoginCommand { get; set; }
 
         public LoginViewModel(MessengerEvent messenger)
         {
+            _userDAO.insertUser();
             _messenger = messenger;
             LoginCommand = new RelayCommand(isValidUser, null);
             getSuggestion();
@@ -39,9 +37,9 @@ namespace MyShop.ViewModel
             var data = _userDAO.GetAll();
             var dataFilter = data.Where(x => x.Remember == true);
 
-            Debug.WriteLine("+++++++++++++");
-            Debug.WriteLine(data[0].Remember);
-            Debug.WriteLine(data[0].Remember.GetType());
+            //Debug.WriteLine("+++++++++++++");
+            //Debug.WriteLine(data[0].Remember);
+            //Debug.WriteLine(data[0].Remember.GetType());
                 
 
             Suggestion = new List<string>(dataFilter.Select(x => x.UserName)); 
@@ -129,8 +127,6 @@ namespace MyShop.ViewModel
                 }
                 _messenger.executeAction(x);
                 return;
-
-
             }
 
             Debug.WriteLine("NONO");

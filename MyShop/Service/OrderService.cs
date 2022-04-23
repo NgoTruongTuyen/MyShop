@@ -20,5 +20,16 @@ namespace MyShop.Service
 
             return list;
         }
+
+        public List<RevenueInfor> GetRevenueList()
+        {
+            List<RevenueInfor> list = new List<RevenueInfor>();
+
+            OrderDAO orderDAO = new OrderDAO();
+
+            list = orderDAO.GetRevenueList();
+
+            return list;
+        }
     }
 }

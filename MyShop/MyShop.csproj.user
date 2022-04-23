@@ -29,7 +29,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\DiscountManagementView.xaml.cs">
-    <SubType>Code</SubType>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\DetailProductView.xaml.cs">
       <SubType>Code</SubType>
@@ -41,6 +41,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\OrderManagementView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\StatisticView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -64,7 +67,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\DiscountManagementView.xaml">
-        <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CategoryView.xaml">
       <SubType>Designer</SubType>
@@ -161,6 +164,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SettingView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\StatisticView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

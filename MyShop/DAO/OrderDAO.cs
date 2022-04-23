@@ -141,5 +141,28 @@ namespace MyShop.DAO
             return orderCurrent.Count();
         }
 
+        public List<RevenueInfor> GetRevenueList()
+        {
+            List<RevenueInfor> revenueList = new List<RevenueInfor>();
+            string sql = "select CONVERT(VARCHAR(10), createdDate, 101) as createdDate, totalPrice from Orders order by createdDate asc;";
+            SqlDataReader reader = DBConn.query(sql);
+
+            while (reader.Read())
+            {
+                string date = (string)reader["createdDate"];
+                var totalPrice = (int)reader["totalPrice"];
+
+                revenueList.Add(new RevenueInfor()
+                {
+                    CreateDate = date.ToString(),
+                    AmountOfMoney = totalPrice
+                });
+            }
+
+            reader.Close();
+
+            return revenueList;
+        }
+
     }
 }
