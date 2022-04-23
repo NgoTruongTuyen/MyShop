@@ -210,6 +210,37 @@ namespace MyShop.DAO
         }
 
 
+         public void insertOne(Product o, int brandId)
+        {
+            string sql = "insert into Products (productName, imageURL, stock, costPrice, sellingPrice, brand,screenSize, os,color, memory, storage, battery, releaseDate, buyCounts, viewCounts ) " +
+                "values(@productName, @imageURL, @stock, @costPrice, @sellingPrice, @brand, @screenSize, @os,@color, @memory, @storage, @battery, @releaseDate, @buyCounts," +
+                "@viewCounts );";
+
+           DBConn.excute(sql, 
+               new SqlParameter("@productName", o.ProductName),
+               new SqlParameter("@imageURL", o.ImageURL),
+               new SqlParameter("@stock", o.Stock),
+               new SqlParameter("@costPrice", o.CostPrice),
+               new SqlParameter("@sellingPrice", o.SellingPrice),
+               new SqlParameter("@brand", brandId),
+               new SqlParameter("@screenSize", o.ScreenSize),
+               new SqlParameter("@os", o.OS),
+               new SqlParameter("@color", o.Color),
+               new SqlParameter("@memory", o.Memory),
+               new SqlParameter("@storage", o.Storage),
+               new SqlParameter("@battery", o.Battery),
+               new SqlParameter("@releaseDate", o.ReleaseDate),
+               new SqlParameter("@buyCounts", o.BuyCounts),
+               new SqlParameter("@viewCounts", o.ViewCounts)
+               );
+
+
+
+
+        }
+
+
+
     }
 
 }

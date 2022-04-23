@@ -10,6 +10,7 @@ using Aspose.Cells;
 using MyShop.Model;
 using System.Collections.ObjectModel;
 using System.IO;
+using MyShop.DAO;
 
 namespace MyShop.ViewModel
 {
@@ -19,8 +20,15 @@ namespace MyShop.ViewModel
         public string FileName { get; set; }
         public RelayCommand importCommand { get; }
         public RelayCommand submitCommand { get; }
+        public RelayCommand CancelCommand { get; }
+
+        public bool IsSubmit { get; set; }
+        public bool IsCancel { get; set; }
 
         private ObservableCollection<Category> _listProduct;
+
+        ProductDAO _productDAO = new ProductDAO();
+        BrandDAO _brandDAO = new BrandDAO();
 
         public ImportViewModel()
         {
@@ -28,17 +36,73 @@ namespace MyShop.ViewModel
             FileName = "+ Import File";
             importCommand = new RelayCommand(addFile, null);
             submitCommand = new RelayCommand(submitFile, null);
+            CancelCommand = new RelayCommand(cancelCommand, null);
+
             _listProduct = new ObservableCollection<Category>();
+            IsSubmit = false;
             
 
         }
 
+
+        private bool isExist(string name)
+        {
+
+            ObservableCollection<Brand> brand = _brandDAO.getAll();
+
+            foreach(var b in brand)
+            {
+                if(b.Name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
         private void submitFile(object parameter)
         {
+
+            FileName = "+ Import File";
+             IsSubmit = false;
+            IsCancel = false;
+
             // update database
-                // . . .
+            // . . .
+            // insert brand
+
+            foreach(var data in _listProduct)
+            {
+                if (!isExist(data.Brand))
+                {
+                    _brandDAO.insertOne(data.Brand);
+                }
+                var id = _brandDAO.getId(data.Brand);
+                Debug.WriteLine(id);
+                
+                foreach(var entry in data.Products)
+                {
+                    _productDAO.insertOne(entry, id);
+                }
+                
+                
+            }
+
+
+
+          
             // moving image to store folder
             movingImg();
+        }
+
+        private void cancelCommand(object x)
+        {
+            
+            FileName = "+ Import File";
+            IsSubmit = false;
+            IsCancel = false;
         }
 
         private void addFile(object parameter)
@@ -59,6 +123,8 @@ namespace MyShop.ViewModel
                  * MyShop\MyShop
                  */
                 getProductData(openFile.FileName);
+                IsSubmit = true;
+                IsCancel = true;
             }
           
         }
@@ -103,13 +169,14 @@ namespace MyShop.ViewModel
                 {
 
                     Debug.WriteLine(cell.StringValue);
+                    Debug.WriteLine(tab.Cells[$"C{row}"].StringValue); 
                     products.Add(new Product(
                     )
                     {
                         ProductName = cell.StringValue,
                         ImageURL = tab.Cells[$"C{row}"].StringValue,
                         CostPrice = tab.Cells[$"D{row}"].IntValue,
-                        ScreenSize = float.Parse( tab.Cells[$"E{row}"].StringValue),
+                        ScreenSize = float.Parse(tab.Cells[$"E{row}"].StringValue),
                         OS = tab.Cells[$"F{row}"].StringValue,
 
                         Color = tab.Cells[$"G{row}"].StringValue,
@@ -118,12 +185,13 @@ namespace MyShop.ViewModel
                         Storage = tab.Cells[$"I{row}"].IntValue,
                         Battery = tab.Cells[$"J{row}"].IntValue,
                         ReleaseDate = tab.Cells[$"K{row}"].DateTimeValue,
-                        Stock =tab.Cells[$"L{row}"].IntValue,
-                       // Brand = worksheet.Brand,
+                        Stock = tab.Cells[$"L{row}"].IntValue,
+                        // Brand = worksheet.Brand,
 
                     }
-                        
-                    );
+
+                    ) ;
+                    Debug.WriteLine("HERE");
                     row++;
                     cell = tab.Cells[$"{column}{row}"];
                     
@@ -135,6 +203,17 @@ namespace MyShop.ViewModel
                     Brand = tab.Name,
                     Products = products,
                 });
+
+                foreach(var x in _listProduct)
+                {
+                    Debug.WriteLine(x.Brand);
+                    foreach(var y in x.Products)
+                    {
+                        Debug.WriteLine(y.ProductName);
+                            
+
+                    }
+                }
 
             }
         }

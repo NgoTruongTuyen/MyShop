@@ -38,7 +38,7 @@ namespace MyShop
         private void openMainWindow(object x)
         {
             NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new DashboardViewModel();
+            navigationStore.CurrentViewModel = new ImportViewModel();
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(navigationStore)
