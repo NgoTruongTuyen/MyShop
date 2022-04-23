@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace MyShop.View
 {
     /// <summary>
-    /// Interaction logic for AddProductView.xaml
+    /// Interaction logic for AddNewDiscountView.xaml
     /// </summary>
-    public partial class AddProductView : UserControl
+    public partial class AddNewDiscountView : UserControl
     {
-        public AddProductView()
+        public AddNewDiscountView()
         {
             InitializeComponent();
         }
-
-
     }
 }

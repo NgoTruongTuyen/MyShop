@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,7 @@ namespace MyShop.DAO
                             Stock = (int)stock,
                             CostPrice = (int)costPrice,
                             SellingPrice = (int)sellingPrice,
-                            Brand = (string)brand,
+                            Brand = (int)brand,
                             ScreenSize = (float)(double)screenSize,
                             OS = (string)os,
                             Color = (string)color,
@@ -79,6 +80,26 @@ namespace MyShop.DAO
 
             reader.Close();
             return products;
+        }
+
+        public bool checkStock (int id, int expectNumber)
+        {
+            string sql = "select stock as stock from Products where productId = @id";
+
+            SqlDataReader reader = DBConn.queryInNewConnection(sql, new SqlParameter("@id",id));
+
+            int stock = 0;
+
+            while (reader.Read())
+            {
+                stock = (int)reader["stock"];
+
+                Debug.WriteLine("---------------------------" + stock + "--------------------------------------------");
+            }
+
+            reader.Close();
+
+            return stock >= expectNumber;
         }
 
         public List<Product> GetAll()
@@ -115,7 +136,7 @@ namespace MyShop.DAO
                     Stock = (int)stock,
                     CostPrice = (int)costPrice,
                     SellingPrice = (int)sellingPrice,
-                    Brand = (string)brand,
+                    Brand = (int)brand,
                     ScreenSize = (float)(double)screenSize,
                     OS = (string)os,
                     Color = (string)color,
@@ -135,5 +156,24 @@ namespace MyShop.DAO
             reader.Close();
             return products;
         }
+
+        public void increaseStock(int id, int diff)
+        {
+            String sql = "update Products set stock=stock+5 where productID=@id";
+
+            DBConn.excute(sql,
+               new SqlParameter("@id", id)
+              );
+        }
+
+        public void decreaseStock(int id, int diff)
+        {
+            String sql = "update Products set stock=stock-5 where productID=@id";
+
+            DBConn.excute(sql, new SqlParameter("@diff", diff),
+               new SqlParameter("@id", id)
+              );
+        }
     }
+
 }

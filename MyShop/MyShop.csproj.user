@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\AddNewDiscountView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\AddProductView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\DashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DetailOrderView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DiscountManagementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ImportView.xaml.cs">
@@ -30,6 +39,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\AddNewDiscountView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\AddProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -40,6 +52,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DetailOrderView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DiscountManagementView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ProductView.xaml">

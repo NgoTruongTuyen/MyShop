@@ -119,7 +119,7 @@ namespace MyShop.ViewModel
                         Battery = tab.Cells[$"J{row}"].IntValue,
                         ReleaseDate = tab.Cells[$"K{row}"].DateTimeValue,
                         Stock =tab.Cells[$"L{row}"].IntValue,
-                        Brand = worksheet.Brand,
+                       // Brand = worksheet.Brand,
 
                     }
                         

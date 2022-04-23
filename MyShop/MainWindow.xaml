@@ -45,6 +45,19 @@
         <DataTemplate DataType="{x:Type viewmodels:AddNewOrderViewModel}">
             <views:AddNewProductView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:DiscountManagementViewModel}">
+            <views:DiscountManagementView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:AddNewDiscountView}">
+            <views:AddNewDiscountView/>
+        </DataTemplate>
+
+
+        <DataTemplate DataType="{x:Type viewmodels:DetailOrderViewModel}">
+            <views:DetailOrderView/>
+        </DataTemplate>
     </Window.Resources>
     
     
@@ -112,6 +125,22 @@
                         </StackPanel>
                     </TabItem.Header>
                     <TextBlock></TextBlock>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <Button Command="{Binding NavigateDiscountManagementCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="auto" Height="auto"
+                            HorizontalAlignment="Center" Kind="ReceiptOutline" />
+                                <TextBlock HorizontalAlignment="Center" Text="Discount" Foreground="Black" />
+                            </StackPanel>
+                        </Button>
+
+                    </TabItem.Header>
+
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
             </TabControl>
         </materialDesign:Card>

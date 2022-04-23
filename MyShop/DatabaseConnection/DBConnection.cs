@@ -53,6 +53,27 @@ namespace MyShop.DatabaseConnection
         {
             Transaction=_transConnection.BeginTransaction();
         }
+        public SqlDataReader queryInNewConnection(string sql, params object[] Params)
+        {
+            var connectionString =
+               string.Format(@"Server=(local);Database={0};Trusted_Connection=Yes;", "QLCH");
+
+            var transConnection = new SqlConnection(connectionString);
+
+            transConnection.Open();
+
+            var command = new SqlCommand(sql, transConnection);
+
+            foreach (var p in Params)
+            {
+                command.Parameters.Add(p);
+            }
+
+            var reader = command.ExecuteReader();
+
+            return reader;
+        }
+
 
         public SqlDataReader query(string sql, params object[] Params)
         {
@@ -82,6 +103,7 @@ namespace MyShop.DatabaseConnection
                 //Sample 04: Execute the Query and Get the Count of Emplyees
                 object count = command.ExecuteScalar();
                 Int32 Total_Records = System.Convert.ToInt32(count);
+
 
                 return Total_Records;
             }
