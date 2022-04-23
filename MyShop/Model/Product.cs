@@ -122,7 +122,7 @@ namespace MyShop.Model
             ImageURL = imgURL;
             CostPrice = cost;
             SellingPrice = selling;
-            ScreenSize = screenSize;
+            ScreenSize = (float)screenSize;
             OS = os;
             Color = color;
             Memory = memory;

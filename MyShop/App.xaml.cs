@@ -16,36 +16,37 @@ namespace MyShop
     /// </summary>
     public partial class App : Application
     {
-        
-        //private MessengerEvent _message { get;set; }
-        //private LoginWindow _loginWindow { get;set; }
-        //protected override void OnStartup(StartupEventArgs e)
-        //{
-            
-        //    _message = new MessengerEvent();
-        //    _message.Message += openMainWindow;
 
-        //    _loginWindow = new LoginWindow()
-        //    {
-        //        DataContext = new LoginViewModel(_message)
-        //    };
-        //    _loginWindow.Show();
+        private MessengerEvent _message { get; set; }
+        private LoginWindow _loginWindow { get; set; }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+
+            _message = new MessengerEvent();
+            _message.Message += openMainWindow;
+
+            _loginWindow = new LoginWindow()
+            {
+                DataContext = new LoginViewModel(_message)
+            };
+            _loginWindow.Show();
 
 
-        //    base.OnStartup(e);
-        //}
+            base.OnStartup(e);
+        }
 
-        //private void openMainWindow(object x)
-        //{
-        //    NavigationStore navigationStore = new NavigationStore();
-        //    navigationStore.CurrentViewModel = new DashboardViewModel();
-        //    MainWindow = new MainWindow() {
-        //        DataContext = new MainViewModel(navigationStore)
-        //    };
-        //    MainWindow.Show();
+        private void openMainWindow(object x)
+        {
+            NavigationStore navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new DashboardViewModel();
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(navigationStore)
+            };
+            MainWindow.Show();
 
-        //    _loginWindow.Close();
+            _loginWindow.Close();
 
-        //}
+        }
     }
 }
