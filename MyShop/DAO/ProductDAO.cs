@@ -191,9 +191,19 @@ namespace MyShop.DAO
         {
 
             var data = GetAll();
+            BrandDAO brandDAO = new BrandDAO();
+            var brand = brandDAO.getAll();
+
+            var joinBrand = data.Join(brand, d => d.BrandId, b => b.BrandId, (d, b) => new { name = b.Name });
+
           
-            var chart  = data.GroupBy(x => x.Brand)
-                        .Select(y => new Product { Brand = y.Key, BuyCounts = y.Count() }).ToList();
+            var chart  = joinBrand.GroupBy(x => x.name)
+                        .Select(y => new Product { ProductName =  y.Key, BuyCounts = y.Count() }).ToList();
+            Debug.WriteLine("CHARTTTTTTTTTT");
+            foreach(var sth  in chart)
+            {
+                Debug.WriteLine(sth.ProductName+" "+sth.BuyCounts);
+            }
             return new ObservableCollection<Product>(chart);
 
 

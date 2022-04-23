@@ -45,7 +45,7 @@ namespace MyShop.ViewModel
             {
                 
                 Series.Add(new PieSeries {
-                    Title = product.Brand,
+                    Title = product.ProductName,
                     Values =  new ChartValues<ObservableValue>{new ObservableValue(product.BuyCounts) },
                     DataLabels =true,
                  }
