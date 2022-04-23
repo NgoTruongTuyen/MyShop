@@ -117,16 +117,19 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <TextBlock FontWeight="Bold">Subtotal:</TextBlock>
                         <TextBlock FontWeight="Bold" Grid.Row="1">Discount:</TextBlock>
-                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2">_________________________________________________</TextBlock>
-                        <TextBlock FontWeight="Bold" Grid.Row="3">Total:</TextBlock>
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2">_________________________________________________</TextBlock>
+                        <TextBlock FontWeight="Bold" Grid.Row="4">Total:</TextBlock>
+
+                        <TextBlock FontWeight="Medium"  Grid.Row="2" Foreground="Green" FontStyle="Italic" Text="{Binding DiscountName}"></TextBlock>
 
                         <TextBlock Grid.Column="1" Text="{Binding SubTotal}"></TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="red" Text="{Binding Discount}"></TextBlock>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Total}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="Green" Text="{Binding Discount}"></TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Total}"></TextBlock>
 
                     </Grid>
                     

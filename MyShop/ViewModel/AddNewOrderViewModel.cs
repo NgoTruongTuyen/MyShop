@@ -69,10 +69,24 @@ namespace MyShop.ViewModel
                 OnPropertyChanged(nameof(Total));
             }
         }
+
+        public string DiscountName { get;set;}
+
         private int _discount;
         public int Discount
         {
-            get { return _discount; }
+            get 
+            {
+                DiscountDAO discountDAO = new DiscountDAO();
+
+                Discount discount = discountDAO.getBestDiscount(SubTotal);
+
+                _discount = SubTotal * discount.DiscountPercentage/100;
+
+                DiscountName = discount.Name;
+
+                return _discount;
+            }
             set
             {
                 _discount = value;

@@ -19,6 +19,7 @@ namespace MyShop.ViewModel
 
 
         public ICommand NavigateOrderManagementCommand { get; }
+        public ICommand NavigateDiscountManagementCommand { get; }
 
         public MainViewModel(NavigationStore navigationStore)
         {
@@ -27,6 +28,8 @@ namespace MyShop.ViewModel
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             NavigateOrderManagementCommand = new NavigateCommand<OrderManagementViewModel>(navigationStore, () => new OrderManagementViewModel(navigationStore));
+
+            NavigateDiscountManagementCommand = new NavigateCommand<DiscountManagementViewModel>(navigationStore, () => new DiscountManagementViewModel(navigationStore));
         }
 
         private BaseViewModel GetCurrentViewModel()
