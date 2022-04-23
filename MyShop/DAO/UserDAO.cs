@@ -45,22 +45,18 @@ namespace MyShop.DAO
         public void insertUser()
         {
 
-            string sql = "insert into Users (username, password, entropy) " +
+            string sql = "insert into Users (username, password, entropy, remember) " +
              "values(@username, @password, @entropy,@remember)";
 
             string data = encode("123456");
 
 
 
-            DBConn.excute(sql, new SqlParameter("@username", "vdphuc"),
+            DBConn.excute(sql, new SqlParameter("@username", "ndkhoi"),
                 new SqlParameter("@password", data.Split(' ')[0]),
                 new SqlParameter("@entropy", data.Split(' ')[1]),
                 new SqlParameter("@remember", false)
                 ) ;
-
-
-
-
 
         }
 

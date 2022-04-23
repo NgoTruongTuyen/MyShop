@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MyShop.Model;
+using MyShop.Stores;
 using MyShop.ViewModel.Command;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace MyShop.ViewModel
 {
     public class AddProductViewModel : BaseViewModel
     {
-        private string server = @"LAPTOP-R4MFGNUI\SQL";
+        private string server = @"(local)";
         public RelayCommand importCommand { get; }
         public RelayCommand submitCommand { get; }
         public ImageSource Image { get; set; }

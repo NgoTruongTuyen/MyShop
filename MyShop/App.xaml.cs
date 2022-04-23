@@ -22,6 +22,8 @@ namespace MyShop
         protected override void OnStartup(StartupEventArgs e)
         {
 
+
+
             _message = new MessengerEvent();
             _message.Message += openMainWindow;
 

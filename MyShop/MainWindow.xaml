@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyShop"
         mc:Ignorable="d"
+        WindowState="Maximized"
 
         xmlns:views="clr-namespace:MyShop.View"
         xmlns:viewmodels="clr-namespace:MyShop.ViewModel"
@@ -69,22 +70,28 @@
             Style="{StaticResource MaterialDesignNavigationRailTabControl}">
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24"
+                        <Button Command="{Binding NavigateDashboardCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="ViewDashboardOutline" />
-                            <TextBlock HorizontalAlignment="Center" Text="Dashboard" />
-                        </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Text="Dashboard" />
+                            </StackPanel>
+                        </Button>
                     </TabItem.Header>
                     <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
 
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24"
+                        <Button Command="{Binding NavigateProductCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="PackageVariantClosed" />
-                            <TextBlock HorizontalAlignment="Center" Text="Product" />
-                        </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Text="Product" />
+                            </StackPanel>
+                        </Button>
                     </TabItem.Header>
                     <ContentControl Content="{Binding CurrentViewModel}" />
                 </TabItem>
@@ -107,24 +114,31 @@
 
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24"
+                        <Button Command="{Binding NavigateStatisticCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="ChartBoxOutline" />
-                            <TextBlock HorizontalAlignment="Center" Text="Statistic" />
-                        </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Text="Statistic" />
+                            </StackPanel>
+                        </Button>
                     </TabItem.Header>
-                    <TextBlock></TextBlock>
+                    
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
 
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24"
+                        <Button Command="{Binding NavigateProfileCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="AccountReactivate" />
-                            <TextBlock HorizontalAlignment="Center" Text="Profile" />
-                        </StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Text="Profile" />
+                            </StackPanel>
+                        </Button>
                     </TabItem.Header>
-                    <TextBlock></TextBlock>
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
 
                 <TabItem>
@@ -137,13 +151,12 @@
                                 <TextBlock HorizontalAlignment="Center" Text="Discount" Foreground="Black" />
                             </StackPanel>
                         </Button>
-
                     </TabItem.Header>
-
                     <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
             </TabControl>
         </materialDesign:Card>
     </Grid>
+        
         
 </Window>

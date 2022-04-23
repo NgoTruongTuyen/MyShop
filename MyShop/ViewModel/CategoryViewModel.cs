@@ -17,7 +17,7 @@ namespace MyShop.ViewModel
     }
     public class CategoryViewModel : BaseViewModel
     {
-        private string server = @"LAPTOP-R4MFGNUI\SQL";
+        private string server = @"(local)";
         public ObservableCollection<BrandCategory> CategoryList { get; set; }
         public BrandCategory SelectedCategory { get; set; }
         public String NewBrand { get; set; }

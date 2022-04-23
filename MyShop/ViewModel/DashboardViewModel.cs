@@ -4,6 +4,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using MyShop.DAO;
 using MyShop.Model;
+using MyShop.Stores;
 using MyShop.ViewModel.Command;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,7 @@ namespace MyShop.ViewModel
         }
         public DashboardViewModel()
         {
+
             Products = _productDAO.getTopFive();
             NumberProduct = _productDAO.GetAll().Count().ToString();
             NumberOrder = _orderDAO.getCount(0).ToString();
@@ -88,10 +90,10 @@ namespace MyShop.ViewModel
             ChartData= _productDAO.getDashboardChart();
             InitChart();
 
-            
-
         }
 
-        
+        public DashboardViewModel(NavigationStore navigationStore)
+        {
+        }
     }
 }

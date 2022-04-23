@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         d:DesignHeight="768"
         d:DesignWidth="1292"
+         WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local1="clr-namespace:MyShop.ViewModel"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

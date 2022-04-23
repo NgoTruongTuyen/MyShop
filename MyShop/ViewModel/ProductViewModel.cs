@@ -1,4 +1,6 @@
-﻿using MyShop.Model;
+﻿using MyShop.Commands;
+using MyShop.Model;
+using MyShop.Stores;
 using MyShop.View;
 using MyShop.ViewModel.Command;
 using System;
@@ -17,7 +19,7 @@ namespace MyShop.ViewModel
     {
         private ObservableCollection<Category> _categories;
 
-        private string server = @"LAPTOP-R4MFGNUI\SQL";
+        private string server = @"(local)";
         private ObservableCollection<Product> _currentCategory { get; set; }
         public List<Product> _selectedCategory { get; set; }
         public Product _selectedProduct { get; set; }
@@ -70,15 +72,15 @@ namespace MyShop.ViewModel
         public RelayCommand firstPageCommand { get; }
         public RelayCommand lastPageCommand { get; }
         public RelayCommand searchCommand { get; }
-        public RelayCommand addProductCommand { get; }
+        public ICommand addProductCommand { get; }
 
         private ICommand doubleClickProductCommand;
         public RelayCommand editProductCommand { get; }
         public RelayCommand deleteProductCommand { get; }
         public RelayCommand manageCategoryCommand { get; }
-        public ProductViewModel()
-        {
 
+        public ProductViewModel(NavigationStore navigationStore)
+        {
             _categories = getDataFromDataBase(server);
             paging("All");
             categoryName = "All";
@@ -88,11 +90,39 @@ namespace MyShop.ViewModel
             lastPageCommand = new RelayCommand(clickLastPage, null);
 
             searchCommand = new RelayCommand(search, null);
+
             addProductCommand = new RelayCommand(addProduct, null);
+
             editProductCommand = new RelayCommand(editProduct, null);
             deleteProductCommand = new RelayCommand(deleteProduct, null);
             manageCategoryCommand = new RelayCommand(manageCategory, null);
+
+
         }
+
+        public ProductViewModel()
+        {
+            _categories = getDataFromDataBase(server);
+            paging("All");
+            categoryName = "All";
+            nextPageCommand = new RelayCommand(clickNextPage, null);
+            previousPageCommand = new RelayCommand(clickPreviousPage, null);
+            firstPageCommand = new RelayCommand(clickFirstPage, null);
+            lastPageCommand = new RelayCommand(clickLastPage, null);
+
+            addProductCommand = new RelayCommand(addProduct, null);
+
+            searchCommand = new RelayCommand(search, null);
+
+           
+
+            editProductCommand = new RelayCommand(editProduct, null);
+            deleteProductCommand = new RelayCommand(deleteProduct, null);
+            manageCategoryCommand = new RelayCommand(manageCategory, null);
+
+
+        }
+
         public ObservableCollection<Category> Categories
         {
             get { return _categories; }
