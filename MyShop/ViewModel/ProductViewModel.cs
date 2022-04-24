@@ -1,4 +1,5 @@
 ﻿using MyShop.Commands;
+using MyShop.Messenger;
 using MyShop.Model;
 using MyShop.Stores;
 using MyShop.View;
@@ -81,6 +82,11 @@ namespace MyShop.ViewModel
 
         public ProductViewModel(NavigationStore navigationStore)
         {
+
+            SettingMessenger setting = new SettingMessenger();
+            setting.readData();
+            _rowsPerPage = setting.ItemPerPage;
+
             _categories = getDataFromDataBase(server);
             paging("All");
             categoryName = "All";
@@ -98,10 +104,19 @@ namespace MyShop.ViewModel
             manageCategoryCommand = new RelayCommand(manageCategory, null);
 
 
+            
+
+
         }
 
         public ProductViewModel()
         {
+
+            
+            SettingMessenger setting = new SettingMessenger();
+            setting.readData();
+            _rowsPerPage = setting.ItemPerPage;
+
             _categories = getDataFromDataBase(server);
             paging("All");
             categoryName = "All";
