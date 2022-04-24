@@ -113,6 +113,13 @@ namespace MyShop.ViewModel
 
         public OrderManagementViewModel (NavigationStore navigationStore)
         {
+ // getting item per page in setting.json
+            SettingMessenger setting = new SettingMessenger();
+            setting.readData();
+            itemPerPage = setting.ItemPerPage;
+
+
+
             //Init selected order
             SelectedItem = new Order();
             //DAO init
@@ -160,6 +167,9 @@ namespace MyShop.ViewModel
                 () => new AddNewOrderViewModel(navigationStore, UpdatingMessenger, SelectedItem));
             NavigateDetailOrderCommand = new NavigateCommand<DetailOrderViewModel>(navigationStore, ()=> new DetailOrderViewModel(navigationStore, SelectedItem));
 
+
+
+           
         }
 
         private void refresh(object obj)

@@ -9,6 +9,7 @@
 
              
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:converter="clr-namespace:MyShop.ViewModel.Converter"
              
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -21,6 +22,11 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
                      
              >
+     <UserControl.Resources>
+        <converter:IndexConverter x:Key="getIndex"/>
+
+    </UserControl.Resources>
+
     
     
     <Grid Background="#FDEFF4">
@@ -336,7 +342,9 @@
                     Style="{StaticResource MaterialDesignChoiceChipPrimaryOutlineRadioButton}"
                     IsChecked="True"
                     GroupName="GroupChoiceChipOutline"
-                    Content="1" />
+                    Content="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                         AncestorType={x:Type ListViewItem}}, 
+                                         Converter={StaticResource getIndex}}" />
 
                                     <Image Grid.Column="1"
                     Width="100"
@@ -365,7 +373,7 @@ Grid.Column="2">
                                             <TextBlock
                                 Foreground="#bdbdbd"
                                 FontSize="20"
-                                Text="{Binding  Stock}"/>
+                                Text="{Binding  BuyCounts}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
