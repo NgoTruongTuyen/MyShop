@@ -72,9 +72,13 @@
             <TabControl VerticalContentAlignment="Top"
             materialDesign:ColorZoneAssist.Mode="Light"
             Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-                <TabItem>
+                <TabItem
+                    >
                     <TabItem.Header>
-                        <Button Command="{Binding NavigateDashboardCommand}"
+                        <Button
+                        Width="72"
+                            Padding="0"
+                            Command="{Binding NavigateDashboardCommand}"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
                                 <materialDesign:PackIcon Width="24" Height="24"
@@ -88,7 +92,12 @@
 
                 <TabItem>
                     <TabItem.Header>
-                        <Button Command="{Binding NavigateProductCommand}"
+                        <Button 
+                            
+                        Width="72"
+                            Padding="0"
+
+                            Command="{Binding NavigateProductCommand}"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
                                 <materialDesign:PackIcon Width="24" Height="24"
@@ -103,9 +112,11 @@
                 <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding NavigateOrderManagementCommand}"
+                        Width="72"
+                            Padding="0"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon Width="auto" Height="auto"
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="ReceiptOutline" />
                                 <TextBlock HorizontalAlignment="Center" Text="Order" Foreground="Black" />
                             </StackPanel>
@@ -119,6 +130,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding NavigateStatisticCommand}"
+                            Padding="0"
+                        Width="72"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
                                 <materialDesign:PackIcon Width="24" Height="24"
@@ -134,6 +147,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding NavigateProfileCommand}"
+                            Padding="0"
+                        Width="72"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
                                 <materialDesign:PackIcon Width="24" Height="24"
@@ -148,9 +163,11 @@
                 <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding NavigateDiscountManagementCommand}"
+                            Padding="0"
+                        Width="72"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon Width="auto" Height="auto"
+                                <materialDesign:PackIcon Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="ReceiptOutline" />
                                 <TextBlock HorizontalAlignment="Center" Text="Discount" Foreground="Black" />
                             </StackPanel>
@@ -161,10 +178,12 @@
                 <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding NavigateSettingCommand}"
+                            Padding="0"
+                        Width="72"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon Width="auto" Height="auto"
-                            HorizontalAlignment="Center" Kind="ReceiptOutline" />
+                                <materialDesign:PackIcon Width="24" Height="24"
+                            HorizontalAlignment="Center" Kind="CogOutline" />
                                 <TextBlock HorizontalAlignment="Center" Text="Setting" Foreground="Black" />
                             </StackPanel>
                         </Button>
@@ -177,10 +196,12 @@
                  <TabItem>
                     <TabItem.Header>
                         <Button Command="{Binding LogoutCommand}"
+                            Padding="0"
+                        Width="72"
                         CommandParameter="{Binding ElementName=MyMainWindow}"
                                 Background="White" Foreground="Black" Height="66" >
                             <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon Width="auto" Height="auto"
+                                <materialDesign:PackIcon  Width="24" Height="24"
                             HorizontalAlignment="Center" Kind="Logout" />
                                 <TextBlock HorizontalAlignment="Center" Text="Log out" Foreground="Black" />
                             </StackPanel>
