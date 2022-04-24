@@ -3,6 +3,7 @@ using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using MyShop.DAO;
+using MyShop.Messenger;
 using MyShop.Model;
 using MyShop.Stores;
 using MyShop.ViewModel.Command;
@@ -46,7 +47,7 @@ namespace MyShop.ViewModel
             {
                 
                 Series.Add(new PieSeries {
-                    Title = product.Brand,
+                    Title = product.ProductName,
                     Values =  new ChartValues<ObservableValue>{new ObservableValue(product.BuyCounts) },
                     DataLabels =true,
                  }
@@ -76,8 +77,7 @@ namespace MyShop.ViewModel
         }
         public DashboardViewModel()
         {
-
-            Products = _productDAO.getTopFive();
+                       Products = _productDAO.getTopFive();
             NumberProduct = _productDAO.GetAll().Count().ToString();
             NumberOrder = _orderDAO.getCount(0).ToString();
             Income = _orderDAO.getAllPrice(0).ToString();
@@ -94,6 +94,21 @@ namespace MyShop.ViewModel
 
         public DashboardViewModel(NavigationStore navigationStore)
         {
+            
+          
+            Products = _productDAO.getTopFive();
+            NumberProduct = _productDAO.GetAll().Count().ToString();
+            NumberOrder = _orderDAO.getCount(0).ToString();
+            Income = _orderDAO.getAllPrice(0).ToString();
+
+
+            DayCommand = new RelayCommand(dayCommand,null);
+            MonthCommand = new RelayCommand(monthCommand,null);
+            YearCommand = new RelayCommand(yearCommand,null);
+
+            ChartData= _productDAO.getDashboardChart();
+            InitChart();
+
         }
     }
 }

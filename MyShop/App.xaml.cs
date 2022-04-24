@@ -1,4 +1,6 @@
-﻿using MyShop.Stores;
+﻿using MyShop.Commands;
+using MyShop.Messenger;
+using MyShop.Stores;
 using MyShop.ViewModel;
 using MyShop.ViewModel.Messenger;
 using System;
@@ -19,6 +21,7 @@ namespace MyShop
 
         private MessengerEvent _message { get; set; }
         private LoginWindow _loginWindow { get; set; }
+        private SettingMessenger setting { get; set; }
         protected override void OnStartup(StartupEventArgs e)
         {
 
@@ -33,14 +36,55 @@ namespace MyShop
             };
             _loginWindow.Show();
 
+            setting = new SettingMessenger();
+            setting.readData();
+
+
 
             base.OnStartup(e);
         }
 
         private void openMainWindow(object x)
         {
+            setting.readData();
             NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new DashboardViewModel();
+            if(setting.Page == "setting")
+            {
+
+
+                navigationStore.CurrentViewModel = new SettingViewModel();
+            }
+            else if (setting.Page == "import")
+            {
+
+                navigationStore.CurrentViewModel = new ImportViewModel();
+            }
+            else if(setting.Page == "order")
+            {
+
+                navigationStore.CurrentViewModel = new OrderManagementViewModel(navigationStore);
+            }
+            else if(setting.Page == "product")
+            {
+
+                navigationStore.CurrentViewModel = new ProductViewModel(navigationStore);
+            }
+            else if(setting.Page == "discount")
+            {
+
+                navigationStore.CurrentViewModel = new DiscountManagementViewModel(navigationStore);
+            }
+            else if (setting.Page =="statistic")
+            {
+                navigationStore.CurrentViewModel = new StatisticViewModel(navigationStore);
+            }
+            else 
+            {
+
+                navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
+
+            }
+
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(navigationStore)

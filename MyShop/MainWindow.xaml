@@ -1,4 +1,5 @@
 <Window x:Class="MyShop.MainWindow"
+        x:Name="MyMainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,7 +20,6 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource DashboardVM}"
         Title="MainWindow" Height="768" Width="1366">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
@@ -158,6 +158,41 @@
                     </TabItem.Header>
                     <ContentControl Content="{Binding CurrentViewModel}"/>
                 </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Button Command="{Binding NavigateSettingCommand}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="auto" Height="auto"
+                            HorizontalAlignment="Center" Kind="ReceiptOutline" />
+                                <TextBlock HorizontalAlignment="Center" Text="Setting" Foreground="Black" />
+                            </StackPanel>
+                        </Button>
+                    </TabItem.Header>
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
+                </TabItem>
+                
+                
+                
+                 <TabItem>
+                    <TabItem.Header>
+                        <Button Command="{Binding LogoutCommand}"
+                        CommandParameter="{Binding ElementName=MyMainWindow}"
+                                Background="White" Foreground="Black" Height="66" >
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="auto" Height="auto"
+                            HorizontalAlignment="Center" Kind="Logout" />
+                                <TextBlock HorizontalAlignment="Center" Text="Log out" Foreground="Black" />
+                            </StackPanel>
+                        </Button>
+                    </TabItem.Header>
+                    <ContentControl Content="{Binding CurrentViewModel}"/>
+                </TabItem>
+
+             
+
+
+                
             </TabControl>
         </materialDesign:Card>
     </Grid>
