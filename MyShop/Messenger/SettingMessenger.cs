@@ -19,14 +19,15 @@ namespace MyShop.Messenger
         public void readData()
         {
 
-            string workingDirectory = Environment.CurrentDirectory;
+           // string workingDirectory = Environment.CurrentDirectory;
 
       
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+           // string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
-            string startupPath = Environment.CurrentDirectory;
-            Debug.WriteLine(projectDirectory);
-            string file = File.ReadAllText(projectDirectory + @"/setting.json");
+           // string startupPath = Environment.CurrentDirectory;
+            //Debug.WriteLine(projectDirectory);
+
+            string file = File.ReadAllText( @"setting.json");
             var data = JsonConvert.DeserializeObject<SettingMessenger>(file);
 
             ItemPerPage = data.ItemPerPage;
@@ -48,13 +49,13 @@ namespace MyShop.Messenger
 
             string json = System.Text.Json.JsonSerializer.Serialize(_data[0]);
 
-               string workingDirectory = Environment.CurrentDirectory;
+              // string workingDirectory = Environment.CurrentDirectory;
 
       
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+           // string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
             
-            File.WriteAllText(projectDirectory + @"/setting.json", json);
+            File.WriteAllText(@"setting.json", json);
         }
     }
 }
