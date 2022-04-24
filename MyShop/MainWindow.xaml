@@ -19,7 +19,6 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource DashboardVM}"
         Title="MainWindow" Height="768" Width="1366">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">

@@ -83,8 +83,8 @@
             Grid.Row="2"
             Orientation="Horizontal">
             <Button
-                Opacity="0.2"
                 Command="{Binding submitCommand }"
+                IsEnabled="{Binding IsSubmit}"
                 Margin="0 0 20 0"
             FontSize="32"
             Width="200"
@@ -96,6 +96,9 @@
 
             <Button 
             FontSize="32"
+
+                Command="{Binding CancelCommand}"
+                IsEnabled="{Binding IsCancel}"
             Width="200"
              Height="50"
              Background="#BDBDBD"

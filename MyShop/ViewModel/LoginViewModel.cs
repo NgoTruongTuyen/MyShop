@@ -23,12 +23,14 @@ namespace MyShop.ViewModel
 
         public LoginViewModel(MessengerEvent messenger)
         {
-            _userDAO.insertUser();
+
+
             _messenger = messenger;
             LoginCommand = new RelayCommand(isValidUser, null);
             getSuggestion();
             MouseDownCommand = new RelayCommand(mouseDown, null);
             Visibility = "Hidden";
+               
 
         }
 

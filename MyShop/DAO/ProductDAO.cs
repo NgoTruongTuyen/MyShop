@@ -191,13 +191,54 @@ namespace MyShop.DAO
         {
 
             var data = GetAll();
+            BrandDAO brandDAO = new BrandDAO();
+            var brand = brandDAO.getAll();
+
+            var joinBrand = data.Join(brand, d => d.BrandId, b => b.BrandId, (d, b) => new { name = b.Name });
+
           
-            var chart  = data.GroupBy(x => x.Brand)
-                        .Select(y => new Product { Brand = y.Key, BuyCounts = y.Count() }).ToList();
+            var chart  = joinBrand.GroupBy(x => x.name)
+                        .Select(y => new Product { ProductName =  y.Key, BuyCounts = y.Count() }).ToList();
+            Debug.WriteLine("CHARTTTTTTTTTT");
+            foreach(var sth  in chart)
+            {
+                Debug.WriteLine(sth.ProductName+" "+sth.BuyCounts);
+            }
             return new ObservableCollection<Product>(chart);
 
 
         }
+
+
+         public void insertOne(Product o, int brandId)
+        {
+            string sql = "insert into Products (productName, imageURL, stock, costPrice, sellingPrice, brand,screenSize, os,color, memory, storage, battery, releaseDate, buyCounts, viewCounts ) " +
+                "values(@productName, @imageURL, @stock, @costPrice, @sellingPrice, @brand, @screenSize, @os,@color, @memory, @storage, @battery, @releaseDate, @buyCounts," +
+                "@viewCounts );";
+
+           DBConn.excute(sql, 
+               new SqlParameter("@productName", o.ProductName),
+               new SqlParameter("@imageURL", o.ImageURL),
+               new SqlParameter("@stock", o.Stock),
+               new SqlParameter("@costPrice", o.CostPrice),
+               new SqlParameter("@sellingPrice", o.SellingPrice),
+               new SqlParameter("@brand", brandId),
+               new SqlParameter("@screenSize", o.ScreenSize),
+               new SqlParameter("@os", o.OS),
+               new SqlParameter("@color", o.Color),
+               new SqlParameter("@memory", o.Memory),
+               new SqlParameter("@storage", o.Storage),
+               new SqlParameter("@battery", o.Battery),
+               new SqlParameter("@releaseDate", o.ReleaseDate),
+               new SqlParameter("@buyCounts", o.BuyCounts),
+               new SqlParameter("@viewCounts", o.ViewCounts)
+               );
+
+
+
+
+        }
+
 
 
     }
